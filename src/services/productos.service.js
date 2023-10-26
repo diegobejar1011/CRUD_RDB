@@ -25,8 +25,9 @@ export const getProductos = (pagina) => {
 
 export const createProduct = (newProduct) => {
   return new Promise((resolve, reject) => {
+    console.log(newProduct);
     const {
-      ID_Product,
+      id,
       Prod_Name,
       Price,
       Width,
@@ -41,7 +42,7 @@ export const createProduct = (newProduct) => {
     const query =
       "insert into productos (ID_Product, Prod_Name, Price, Width, Height, Colour, Images, state_delete, Delete_at, Created_at, Update_at) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     db.execute(query, [
-      ID_Product,
+      id,
       Prod_Name,
       Price,
       Width,
