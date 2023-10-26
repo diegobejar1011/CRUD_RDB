@@ -1,0 +1,16 @@
+###
+POST http://localhost:5000/api/productos HTTP/1.1
+Content-Type: application/json
+
+{
+    "Prod_Name": "Producto 15",
+    "Price": 29,
+    "Width": 10,
+    "Height": 20,
+    "Colour": "Red",
+    "Images": "https://example.com/product1.jpg",
+    "state_delete": "N",
+    "Delete_at": null,
+    "Created_at": null,
+    "Update_at": null
+}

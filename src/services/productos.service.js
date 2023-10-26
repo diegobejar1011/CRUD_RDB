@@ -25,7 +25,6 @@ export const getProductos = (pagina) => {
 
 export const createProduct = (newProduct) => {
   return new Promise((resolve, reject) => {
-    console.log(newProduct);
     const {
       id,
       Prod_Name,
