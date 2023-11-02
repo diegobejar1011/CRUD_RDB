@@ -12,7 +12,7 @@ export const getProducto = (id) => {
 
 export const getProductos = (pagina) => {
   return new Promise((resolve, reject) => {
-    const query = "select * from productos where state_delete = 'N' limit ?,5 ";
+    const query = "select * from productos where state_delete = 'N' order by Price desc limit ?,5 ";
     db.execute(query, [pagina])
       .then((result) => {
         resolve(result);

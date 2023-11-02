@@ -4,8 +4,9 @@ import crypto from "node:crypto";
 
 export const getProductos = (req, res) => {
   const { offset } = req.params;
+  const newOffset = offset * 5;
   productosService
-    .getProductos(offset)
+    .getProductos(newOffset)
     .then((response) => {
       res.status(200).json({
         data: response[0],
