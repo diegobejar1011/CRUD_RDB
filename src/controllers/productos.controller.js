@@ -3,10 +3,9 @@ import * as productosService from "../services/productos.service.js";
 import crypto from "node:crypto";
 
 export const getProductos = (req, res) => {
-  const { offset } = req.params;
-  const newOffset = offset * 5;
+  const {offset} = req.params;
   productosService
-    .getProductos(newOffset)
+    .getProductos(offset)
     .then((response) => {
       res.status(200).json({
         data: response[0],

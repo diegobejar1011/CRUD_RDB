@@ -1,0 +1,51 @@
+###
+GET http://localhost:5000/api/pedidos?page=1&limit=10 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+
+###
+POST http://localhost:5000/api/pedidos HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+
+{
+    "id_entrega": 5, 
+    "id_producto": "0e9a2c63-ce65-4648-87b4-f5e4131a4f67",
+    "id_lugar": 1,
+    "fecha": "2023-11-10",
+    "id_horario": 1,
+    "total": 50,
+    "deleted": "N",
+    "Deleted_at": null,
+    "Created_at": null,
+    "Update_at": null 
+}
+
+###
+GET http://localhost:5000/api/pedidos/pedido/3 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+
+###
+DELETE http://localhost:5000/api/pedidos/eliminarFisico/10 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+
+###
+DELETE http://localhost:5000/api/pedidos/eliminarLogico/5 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+
+###
+PUT http://localhost:5000/api/pedidos/actualizarCompleto/1  HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+
+{
+    "id_entrega": 1, 
+    "id_producto": "0e9a2c63-ce65-4648-87b4-f5e4131a4f67",
+    "id_lugar": 2,
+    "fecha": "2023-11-10",
+    "id_horario": 2,
+    "total": 50,
+    "deleted": "N",
+    "Deleted_at": null,
+    "Created_at": null,
+    "Update_at": null 
+}

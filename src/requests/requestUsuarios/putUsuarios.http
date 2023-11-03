@@ -1,0 +1,11 @@
+###
+PUT http://localhost:5000/api/usuarios/25 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+
+{
+    "nombre": "Rodri",
+    "apellido" : "Flores",
+    "email": "Rodri@gmail.com",
+    "password": "1234"
+}

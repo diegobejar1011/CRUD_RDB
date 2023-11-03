@@ -1,0 +1,2 @@
+DELETE http://localhost:5000/api/usuarios/30 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
