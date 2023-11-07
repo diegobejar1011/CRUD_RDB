@@ -43,7 +43,6 @@ export const getById = (req, res) => {
 
 export const create = (req, res) => {
   const validacion = usuarioModel.validarUsuario(req.body);
-
   if (!validacion.success) {
     return res.status(422).json({
       message: "datos invalidos",

@@ -21,6 +21,9 @@ export const createPedido = (req, res) => {
   if (!result.success) {
     return res.status(422).json({ error: JSON.parse(result.error.message) });
   }
+  //Manipular "creadorNombre" de la forma que se quiera (recordar modificar db)
+  const {nombre : creadorNombre} = req.usuario
+  
   const newPedido = {
     ...result.data,
     Created_at: new Date(),

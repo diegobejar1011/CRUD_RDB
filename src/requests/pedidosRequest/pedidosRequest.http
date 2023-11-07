@@ -5,7 +5,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkI
 ###
 POST http://localhost:5000/api/pedidos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNjk5Mzc4MDk0LCJleHAiOjE2OTkzODE2OTR9.46ImshYkYyh6laCD5SHA01ZOrDwNTPwCdRuWlQGZbM8
 
 {
     "id_entrega": 15, 
