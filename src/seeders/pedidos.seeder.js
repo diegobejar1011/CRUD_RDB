@@ -3,7 +3,7 @@ import crypto from "node:crypto";
 
 const pedidos = [
   {
-    id_entrega: 1,
+    id_entrega: 10,
     id_producto: "0e9a2c63-ce65-4648-87b4-f5e4131a4f67",
     id_lugar: 200,
     fecha: "2023-11-10",
@@ -15,7 +15,7 @@ const pedidos = [
     Update_at: null,
   },
   {
-    id_entrega: 2,
+    id_entrega: 20,
     id_producto: "ad79ad70-1708-49f5-9001-43fa8dbd1fa0",
     id_lugar: 201,
     fecha: "2023-11-12",
@@ -27,7 +27,7 @@ const pedidos = [
     Update_at: null,
   },
   {
-    id_entrega: 3,
+    id_entrega: 30,
     id_producto: "b1d801c1-a299-4981-a336-be0e5eaf6f01",
     id_lugar: 202,
     fecha: "2023-11-15",

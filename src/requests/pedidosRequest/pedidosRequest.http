@@ -1,14 +1,14 @@
 ###
 GET http://localhost:5000/api/pedidos?page=1&limit=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
 
 ###
 POST http://localhost:5000/api/pedidos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
 
 {
-    "id_entrega": 5, 
+    "id_entrega": 15, 
     "id_producto": "0e9a2c63-ce65-4648-87b4-f5e4131a4f67",
     "id_lugar": 1,
     "fecha": "2023-11-10",
@@ -22,20 +22,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkI
 
 ###
 GET http://localhost:5000/api/pedidos/pedido/3 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
 
 ###
 DELETE http://localhost:5000/api/pedidos/eliminarFisico/10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
 ###
 DELETE http://localhost:5000/api/pedidos/eliminarLogico/5 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
 
 ###
 PUT http://localhost:5000/api/pedidos/actualizarCompleto/1  HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
 
 {
     "id_entrega": 1, 

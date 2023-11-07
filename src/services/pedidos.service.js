@@ -3,7 +3,6 @@ import db from "../config/db.js";
 export const createPedido = (newPedido) => {
   return new Promise((resolve, reject) => {
     const {
-      id_entrega,
       id_producto,
       id_lugar,
       fecha,
@@ -14,11 +13,8 @@ export const createPedido = (newPedido) => {
       Created_at,
       Update_at,
     } = newPedido;
-
-    const query = `INSERT INTO pedido (id_entrega, id_producto, id_lugar, fecha, id_horario, total, deleted, Deleted_at, Created_at, Update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
+    const query = `INSERT INTO pedido ( id_producto, id_lugar, fecha, id_horario, total, deleted, Deleted_at, Created_at, Update_at) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     db.execute(query, [
-      id_entrega,
       id_producto,
       id_lugar,
       fecha,
@@ -41,9 +37,7 @@ export const createPedido = (newPedido) => {
 export const getPedidos = (pagina, limite) => {
   return new Promise((resolve, reject) => {
     const offset = (pagina - 1) * limite;
-
     const query = `SELECT * FROM pedido WHERE deleted = 'N' ORDER BY total DESC LIMIT ${offset}, ${limite}`;
-
     db.execute(query)
       .then((result) => {
         resolve(result);
@@ -57,7 +51,6 @@ export const getPedidos = (pagina, limite) => {
 export const getByIdPedido = (id) => {
   return new Promise((resolve, reject) => {
     const query = `select * from pedido where id_entrega = ? and deleted = "N"`;
-
     db.execute(query, [id])
       .then((result) => {
         resolve(result[0]);
@@ -71,7 +64,6 @@ export const getByIdPedido = (id) => {
 export const deletePedido = (id) => {
   return new Promise((resolve, reject) => {
     const query = `delete from pedido where id_entrega = ?`;
-
     db.execute(query, [id])
       .then((result) => {
         resolve(result);
@@ -85,7 +77,6 @@ export const deletePedido = (id) => {
 export const updatePedido = (newPedido, id) => {
   return new Promise((resolve, reject) => {
     const {
-      id_entrega,
       id_producto,
       id_lugar,
       fecha,
@@ -96,11 +87,10 @@ export const updatePedido = (newPedido, id) => {
       Created_at,
       Update_at,
     } = newPedido;
-
     const query =
       "update pedido set id_entrega = ?, id_producto=?, id_lugar=?, fecha=?, id_horario=?, total=?, deleted=?, Deleted_at=?, Created_at=?, Update_at=? where id_entrega = ?";
     db.execute(query, [
-      id_entrega,
+      id,
       id_producto,
       id_lugar,
       fecha,

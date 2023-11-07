@@ -1,7 +1,7 @@
 ###
 PUT http://localhost:5000/api/productos/update/0addcb6c-513a-4cc9-9fa8-14eec61425d0 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMTYyNiwiZXhwIjoxNjk5MTI1MjI2fQ.h4n3ThFCQx3pw2YKLBSm20qBVpuaUwxd1-nvXC-T_iw
 
 {
     "Prod_Name": "Producto 15",

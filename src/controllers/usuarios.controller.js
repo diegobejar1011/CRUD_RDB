@@ -1,197 +1,185 @@
-import db from "../config/db.js";
 import * as usuarioModel from "../models/usuario.js";
+import * as usuarioServices from "../services/usuarios.service.js";
 import bcrypt from "bcrypt";
 
 const saltosBcrypt = parseInt(process.env.SALTOS_BCRYPT);
 
-export const index = async (req, res) => {
-  try {
-    const { page, limit } = req.query;
-    const skip = (page - 1) * limit;
-    let usuarios;
-
-    if (page && limit) {
-      usuarios = await db.execute(
-        `Select * from usuarios where deleted = 0 or deleted is null limit ${skip},${limit} `
-      );
-    } else {
-      usuarios = await db.execute(
-        "Select * from usuarios where deleted = 0 or deleted is null"
-      );
-    }
-
-    return res.status(200).json({
-      message: "se obtuvieron los usuarios correctamente",
-      usuarios: usuarios[0],
+export const index = (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  const skip = (page - 1) * limit;
+  usuarioServices
+    .getUsuarios(skip, limit)
+    .then((response) => {
+      res.status(200).json({
+        message: "se obtuvieron los usuarios correctamente",
+        usuarios: response[0],
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "hubo un error en el servidor",
+        error: err.message,
+      });
     });
-  } catch (error) {
-    return res.status(500).json({
-      message: "hubo un error en el servidor",
-      error: error.message,
-    });
-  }
 };
 
-export const getById = async (req, res) => {
-  try {
-    const usuarioId = req.params.id;
-
-    const usuario = await db.execute(`select * from usuarios where id=? `, [
-      usuarioId,
-    ]);
-
-    return res.status(200).json({
-      message: "usuario obtenido correctamente",
-      usuario: usuario[0],
+export const getById = (req, res) => {
+  const { id } = req.params;
+  usuarioServices
+    .getUsuarioById(id)
+    .then((response) => {
+      res.status(200).json({
+        message: "usuario obtenido correctamente",
+        usuario: response[0],
+      });
+    })
+    .catch((err) => {
+      res.status(406).json({
+        message: "hubo un error al intentar obtener al usuarios",
+        error: err.message,
+      });
     });
-  } catch (error) {
-    return res.status(406).json({
-      message: "hubo un error al intentar obtener al usuarios",
-      error: error.message,
-    });
-  }
 };
 
-export const create = async (req, res) => {
-  try {
-    const validacion = usuarioModel.validarUsuario(req.body);
+export const create = (req, res) => {
+  const validacion = usuarioModel.validarUsuario(req.body);
 
-    if (!validacion.success) {
-      return res.status(422).json({
-        message: "datos invalidos",
-        error: JSON.parse(validacion.error.message),
+  if (!validacion.success) {
+    return res.status(422).json({
+      message: "datos invalidos",
+      error: JSON.parse(validacion.error.message),
+    });
+  }
+  const { nombre, apellido, email } = req.body;
+  const { updated, deleted } = validacion.data;
+  const password = bcrypt.hashSync(req.body.password, saltosBcrypt);
+  const hoy = new Date();
+  const newObject = {
+    nombre,
+    apellido,
+    email,
+    password,
+    updated,
+    deleted,
+    hoy,
+  };
+  usuarioServices
+    .createUsuario(newObject)
+    .then(() => {
+      res.status(201).json({
+        message: `usuario con ${nombre} creado exitosamente`,
       });
-    }
-
-    const { nombre, apellido, email } = req.body;
-    const { updated, deleted } = validacion.data;
-    console.log(saltosBcrypt)
-    const password = bcrypt.hashSync(req.body.password, saltosBcrypt);
-    const hoy = new Date();
-    try {
-      //await db.execute(`Insert into usuarios (nombre, apellido, email) values ('${nombre}', '${apellido}', '${email}')`)
-      await db.execute(
-        `Insert into usuarios (nombre, apellido, email, password, updated, deleted, created_at values (?, ?, ?, ?, ?, ?, ?)`,
-        [nombre, apellido, email, password, updated, deleted, hoy]
-      );
-
-      return res.status(201).json({
-        message: "usuario creado exitosamente",
-      });
-    } catch (error) {
-      return res.status(406).json({
+    })
+    .catch((err) => {
+      res.status(406).json({
         message: "hubo un error al crear el usuario",
-        error: error.message,
+        error: err.message,
       });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      message: "hubo un error con el servidor",
-      error: error.message,
     });
-  }
 };
 
-export const updateParcial = async (req, res) => {
-  try {
-    const usuarioId = req.params.id;
-    const { nombre, apellido, email } = req.body;
-    const hoy = new Date();
-    if (nombre) {
-      db.execute(
-        `update usuarios set nombre= ?, updated = true, updated_at = ? where id = ?`,
-        [nombre, hoy, usuarioId]
-      );
-    }
-    if (apellido) {
-      db.execute(
-        `update usuarios set apellido= ? updated = true, updated_at = ? where id = ?`,
-        [apellido, hoy, usuarioId]
-      );
-    }
-    if (email) {
-      db.execute(
-        "update usuarios set email= ?, updated = true, updated_at = ? where id = ?",
-        [email, hoy, usuarioId]
-      );
-    }
-
-    return res.status(200).json({
-      message: "usuario actualizado correctamente",
-    });
-  } catch (error) {
-    return res.status(406).json({
-      message: "hubo un error al intentar actualizar al usuarios",
-      error: error.message,
+export const updateParcial = (req, res) => {
+  const { id } = req.params;
+  const validacion = usuarioModel.validarUsuarioParcial(req.body);
+  if (!validacion.success) {
+    return res.status(422).json({
+      message: "datos invalidos",
+      error: JSON.parse(validacion.error.message),
     });
   }
+  const { nombre, apellido, email } = req.body;
+  usuarioServices
+    .getUsuarioById(id)
+    .then((response) => {
+      const newObject = {
+        ...response[0][0],
+        nombre: nombre || response[0][0].nombre,
+        apellido: apellido || response[0][0].apellido,
+        email: email || response[0][0].email,
+        updated_at: new Date(),
+      };
+      usuarioServices
+        .updateParcialUsuario(newObject, id)
+        .then(() => {
+          res.status(200).json({
+            message: "usuario actualizado correctamente",
+          });
+        })
+        .catch((err) => {
+          res.status(406).json({
+            message: "hubo un error al intentar actualizar al usuarios",
+            error: err.message,
+          });
+        });
+    })
+    .catch((err) => {
+      res.status(404).json({
+        message: "usuario no encontrado",
+        error: err.message,
+      });
+    });
 };
 
-export const updateCompleto = async (req, res) => {
-  try {
-    const usuarioId = req.params.id;
-    const { nombre, apellido, email } = req.body;
-    const hoy = new Date();
-
-    await db.execute(
-      `update usuarios set nombre= ?, apellido= ?, email= ?, updated = true, updated_at = ? where id = ?`,
-      [nombre || null, apellido || null, email || null, hoy, usuarioId]
-    );
-
-    return res.status(200).json({
-      message: "usuario actualizado correctamente",
-    });
-  } catch (error) {
-    return res.status(406).json({
-      message: "hubo un error al intentar actualizar al usuarios",
-      error: error.message,
+export const updateCompleto = (req, res) => {
+  const { id } = req.params;
+  const validacion = usuarioModel.validarUsuario(req.body);
+  if (!validacion.success) {
+    return res.status(422).json({
+      message: "datos invalidos",
+      error: JSON.parse(validacion.error.message),
     });
   }
+  const newUser = {
+    ...validacion.data,
+    id,
+    updated_at: new Date(),
+  };
+  usuarioServices
+    .updateUsuario(newUser, id)
+    .then(() => {
+      res.status(200).json({
+        message: "usuario actualizado correctamente",
+      });
+    })
+    .catch((err) => {
+      res.status(406).json({
+        message: "hubo un error al intentar actualizar al usuarios",
+        error: err.message,
+      });
+    });
 };
 
-export const deleteLogico = async (req, res) => {
-  try {
-    const usuarioId = req.params.id;
-    const hoy = new Date();
-
-    await db.execute(
-      `update usuarios set deleted= true, deleted_at= ? where id = ?`,
-      [hoy, usuarioId]
-    );
-
-    return res.status(200).json({
-      message: "usuario eliminado correctamente",
+export const deleteLogico = (req, res) => {
+  const { id } = req.params;
+  const hoy = new Date();
+  usuarioServices
+    .deleteLogico(hoy, id)
+    .then(() => {
+      res.status(200).json({
+        message: "usuario eliminado correctamente",
+      });
+    })
+    .catch((err) => {
+      res.status(406).json({
+        message: "hubo un error al intentar eliminar al usuarios",
+        error: err.message,
+      });
     });
-  } catch (error) {
-    return res.status(406).json({
-      message: "hubo un error al intentar eliminar al usuarios",
-      error: error.message,
-    });
-  }
 };
 
-const deleteFisico = async (req, res) => {
-  try {
-    const usuarioId = req.params.id;
-
-    await db.execute(`delete from usuarios where id = ? `, [usuarioId]);
-
-    return res.status(200).json({
-      message: "usuario eliminado correctamente",
+export const deleteFisico = async (req, res) => {
+  const { id } = req.params;
+  usuarioServices
+    .deleteFisico(id)
+    .then(() => {
+      res.status(200).json({
+        message: "usuario eliminado correctamente",
+      });
+    })
+    .catch((err) => {
+      res.status(406).json({
+        message: "hubo un error al intentar eliminar al usuarios",
+        error: err.message,
+      });
     });
-  } catch (error) {
-    return res.status(406).json({
-      message: "hubo un error al intentar eliminar al usuarios",
-      error: error.message,
-    });
-  }
 };
-
-// module.exports = {
-//     index,
-//     getById,
-//     create,
-//     delete: deleteLogico,
-//     updateParcial,
-//     updateCompleto,
-// }

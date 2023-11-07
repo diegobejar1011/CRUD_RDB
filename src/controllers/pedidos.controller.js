@@ -81,12 +81,12 @@ export const deleteFisico = (req, res) => {
   pedidosService
     .deletePedido(id)
     .then(() => {
-      res.status(301).json({
+      res.status(200).json({
         message: `Pedido con id ${id} ha sido eliminado`,
       });
     })
     .catch((error) => {
-      res.status(500).sned(error);
+      res.status(500).send(error);
     });
 };
 
@@ -111,7 +111,7 @@ export const updatePartialPedido = (req, res) => {
         .updatePedido(newPedido, id)
         .then(() => {
           res.status(200).json({
-            message: `Pedido con el id ${newPedido.id_entrega} ha sido actualizado`,
+            message: `Pedido con el id ${id} ha sido actualizado`,
           });
         })
         .catch((error) => {
@@ -138,7 +138,7 @@ export const updatePedido = (req, res) => {
     .updatePedido(updatePedido, id)
     .then(() => {
       res.status(200).json({
-        message: `Pedido con el di ${updatePedido.Id_entrega} ha sido actualizado`,
+        message: `Pedido con el id ${updatePedido.Id_entrega} ha sido actualizado`,
       });
     })
     .catch((error) => {

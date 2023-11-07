@@ -1,10 +1,6 @@
 import z from "zod";
 
 const pedidoSchema = z.object({
-  id_entrega: z.number({
-    invalid_type_error: "Id_pedido debe ser un string",
-    required_error: "Id_pedido es requerido",
-  }),
   id_producto: z.string({
     invalid_type_error: "Id_product debe ser un string",
     required_error: "Id_product es requerido",
@@ -13,8 +9,8 @@ const pedidoSchema = z.object({
     invalid_type_error: "Id_lugar debe ser un número",
     required_error: "Id_lugar es requerido",
   }),
-  fecha: z.string({
-    invalid_type_error: "Fecha debe ser un string",
+  fecha: z.coerce.date({
+    invalid_type_error: "Fecha debe ser un date",
     required_error: "Fecha es requerida",
   }),
   id_horario: z.number({

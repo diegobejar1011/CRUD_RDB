@@ -1,7 +1,7 @@
 ###
 POST http://localhost:5000/api/productos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNn0sImlhdCI6MTY5OTAzNDY3MywiZXhwIjoxNjk5MDM4MjczfQ.HP4SNqpLehrJIXrEKf2wffbn5xAHVQFJK5ZvSmAKCiE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMTYyNiwiZXhwIjoxNjk5MTI1MjI2fQ.h4n3ThFCQx3pw2YKLBSm20qBVpuaUwxd1-nvXC-T_iw
 
 {
     "Prod_Name": "Producto 15",
@@ -12,6 +12,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkI
     "Images": "https://example.com/product1.jpg",
     "state_delete": "N",
     "Delete_at": null,
-    "Created_at": null,
     "Update_at": null
 }

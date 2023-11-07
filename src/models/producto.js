@@ -31,7 +31,7 @@ const productoSchema = z.object({
     })
     .default("N"),
   Delete_at: z.coerce.date().nullable().default(null),
-  Created_at: z.coerce.date().nullable().default(null),
+  Created_at: z.coerce.date().nullable().default(new Date()),
   Update_at: z.coerce.date().nullable().default(null),
 });
 
