@@ -105,11 +105,11 @@ export const deleteLogico = (id) => {
 
 
 
-export const updateImage = (idProducto, UrlImagen) => {
+export const updateImage = (idProducto, id_imagen) => {
   return new Promise((resolve, reject) => {
     const query =
-      "INSERT INTO imagenes (id_producto, url_imagen) VALUES (?,?);";
-    db.execute(query, [idProducto, UrlImagen])
+      "INSERT INTO producto_imagen (id_producto, id_imagen) VALUES (?,?);";
+    db.execute(query, [idProducto, id_imagen])
       .then((res) => {
         resolve(res);
       })
@@ -119,11 +119,20 @@ export const updateImage = (idProducto, UrlImagen) => {
   });
 };
 
-export const saveImage = (idProducto) => {
+export const saveImage = (newObject) => {
   return new Promise((resolve, reject) => {
+    const {
+      id_imagen,
+      url_imagen,
+      created_at,
+      deleted
+    } = newObject;
     const query =
-      "INSERT INTO imagen (url_imagen) VALUES (?,?);";
-    db.execute(query, [idProducto, UrlImagen])
+      "INSERT INTO imagen (id_imagen, url_imagen, created_at, deleted) VALUES (?,?,?,?);";
+    db.execute(query, [id_imagen, 
+      url_imagen, 
+      created_at,
+      deleted])
       .then((res) => {
         resolve(res);
       })
@@ -133,10 +142,10 @@ export const saveImage = (idProducto) => {
   });
 };
 
-export const deleteImage = (idProducto) => {
+export const deleteImage = (id_imagen) => {
   return new Promise((resolve, reject) => {
-    const query = "DELETE FROM imagenes where id_producto= ?";
-    db.execute(query, [idProducto])
+    const query = "UPDATE imagen SET deleted = true , deleted_at = ? where id_imagen= ?";
+    db.execute(query, [new Date(),id_imagen])
       .then((res) => {
         resolve(res);
       })

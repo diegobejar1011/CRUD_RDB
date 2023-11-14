@@ -131,6 +131,7 @@ export const deleteFisico = (req, res) => {
     });
 };
 
+//controladores para las imagenes --------
 
 export const updateImagen = async (req,res)=>{
   try{
@@ -151,12 +152,22 @@ export const updateImagen = async (req,res)=>{
     const uploadPath = path.join(__dirname,'uploads', nombreImagen);
     fs.writeFileSync(uploadPath, imagen);
 
-    productosService.saveImage();
-    productosService.updateImage(idProducto,uploadPath); 
+    const id_imagen = crypto.randomUUID();
+
+    const newImagen = {
+      id_imagen,
+      url_imagen: uploadPath,
+      created_at: new Date(),
+      deleted: false
+    }
+
+    productosService.saveImage(newImagen);
+    productosService.updateImage(idProducto,id_imagen); 
 
     return res.status(200).json({
       message: "Se subio la imagen correctamente",
     });
+
   }catch(error){
     return res.status(500).json({
       message: "Ocurrión un error al actualizar imagen del producto",
@@ -166,13 +177,10 @@ export const updateImagen = async (req,res)=>{
 }
 
 export const deleteImagen = (req,res)=>{
-  const __dirname= path.resolve();
-  const {idProducto,extension}=req.params;
-  const uploadPath = path.join(__dirname,'uploads', `${idProducto}.${extension}`); 
+  const {id_imagen}=req.params;
   productosService
-  .deleteImage(idProducto)
+  .deleteImage(id_imagen)
   .then(()=>{
-    fs.unlinkSync(uploadPath);
     return res.status(200).json({
       message: "Imagen eliminada",
     })

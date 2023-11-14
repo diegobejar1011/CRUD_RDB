@@ -25,6 +25,6 @@ productosRouter.delete("/deleteFisico/:id", verificarJWT, deleteFisico);
 //rutas paa imgenes
 productosRouter.put("/updateImagen/:id", updateImagen);
 productosRouter.get("/mostrarArchivo/:nombreArchivo", mostrarArchivo);
-productosRouter.delete("/eliminarImagen/:idProducto/:extension", deleteImagen);
+productosRouter.delete("/eliminarImagen/:id_imagen", deleteImagen);
 
 export default productosRouter;

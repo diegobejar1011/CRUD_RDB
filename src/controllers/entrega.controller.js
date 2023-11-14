@@ -1,7 +1,6 @@
 import * as entregaServices from '../services/entrega.service.js';
 import { validatePartialEntrega, validateEntrega } from "../models/entrega.js";
 import crypto from 'node:crypto';
-import { response } from 'express';
 
 export const getEntrega = (req, res) =>{
     const { page = 1, limit = 10 , orden = 'fecha' } = req.query;
