@@ -1,38 +1,26 @@
 import z from "zod";
 
 const productoSchema = z.object({
-  Prod_Name: z.string({
-    invalid_type_error: "Task name must be a string",
-    required_error: "Task name is required",
+  nombre_producto: z.string({
+    invalid_type_error: "name must be a string",
+    required_error: "name is required",
   }),
-  Price: z.number({
+  precio: z.number({
     invalid_type_error: "Price must be a Number",
-    required_error: "Price is required",
+    required_error: "Price is required", 
   }),
-  Width: z.number({
-    invalid_type_error: "Width must be a Number",
-    required_error: "Width is required",
+  id_tamaño: z.number({
+    invalid_type_error: "Tamaño must be a Number",
+    required_error: "Tamaño is required",
   }),
-  Height: z.number({
-    invalid_type_error: "Height must be a Number",
-    required_error: "Height is required",
+  tipo_producto: z.number({
+    invalid_type_error: "Tipo must be a Number",
+    required_error: "Tipo name is required",
   }),
-  Colour: z.string({
-    invalid_type_error: "Task name must be a string",
-    required_error: "Task name is required",
-  }),
-  Images: z.string({
-    invalid_type_error: "Task name must be a string",
-    required_error: "Task name is required",
-  }),
-  state_delete: z
-    .string({
-      invalid_type_error: "Delete must be a Char",
-    })
-    .default("N"),
-  Delete_at: z.coerce.date().nullable().default(null),
-  Created_at: z.coerce.date().nullable().default(new Date()),
-  Update_at: z.coerce.date().nullable().default(null),
+  deleted: z.boolean({
+    invalid_type_error: 'deleted must be a boolean'
+  })
+  .default(false)
 });
 
 export const validateProduct = (object) => {

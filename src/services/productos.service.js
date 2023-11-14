@@ -3,17 +3,20 @@ import db from "../config/db.js";
 export const getProducto = (id) => {
   return new Promise((resolve, reject) => {
     const query =
-      "select * from productos where ID_Product = ? and state_delete = 'N'";
+      "select id_producto, nombre_producto, precio, id_tamaño, tipo_producto, created_at, updated_at, deleted_at, deleted from producto where id_producto = ? and deleted = false";
     db.execute(query, [id])
-      .then((res) => resolve(res[0]))
+      .then((res) => {
+      resolve(res[0])
+      })
       .catch((err) => reject(err));
   });
 };
 
-export const getProductos = (pagina) => {
+export const getProductos = (offset, limit, orden) => {
   return new Promise((resolve, reject) => {
-    const query = "select * from productos where state_delete = 'N' order by Price desc limit ?,5";
-    db.execute(query, [pagina])
+    const query =
+      `select id_producto, nombre_producto, precio, id_tamaño, tipo_producto from producto where deleted = false order by ${orden}  desc limit ${offset},${limit}`;
+    db.execute(query)
       .then((result) => {
         resolve(result);
       })
@@ -27,31 +30,23 @@ export const createProduct = (newProduct) => {
   return new Promise((resolve, reject) => {
     const {
       id,
-      Prod_Name,
-      Price,
-      Width,
-      Height,
-      Colour,
-      Images,
-      state_delete,
-      Delete_at,
-      Created_at,
-      Update_at,
+      nombre_producto,
+      precio,
+      id_tamaño,
+      tipo_producto,
+      deleted,
+      created_at
     } = newProduct;
     const query =
-      "insert into productos (ID_Product, Prod_Name, Price, Width, Height, Colour, Images, state_delete, Delete_at, Created_at, Update_at) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "insert into producto (id_producto, nombre_producto, precio, id_tamaño, tipo_producto, deleted, created_at ) values (?, ?, ?, ?, ?, ?, ?)";
     db.execute(query, [
-      id,
-      Prod_Name,
-      Price,
-      Width,
-      Height,
-      Colour,
-      Images,
-      state_delete,
-      Delete_at,
-      Created_at,
-      Update_at,
+        id,
+        nombre_producto,
+        precio,
+        id_tamaño,
+        tipo_producto,
+        deleted,
+        created_at
     ])
       .then((result) => {
         resolve(result);
@@ -65,36 +60,25 @@ export const createProduct = (newProduct) => {
 export const updateProduct = (newProduct, id) => {
   return new Promise((resolve, reject) => {
     const {
-      Prod_Name,
-      Price,
-      Width,
-      Height,
-      Colour,
-      Images,
-      state_delete,
-      Delete_at,
-      Created_at,
-      Update_at,
+        nombre_producto,
+        precio,
+        id_tamaño,
+        tipo_producto,
+        updated_at,
     } = newProduct;
     const query =
-      "update productos set ID_Product = ?, Prod_Name = ?, Price = ?, Width = ?, Height = ?, Colour = ?, Images = ?, state_delete = ?, Delete_at = ?, Created_at = ?, Update_at = ? where ID_Product = ?";
+      "update producto set nombre_producto = ?, precio = ?, id_tamaño = ?, tipo_producto = ?, updated_at = ? where id_producto = ?";
     db.execute(query, [
-      id,
-      Prod_Name,
-      Price,
-      Width,
-      Height,
-      Colour,
-      Images,
-      state_delete,
-      Delete_at,
-      Created_at,
-      Update_at,
-      id,
+        nombre_producto,
+        precio,
+        id_tamaño,
+        tipo_producto,
+        updated_at,
+        id
     ])
       .then((result) => {
         resolve(result);
-      })
+      }) 
       .catch((err) => {
         reject(err);
       });
@@ -103,9 +87,61 @@ export const updateProduct = (newProduct, id) => {
 
 export const deleteProduct = (id) => {
   return new Promise((resolve, reject) => {
-    const query = "delete from productos where ID_Product = ?";
+    const query = "delete from producto where id_producto = ?";
     db.execute(query, [id])
       .then((res) => resolve(res))
       .catch((err) => reject(err));
+  });
+};
+
+export const deleteLogico = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "update producto set deleted = true , deleted_at = ? where id_producto = ?";
+    db.execute(query, [new Date(),id])
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+}
+
+
+
+export const updateImage = (idProducto, UrlImagen) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      "INSERT INTO imagenes (id_producto, url_imagen) VALUES (?,?);";
+    db.execute(query, [idProducto, UrlImagen])
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const saveImage = (idProducto) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      "INSERT INTO imagen (url_imagen) VALUES (?,?);";
+    db.execute(query, [idProducto, UrlImagen])
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const deleteImage = (idProducto) => {
+  return new Promise((resolve, reject) => {
+    const query = "DELETE FROM imagenes where id_producto= ?";
+    db.execute(query, [idProducto])
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 };

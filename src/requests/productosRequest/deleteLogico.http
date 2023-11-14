@@ -1,2 +1,2 @@
-DELETE http://localhost:5000/api/productos/deleteLogico/0e9a2c63-ce65-4648-87b4-f5e4131a4f67 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjE2MCwiZXhwIjoxNjk5MTI1NzYwfQ.2HhOY96Y6Ki6yU7I-07fXkju1lee6K_te2zXHrSPlw0
+DELETE http://localhost:5000/api/productos/deleteLogico/9ca14181-5647-4b6b-a808-ec2072140970 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkyMTAwNSwiZXhwIjoxNjk5OTI0NjA1fQ.g3CVRbTmG1oPS1eS29XnlM-cWSmea_LimMvtXBSSR8w

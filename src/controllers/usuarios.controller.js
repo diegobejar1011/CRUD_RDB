@@ -1,14 +1,15 @@
 import * as usuarioModel from "../models/usuario.js";
 import * as usuarioServices from "../services/usuarios.service.js";
 import bcrypt from "bcrypt";
-
+import crypto from 'node:crypto';
+ 
 const saltosBcrypt = parseInt(process.env.SALTOS_BCRYPT);
 
 export const index = (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 10, orden = "nombre" } = req.query;
   const skip = (page - 1) * limit;
   usuarioServices
-    .getUsuarios(skip, limit)
+    .getUsuarios(skip, limit, orden)
     .then((response) => {
       res.status(200).json({
         message: "se obtuvieron los usuarios correctamente",
@@ -49,24 +50,22 @@ export const create = (req, res) => {
       error: JSON.parse(validacion.error.message),
     });
   }
-  const { nombre, apellido, email } = req.body;
-  const { updated, deleted } = validacion.data;
+  
+  
   const password = bcrypt.hashSync(req.body.password, saltosBcrypt);
-  const hoy = new Date();
+
   const newObject = {
-    nombre,
-    apellido,
-    email,
-    password,
-    updated,
-    deleted,
-    hoy,
+    id: crypto.randomUUID(),
+    ...validacion.data,
+    password: password,
+    created_at: new Date()
   };
+
   usuarioServices
     .createUsuario(newObject)
     .then(() => {
       res.status(201).json({
-        message: `usuario con ${nombre} creado exitosamente`,
+        message: `usuario creado exitosamente`,
       });
     })
     .catch((err) => {
@@ -78,23 +77,23 @@ export const create = (req, res) => {
 };
 
 export const updateParcial = (req, res) => {
+
   const { id } = req.params;
   const validacion = usuarioModel.validarUsuarioParcial(req.body);
+
   if (!validacion.success) {
     return res.status(422).json({
       message: "datos invalidos",
       error: JSON.parse(validacion.error.message),
     });
   }
-  const { nombre, apellido, email } = req.body;
+  
   usuarioServices
     .getUsuarioById(id)
     .then((response) => {
       const newObject = {
         ...response[0][0],
-        nombre: nombre || response[0][0].nombre,
-        apellido: apellido || response[0][0].apellido,
-        email: email || response[0][0].email,
+        ...validacion.data,
         updated_at: new Date(),
       };
       usuarioServices
@@ -150,9 +149,8 @@ export const updateCompleto = (req, res) => {
 
 export const deleteLogico = (req, res) => {
   const { id } = req.params;
-  const hoy = new Date();
   usuarioServices
-    .deleteLogico(hoy, id)
+    .deleteLogico(new Date(), id)
     .then(() => {
       res.status(200).json({
         message: "usuario eliminado correctamente",
