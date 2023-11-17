@@ -1,95 +1,59 @@
-import db from "../config/db.js";
+import crypto from 'node:crypto';
 import bcrypt  from "bcrypt";
+import {createUsuario} from '../services/usuarios.service.js'
 
 const usuarios = [
   {
     nombre: "rodrigo",
     apellido: "flores",
+    telefono: "96117272713",
     email: "rodrigFlores@gmail.com",
+    tipo: 1,
     password: bcrypt.hashSync("rodrigo", 10),
+    deleted: false
   },
   {
     nombre: "fernando",
     apellido: "flores",
+    telefono: "96117272713",
     email: "fercho@gmail.com",
+    tipo: 1,
     password: bcrypt.hashSync("fernando", 10),
+    deleted: false
   },
   {
     nombre: "Diego",
     apellido: "Bejar",
+    telefono: "96117272713",
     email: "debz@gmail.com",
+    tipo: 1,
     password: bcrypt.hashSync("Diego", 10),
+    deleted: false
   },
   {
     nombre: "Roxana",
     apellido: "Flores",
+    telefono: "96117272713",
     email: "rox@gmail.com",
+    tipo: 1,
     password: bcrypt.hashSync("Roxana", 10),
-  },
-  {
-    nombre: "carlos",
-    apellido: "ruiz",
-    email: "cato@gmail.com",
-    password: bcrypt.hashSync("carlos", 10),
-  },
-  {
-    nombre: "Edgar",
-    apellido: "Flores",
-    email: "edgar@gmail.com",
-    password: bcrypt.hashSync("Edgar", 10),
-  },
-  {
-    nombre: "Cinthya",
-    apellido: "Lopez",
-    email: "cLopez@gmail.com",
-    password: bcrypt.hashSync("Cinthya", 10),
-  },
-  {
-    nombre: "Jessica",
-    apellido: "Morales",
-    email: "Jess@gmail.com",
-    password: bcrypt.hashSync("Jessica", 10),
-  },
-  {
-    nombre: "Shiny",
-    apellido: "Crochet",
-    email: "ShinyCrochet@gmail.com",
-    password: bcrypt.hashSync("Shiny", 10),
-  },
-  {
-    nombre: "Fernanda",
-    apellido: "Quezada",
-    email: "FerQuezada@gmail.com",
-    password: bcrypt.hashSync("Fernanda", 10),
-  },
-  {
-    nombre: "Ary",
-    apellido: "Coronado",
-    email: "Ary@gmail.com",
-    password: bcrypt.hashSync("Ary", 10),
-  },
-  {
-    nombre: "Iskander",
-    apellido: "Donet",
-    email: "IskanderD@gmail.com",
-    password: bcrypt.hashSync("Iskander", 10),
+    deleted: false
   },
 ];
 
-const insertarUsarios = () => {
-  const query =
-    "insert into usuarios (nombre, apellido, email, password) values (?,?,?,?)";
-
-  usuarios.map((usuario) => {
-    db.execute(query, [
-      usuario.nombre,
-      usuario.apellido,
-      usuario.email,
-      usuario.password,
-    ])
-      .then(() => console.log("usuario creado"))
-      .catch((err) => console.error("Error creando usuario", err));
+try {
+  usuarios.forEach((usuario)=>{
+    const newUsuario ={
+      id: crypto.randomUUID(),
+      ...usuario,
+      created_at: new Date()
+    };
+    createUsuario(newUsuario);
+    process.exit(1);
   });
-};
+  console.log('Usuarios creados correctamente');
+} catch (error) {
+  console.log('Ocurrió un error al crear los usuarios', error);
+}
+ 
 
-insertarUsarios();

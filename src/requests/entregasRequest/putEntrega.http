@@ -1,0 +1,12 @@
+###
+PUT http://localhost:5000/api/entregas/0524bcb0-c2b3-444b-8baa-96a5c9242b30 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
+
+{
+    "id_pedido": "1",
+    "lugar": "Covadonga",
+    "horario": "13:45:00",
+    "fecha": "2023-11-09",
+    "total": 300
+}

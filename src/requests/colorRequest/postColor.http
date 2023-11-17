@@ -1,0 +1,2 @@
+###
+GET http://localhost:5000/api/colores/18806413-aab9-4a91-93f3-3378b55b5e25/25 HTTP/1.1

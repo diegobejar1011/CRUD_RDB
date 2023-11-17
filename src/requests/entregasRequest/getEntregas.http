@@ -1,0 +1,3 @@
+###
+GET http://localhost:5000/api/entregas?page=1&limit=10 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w

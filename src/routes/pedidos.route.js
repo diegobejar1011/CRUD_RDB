@@ -7,25 +7,11 @@ const pedidosRouter = Router();
 pedidosRouter.get("/", verificarJWT, pedidosController.getPedidos);
 pedidosRouter.post("/", verificarJWT, pedidosController.createPedido);
 pedidosRouter.get("/pedido/:id", verificarJWT, pedidosController.getByIdPedido);
-pedidosRouter.delete(
-  "/eliminarFisico/:id",
-  verificarJWT,
-  pedidosController.deleteFisico
-);
-pedidosRouter.delete(
-  "/eliminarLogico/:id",
-  verificarJWT,
-  pedidosController.deleteLogico
-);
-pedidosRouter.patch(
-  "/actualizarParcial/:id",
-  verificarJWT,
-  pedidosController.updatePartialPedido
-);
-pedidosRouter.put(
-  "/actualizarCompleto/:id",
-  verificarJWT,
-  pedidosController.updatePedido
-);
+pedidosRouter.delete("/eliminarFisico/:id", verificarJWT, pedidosController.deleteFisico);
+pedidosRouter.delete("/eliminarLogico/:id", verificarJWT, pedidosController.deleteLogico);
+pedidosRouter.patch("/actualizarParcial/:id", verificarJWT, pedidosController.updatePartialPedido);
+pedidosRouter.put("/actualizarCompleto/:id", verificarJWT, pedidosController.updatePedido);
+
+pedidosRouter.get("/pedidosUser/:id_usuario", pedidosController.getPedidosByUser);
 
 export default pedidosRouter;

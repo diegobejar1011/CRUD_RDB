@@ -1,50 +1,55 @@
 ###
 GET http://localhost:5000/api/pedidos?page=1&limit=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
 
 ###
 POST http://localhost:5000/api/pedidos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNjk5Mzc4MDk0LCJleHAiOjE2OTkzODE2OTR9.46ImshYkYyh6laCD5SHA01ZOrDwNTPwCdRuWlQGZbM8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
 
 {
-    "id_entrega": 15, 
-    "id_producto": "0e9a2c63-ce65-4648-87b4-f5e4131a4f67",
-    "id_lugar": 1,
-    "fecha": "2023-11-10",
-    "id_horario": 1,
-    "total": 50,
-    "deleted": "N",
-    "Deleted_at": null,
-    "Created_at": null,
-    "Update_at": null 
+    "producto": "1",
+    "usuario": "1",
+    "nombre": "osito",
+    "cantidad": 2,
+    "especificacion": "Que se vea bonito",
+    "dedicatoria": "I love you",
+    "deleted": false
 }
 
 ###
-GET http://localhost:5000/api/pedidos/pedido/3 HTTP/1.1
+GET http://localhost:5000/api/pedidos/pedido/3f78dd14-ceda-4a3e-963c-02f3f8351c77 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkyODkyNSwiZXhwIjoxNjk5OTMyNTI1fQ.mb2U0TvzKarD-zRovTdGjKcQaJJBSKgVEfjpu32d8PY
+
+###
+DELETE http://localhost:5000/api/pedidos/eliminarFisico/0f8ca9a3-427b-4472-ab4f-5e6222c0adc2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNjY0OCwiZXhwIjoxNjk5OTEwMjQ4fQ.YZYdihyosCn_nZBmjL5_Qt1XtX1tlrgf9U0HbfOb9q8
+###
+DELETE http://localhost:5000/api/pedidos/eliminarLogico/0f8ca9a3-427b-4472-ab4f-5e6222c0adc2 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
 
 ###
-DELETE http://localhost:5000/api/pedidos/eliminarFisico/10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
-###
-DELETE http://localhost:5000/api/pedidos/eliminarLogico/5 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
-
-###
-PUT http://localhost:5000/api/pedidos/actualizarCompleto/1  HTTP/1.1
+PUT http://localhost:5000/api/pedidos/actualizarCompleto/3f78dd14-ceda-4a3e-963c-02f3f8351c77 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
 
 {
-    "id_entrega": 1, 
-    "id_producto": "0e9a2c63-ce65-4648-87b4-f5e4131a4f67",
-    "id_lugar": 2,
-    "fecha": "2023-11-10",
-    "id_horario": 2,
-    "total": 50,
-    "deleted": "N",
-    "Deleted_at": null,
-    "Created_at": null,
-    "Update_at": null 
+    "nombre": "fresas",
+    "cantidad": 10,
+    "especificacion": "Que se vea más bonito",
+    "dedicatoria": "TQM"
 }
+
+
+###
+PATCH http://localhost:5000/api/pedidos/actualizarParcial/3f78dd14-ceda-4a3e-963c-02f3f8351c77 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNzEzOSwiZXhwIjoxNjk5OTEwNzM5fQ.t-cHFGBWjIZp3tH7OEmg0-9h_wgAgHwZoTMDbIStL7g
+
+{
+    "nombre": "fresitas"
+}
+
+###
+GET http://localhost:5000/api/pedidos/pedidosUser/a0877488-3b4e-4e4d-aadb-1334a5be2829 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNzEzOSwiZXhwIjoxNjk5OTEwNzM5fQ.t-cHFGBWjIZp3tH7OEmg0-9h_wgAgHwZoTMDbIStL7g

@@ -8,6 +8,10 @@ const usuarioSchema = zod.object({
     apellido: zod.string({
         invalid_type_error: "apellido must be a string",
         required_error: "apellido is required"
+    }), 
+    telefono: zod.string({
+        invalid_type_error: 'telefono must be a string',
+        required_error: 'telefono is required'
     }),
     email: zod.string({
         invalid_type_error: "email must be a string",
@@ -17,22 +21,20 @@ const usuarioSchema = zod.object({
         invalid_type_error: " password must be a string",
         required_error: "password is required"
     }),
-    updated: zod.boolean({
-        invalid_type_error: "updated must be a boolean"
+    tipo: zod.number({
+        invalid_type_error: 'tipo must be a number'
     })
-    .default(false),
-    updated_at: zod.coerce.date().nullable().default(null),
+    .default(1),
     deleted: zod.boolean({
         invalid_type_error: 'deleted must be a boolean'
     })
-    .default(false),
-    deleted_at: zod.coerce.date().nullable().default(null),
+    .default(false)
 })
 
 export const validarUsuario = (object) =>{
     return usuarioSchema.safeParse(object)
-}
+};
 
 export const validarUsuarioParcial = (object) => {
-    return productoSchema.partial().safeParse(object);
+    return usuarioSchema.partial().safeParse(object);
   };
