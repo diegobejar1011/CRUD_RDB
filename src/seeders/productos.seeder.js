@@ -3,78 +3,54 @@ import crypto from "node:crypto";
 
 const arregloDeProductos = [
   {
-    Prod_Name: "Producto 1",
-    Price: 10.99,
-    Width: 5.5,
-    Height: 8.2,
-    Colour: "Rojo",
-    Images: "imagen1.jpg",
-    state_delete: "N",
-    Delete_at: null,
-    Created_at: null,
-    Update_at: null,
+    "nombre_producto": "Tulipanes Rojos",
+    "precio": 15, 
+    "id_tamaño": 1,
+    "tipo_producto": 1
   },
   {
-    Prod_Name: "Producto 2",
-    Price: 20.49,
-    Width: 6.1,
-    Height: 7.8,
-    Colour: "Azul",
-    Images: "imagen2.jpg",
-    state_delete: "N",
-    Delete_at: null,
-    Created_at: null,
-    Update_at: null,
+    "nombre_producto": "Rosas Blancas",
+    "precio": 25, 
+    "id_tamaño": 2,
+    "tipo_producto": 1
   },
   {
-    Prod_Name: "Producto 3",
-    Price: 15.75,
-    Width: 4.9,
-    Height: 9.0,
-    Colour: "Verde",
-    Images: "imagen3.jpg",
-    state_delete: "N",
-    Delete_at: null,
-    Created_at: null,
-    Update_at: null,
+    "nombre_producto": "Girasoles Amarillos",
+    "precio": 18, 
+    "id_tamaño": 1,
+    "tipo_producto": 1
   },
   {
-    Prod_Name: "Producto 4",
-    Price: 12.99,
-    Width: 7.0,
-    Height: 6.5,
-    Colour: "Amarillo",
-    Images: "imagen4.jpg",
-    state_delete: "N",
-    Delete_at: null,
-    Created_at: null,
-    Update_at: null,
+    "nombre_producto": "Lirios Morados",
+    "precio": 30, 
+    "id_tamaño": 3,
+    "tipo_producto": 1
   },
   {
-    Prod_Name: "Producto 5",
-    Price: 19.99,
-    Width: 5.3,
-    Height: 7.5,
-    Colour: "Morado",
-    Images: "imagen5.jpg",
-    state_delete: "N",
-    Delete_at: null,
-    Created_at: null,
-    Update_at: null,
-  },
+    "nombre_producto": "Orquídeas Rosadas",
+    "precio": 40,
+    "id_tamaño": 2,
+    "tipo_producto": 1
+  }
 ];
 
-const createProducts = () => {
+try {
   arregloDeProductos.forEach((producto) => {
     const newObject = {
       id: crypto.randomUUID(),
       ...producto,
-      Created_at: new Date(),
+      created_at: new Date(),
+      updated_at: null,
+      deleted_at: null,
+      deleted: false
     };
     createProduct(newObject)
-      .then(() => console.log("objeto creado correctamente"))
-      .catch((err) => console.error("Error al crear el objeto", err));
+    process.exit(1);
   });
-};
+  console.log('Productos creados correctamente');
+} catch (error) {
+  console.log('Ocurrió un error al crear los productos', error);
+} 
 
-createProducts();
+
+

@@ -1,6 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 
+
 export const mostrarArchivo = async (req,res)=>{
     try{
         const __dirname = path.resolve();
@@ -18,5 +19,5 @@ export const mostrarArchivo = async (req,res)=>{
         return res.status(500).json({
             message: "Ocurrio un error al obtener el archivo",
         })
-    }
-}
+    };
+};

@@ -5,7 +5,6 @@ export const getUsuarioByEmail = (email) => {
     const query = "select id_usuario, nombre, apellido, telefono, correo, tipo_usuario, password from usuario where correo = ? and deleted = false";
     db.execute(query, [email])
       .then((res) => {
-        console.log(res);
         resolve(res);
       })
       .catch((err) => {
@@ -147,6 +146,49 @@ export const deleteFisico = (id) => {
       })
       .catch((err) => {
         reject(err);
+      });
+  });
+};
+
+export const getTypes = () => {
+  return new Promise((resolve, reject) =>{
+    const query = 'SELECT id_tipo, nombre_tipo FROM tipo_usuario';
+    db.execute(query)
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const createType = (nombre_tipo) => {
+  return new Promise ((resolve, reject ) => {
+    const query = 'INSERT INTO tipo_usuario (nombre_tipo, created_at) VALUES (?,?)';
+    db.execute(query,[nombre_tipo, new Date()])
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const updateType = (newObject) => {
+  return new Promise((resolve, reject) => {
+    const {
+      id_tipo,
+      nombre_tipo
+    } = newObject
+    const query = 'UPDATE tipo_usuario SET nombre_tipo=? , update = ? where id_tipo=?';
+    db.execute(query,[nombre_tipo ,new Date(), id_tipo])
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
       });
   });
 };

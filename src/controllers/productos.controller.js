@@ -104,7 +104,7 @@ export const updateProduct = (req, res) => {
 export const deleteLogico = (req, res) => {
   const { id } = req.params;
   productosService
-    .deleteLogico(id)
+    .deleteLogico(new Date(), id)
     .then(()=>{
       res.status(200).json({
         message: 'Producto eliminado'
@@ -136,13 +136,13 @@ export const deleteFisico = (req, res) => {
 export const updateImagen = async (req,res)=>{
   try{
     const {b64, extension}=req.body;
-    const idProducto= req.params.id;
-    const imagen= Buffer.from(b64,'base64');
-    const nombreImagen = `${idProducto}${Date.now()}.${
+    const id_producto= req.params.id;
+    const imagen = Buffer.from(b64,'base64');
+    const nombreImagen = `${id_producto}${Date.now()}.${
       extension
     }`;
     const __dirname=path.resolve();
-    const productoEncontrado= await productosService.getProducto(idProducto);
+    const productoEncontrado= await productosService.getProducto(id_producto);
 
     if(!productoEncontrado){
       return res.status(404).json({
@@ -155,14 +155,14 @@ export const updateImagen = async (req,res)=>{
     const id_imagen = crypto.randomUUID();
 
     const newImagen = {
+      id_producto,
       id_imagen,
       url_imagen: uploadPath,
       created_at: new Date(),
       deleted: false
-    }
+    };
 
-    productosService.saveImage(newImagen);
-    productosService.updateImage(idProducto,id_imagen); 
+    productosService.updateImage(newImagen);
 
     return res.status(200).json({
       message: "Se subio la imagen correctamente",
@@ -189,7 +189,123 @@ export const deleteImagen = (req,res)=>{
     return res.status().json({
       message: "ocurrió un error al eliminar la imagen",
       error: err.message
-    })
-  })
+    });
+  });
+};
 
-}
+//tamaño
+export const createTamaño = (req, res) =>{
+  const {nombre_tamaño} = req.body;
+  productosService
+    .createTamaño(nombre_tamaño)
+    .then(()=>{
+      res.status(201).json({
+        message: 'Tamaño creado correctamente'
+      });
+    })
+    .catch((error)=>{
+      res.status(500).json({
+        message: 'Ocurrió un error al crear el tamaño',
+        error: error.message
+      });
+    });
+};
+
+export const updateTamaño = (req, res) => {
+  const { id_tamano, nombre_tamano } = req.body;
+  const newTamano = {
+    id_tamano,
+    nombre_tamano
+  };
+  productosService
+    .updateTamaño(newTamano)
+    .then(() => {
+      res.status(200).json({
+        message: 'Tamaño actualizado'
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'Ocurrió un error al actualizar el tamaño',
+        error: error.message
+      });
+    });
+};
+
+export const getTamaños = (req,res) =>{
+  productosService
+    .getTamaños()
+    .then((response)=>{
+      res.status(200).json({
+        message: 'Se obtuvieron los tamaños correctamente',
+        data: response[0]
+      });
+    })
+    .catch((error)=>{
+      res.status(500).json({
+        message: 'Ocurrió un error al conseguir los tamaños',
+        error: error.message
+      });
+    });
+};
+
+//tipo de producto 
+export const createTypeProducto = (req, res) =>{
+  const {nombre_tipo} = req.body;
+  productosService
+    .createTypeProducto(nombre_tipo)
+    .then(()=>{
+      res.status(201).json({
+        message: 'Tipo de producto creado exitosamente'
+      });
+    })
+    .catch((error)=>{
+      res.status(500).json({
+        message: 'Ocurrió un error al crear el tipo de producto',
+        error: error.message
+      });
+    });
+};
+
+export const updatedTypesProducto = (req, res) =>{
+  const {id_tipo, nombre_tipo} = req.body;
+  const newTipo ={
+    id_tipo,
+    nombre_tipo
+  }
+  productosService
+    .updateTypeProducto(newTipo)
+    .then(()=>{
+      res.status(200).json({
+        messgae: 'Se actualizo el tipo de producto',
+        error: error.message
+      });
+    })
+    .catch((error)=>{
+      res.status(500).json({
+        message: 'Ocurrió un error al actualizar el tipo de producto',
+        error: error.message
+      });
+    });
+};
+
+export const getType = (req, res) => {
+  productosService
+    .getType()
+    .then((response)=>{
+      res.status(200).json({
+        message: 'Se obtuvieron los tipos de producto correctamente',
+        data: response[0]
+      });
+    })
+    .catch((error)=>{
+      res.status(500).json({
+        message: 'Ocurrió un error al conseguir los tipos de producto',
+        error: error.message
+      });
+    });
+};
+
+//Método en conjunto 
+
+

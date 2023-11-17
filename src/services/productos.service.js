@@ -1,3 +1,4 @@
+import { resolveEnvPrefix } from "vite";
 import db from "../config/db.js";
 
 export const getProducto = (id) => {
@@ -94,52 +95,46 @@ export const deleteProduct = (id) => {
   });
 };
 
-export const deleteLogico = (id) => {
+export const deleteLogico = (deleted_at,id) => {
   return new Promise((resolve, reject) => {
     const query = "update producto set deleted = true , deleted_at = ? where id_producto = ?";
-    db.execute(query, [new Date(),id])
+    db.execute(query, [deleted_at,id])
       .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 }
 
 
+//servicios para las imagenes 
 
-export const updateImage = (idProducto, id_imagen) => {
-  return new Promise((resolve, reject) => {
-    const query =
-      "INSERT INTO producto_imagen (id_producto, id_imagen) VALUES (?,?);";
-    db.execute(query, [idProducto, id_imagen])
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
-
-export const saveImage = (newObject) => {
-  return new Promise((resolve, reject) => {
+export const updateImage = async (newObject) => {
+    await db.beginTransaction();
+  try {
     const {
       id_imagen,
       url_imagen,
       created_at,
-      deleted
+      deleted,
+      id_producto
     } = newObject;
+
     const query =
       "INSERT INTO imagen (id_imagen, url_imagen, created_at, deleted) VALUES (?,?,?,?);";
     db.execute(query, [id_imagen, 
       url_imagen, 
       created_at,
-      deleted])
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+      deleted]);
+
+    const queryImagenProducto =
+      "INSERT INTO producto_imagen (id_producto, id_imagen) VALUES (?,?);";
+    db.execute(queryImagenProducto, [id_producto, id_imagen]);
+
+    await db.commit();
+  } catch (error) {
+    await db.rollback();
+    return error;
+  }
+  ;
 };
 
 export const deleteImage = (id_imagen) => {
@@ -154,3 +149,90 @@ export const deleteImage = (id_imagen) => {
       });
   });
 };
+
+export const getTamaños = () =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'SELECT id_tamaño, nombre_tamaño FROM tamaño';
+    db.execute(query)
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const createTamaño = (nombre_tamaño) =>{
+  return new Promise((resolve, reject)=>{
+    const query = 'INSERT INTO tamaño (nombre_tamaño, created_at) VALUES (?,?)';
+    db.execute(query,[nombre_tamaño, new Date()])
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const updateTamaño = (newObject) =>{
+  return new Promise((resolve, reject) => {
+    const {
+      id_tamaño,
+      nombre_tamaño
+    } = newObject;
+    const query = 'UPDATE tamaño SET nombre_tamaño = ?, updated_at = ? WHERE id_tamaño = ?';
+    db.execute(query, [nombre_tamaño, new Date(), id_tamaño])
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const getType = () =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'SELECT id_tipo, nombre_tipo from tipo_producto';
+    db.execute(query)
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const createTypeProducto = (nombre_tipo) =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'INSERT INTO tipo_producto (nombre_tipo, created_at) VALUES (?,?)';
+    db.execute(query,[nombre_tipo,new Date()])
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const updateTypeProducto = (newObject) =>{
+  return new Promise((resolve, reject) =>{
+    const {
+      id_tipo,
+      nombre_tipo
+    } = newObject;
+    const query = 'UPDATE tipo_usuario SET nombre_tipo = ?, updated_at = ? WHERE id_tipo = ?';
+    db.execute(query,[nombre_tipo, new Date(), id_tipo])
+    .then((res)=>{
+      resolve(res);
+    })
+    .catch((error)=>{
+      reject(error);
+    });
+  });
+};
+

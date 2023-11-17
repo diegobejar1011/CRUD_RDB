@@ -49,3 +49,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vb
 {
     "nombre": "fresitas"
 }
+
+###
+GET http://localhost:5000/api/pedidos/pedidosUser/a0877488-3b4e-4e4d-aadb-1334a5be2829 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNzEzOSwiZXhwIjoxNjk5OTEwNzM5fQ.t-cHFGBWjIZp3tH7OEmg0-9h_wgAgHwZoTMDbIStL7g

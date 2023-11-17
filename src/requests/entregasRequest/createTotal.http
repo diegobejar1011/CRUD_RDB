@@ -1,0 +1,22 @@
+###
+POST http://localhost:5000/api/entregas/creacionTotal HTTP/1.1
+Content-Type: application/json
+
+{
+    "id_productoNew": "1b356832-5f79-4ce1-acb9-06001f06df70",
+    "pedido": {
+        "id_usuario": "1",
+        "nombre_pedido": "osito",
+        "cantidad": 2,
+        "especificacion": "Que se vea bonito",
+        "dedicatoria": "I love you",
+        "status": true
+    },
+    "entrega": {
+         "lugar": "calle tepeaca",
+        "horario": "13:45:00",
+        "fecha": "2023-11-09",
+        "total": 250
+    }
+}
+

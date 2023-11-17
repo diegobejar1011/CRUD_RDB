@@ -41,18 +41,19 @@ const usuarios = [
   },
 ];
 
-const insertarUsuarios = () => {
+try {
   usuarios.forEach((usuario)=>{
     const newUsuario ={
       id: crypto.randomUUID(),
       ...usuario,
       created_at: new Date()
     };
-    createUsuario(newUsuario)
-    .then(()=> console.log("Usuarios creados exitosamente"))
-    .catch((error)=> console.log("Error al crear usuarios", error));
+    createUsuario(newUsuario);
+    process.exit(1);
   });
-};
-
-insertarUsuarios();
+  console.log('Usuarios creados correctamente');
+} catch (error) {
+  console.log('Ocurrió un error al crear los usuarios', error);
+}
+ 
 

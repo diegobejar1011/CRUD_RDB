@@ -1,15 +1,15 @@
 import z from "zod";
 
 const pedidoSchema = z.object({
-  producto: z.string({
+  id_producto: z.string({
     invalid_type_error: "Id_product debe ser un string",
     required_error: "Id_product es requerido",
   }),
-  usuario: z.string({
+  id_usuario: z.string({
     invalid_type_error: "Id_usuario debe ser un string",
     required_error: "Id_usuario es requerido",
   }),
-  nombre: z.string({
+  nombre_pedido: z.string({
     invalid_type_error: "Nombre debe ser un string",
     required_error: "Nombre es requerido",
   }),
@@ -26,7 +26,10 @@ const pedidoSchema = z.object({
   deleted: z.boolean({
     invalid_type_error: 'Deletede debe ser un booleano'
   })
-  .default(false)
+  .default(false),
+  status: z.boolean({
+    invalid_type_error: 'Status debe ser booleano'
+  }).default(false)
 });
 
 export const validatePedido = (object) => {

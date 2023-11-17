@@ -180,3 +180,61 @@ export const deleteFisico = async (req, res) => {
       });
     });
 };
+
+export const createType = (req, res) => {
+  const {nombre_tipo} = req.body;
+  usuarioServices
+    .createType(nombre_tipo)
+    .then(()=>{
+      res.status(201).json({
+        message: 'El tipo de usuario ha sido creado exitosamente'
+      })
+    })
+    .catch((error) =>{
+      res.status(500).json({
+        message: 'Ocurrió un error al crear el tipo de usuario',
+        error: error.message
+      });
+    });
+};
+
+export const updateType = (req, res) =>{
+  const {id_tipo} = req.params;
+  const {
+    nombre_usuario
+  } = req.body;
+  const newType = {
+    id_tipo,
+    nombre_usuario
+  };
+  usuarioServices
+    .updateType(newType)
+    .then(()=>{
+      res.status(200).json({
+        message: 'Tipo de usuario actualizado'
+      })
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'Ocurrio un error al actualizar el tipo de usuario',
+        error: error.message
+      });
+    });
+};
+
+export const getType = (req, res) => {
+  usuarioServices
+    .getTypes()
+    .then((response) =>{
+      res.status(200).json({
+        message: 'Se obtuvieron los tipos de usuarios',
+        data: response[0]
+      });
+    })
+    .catch((error)=>{
+      res.status(500).json({
+        message: 'Ocurrió un error al conseguir los tipos de usuarios',
+        error: error.message
+      });
+    });
+};

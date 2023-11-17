@@ -29,6 +29,7 @@ export const createPedido = (req, res) => {
   console.log(creadorNombre);
   const newPedido = {
     id: crypto.randomUUID(),
+    id_usuario: creadorNombre,
     ...result.data,
     created_at: new Date(),
     deleted: false
@@ -152,3 +153,21 @@ export const updatePedido = (req, res) => {
       res.status(500).send(error);
     });
 };
+
+export const getPedidosByUser = (req, res) => {
+  const { id_usuario } = req.params;
+  pedidosService
+    .getPedidosbyUser(id_usuario)
+    .then((response)=> {
+      res.status(200).json({
+        message: 'Los pedidos se obtuvieron correctamente',
+        data: response[0]
+      })
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'Ocurrió un error al obtener los pedidos',
+        error: error.message
+      })
+    })
+}

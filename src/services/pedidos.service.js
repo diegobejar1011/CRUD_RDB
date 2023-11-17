@@ -4,24 +4,28 @@ export const createPedido = (newPedido) => {
   return new Promise((resolve, reject) => {
     const {
       id,
-      producto,
-      usuario,
-      nombre,
+      id_producto,
+      id_usuario,
+      nombre_pedido,
       cantidad,
       especificacion,
       dedicatoria,
-      deleted
+      deleted,
+      status,
+      created_at
     } = newPedido;
-    const query = `INSERT INTO pedido ( id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, deleted) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO pedido ( id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, deleted, status, created_at) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     db.execute(query, [
       id,
-      producto,
-      usuario,
-      nombre,
+      id_producto,
+      id_usuario,
+      nombre_pedido,
       cantidad,
       especificacion,
       dedicatoria,
-      deleted
+      deleted,
+      status,
+      created_at
     ])
       .then((result) => {
         resolve(result);
@@ -34,7 +38,7 @@ export const createPedido = (newPedido) => {
 
 export const getPedidos = (skip, limite, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria FROM pedido WHERE deleted = false ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
+    const query = `SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, status, deleted, created_at, updated_at, deleted_at FROM pedido WHERE deleted = false ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
     db.execute(query)
       .then((result) => {
         resolve(result);
@@ -74,24 +78,40 @@ export const deletePedido = (id) => {
 export const updatePedido = (newPedido, id) => {
   return new Promise((resolve, reject) => {
     const {
-      nombre,
+      nombre_pedido,
       cantidad, 
       especificacion,
-      dedicatoria
+      dedicatoria,
+      status
     } = newPedido;
     const query =
-      "update pedido set nombre_pedido = ?, cantidad = ?, especificacion = ?, dedicatoria= ? where id_pedido = ?";
+      "update pedido set nombre_pedido = ?, cantidad = ?, especificacion = ?, dedicatoria= ?, status = ? where id_pedido = ?";
     db.execute(query, [
-      nombre,
+      nombre_pedido,
       cantidad,
       especificacion,
       dedicatoria,
+      status,
       id,
     ])
       .then((result) => {
         resolve(result);
       })
       .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+
+export const getPedidosbyUser = (id_usuario) => {
+  return new Promise ((resolve, reject) => {
+    const query = 'SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, deleted, created_at, updated_at, deleted_at, status FROM pedido where deleted = false and id_usuario = ?';
+    db.execute(query,[id_usuario])
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
         reject(error);
       });
   });
