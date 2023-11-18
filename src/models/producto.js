@@ -1,13 +1,17 @@
 import z from "zod";
 
 const productoSchema = z.object({
+  Prod_Name: z.string({
+    invalid_type_error: "Name must be a string",
+    required_error: "Name is required",
+  }),
   nombre_producto: z.string({
     invalid_type_error: "name must be a string",
     required_error: "name is required",
   }),
   precio: z.number({
     invalid_type_error: "Price must be a Number",
-    required_error: "Price is required", 
+    required_error: "Price is required",
   }),
   id_tamaño: z.number({
     invalid_type_error: "Tamaño must be a Number",
@@ -17,10 +21,11 @@ const productoSchema = z.object({
     invalid_type_error: "Tipo must be a Number",
     required_error: "Tipo name is required",
   }),
-  deleted: z.boolean({
-    invalid_type_error: 'deleted must be a boolean'
-  })
-  .default(false)
+  deleted: z
+    .boolean({
+      invalid_type_error: "deleted must be a boolean",
+    })
+    .default(false),
 });
 
 export const validateProduct = (object) => {

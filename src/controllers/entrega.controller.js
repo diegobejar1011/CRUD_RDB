@@ -239,20 +239,21 @@ export const createEntregaWithTransaction = async (req, res) => {
     });
 };
 
-export const getEntregasPendingDate = (req, res) =>{
-  console.log('Entro')
+export const getEntregasSinFecha = (req, res) => {
+  const { page = 1, limit = 10, orden = "fecha" } = req.query;
+  const skip = (page - 1) * limit;
   entregaServices
-    .getEntregasPendingDate()
-    .then((response)=>{
+    .getEntregasSinFecha(skip, limit, orden)
+    .then((response) => {
       res.status(200).json({
-        message: 'Se consiguieron las entregas sin fecha',
-        data: response[0]
+        message: "Entregas conseguidas",
+        data: response[0],
       });
     })
-    .catch((error)=>{
+    .catch((error) => {
       res.status(500).json({
-        message: 'Ocurrió un error al conseguir las entregas sin fecha',
-        error: error.message
+        message: "Ocurrió un error al conseguir las entregas",
+        error: error.message,
       });
     });
 };

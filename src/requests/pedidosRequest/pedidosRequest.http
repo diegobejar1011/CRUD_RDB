@@ -1,6 +1,6 @@
 ###
 GET http://localhost:5000/api/pedidos?page=1&limit=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDI3ODkyNywiZXhwIjoxNzAwMjgyNTI3fQ.FvRpoXoOXOEFV-PuHsalHAkKCnvXyMMVCK4d7DzdeEQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MDY3MiwiZXhwIjoxNzAwMzQ0MjcyfQ.ZDSt1t5Y9k1g-hxRQzfZSqHPllEfs2OrVn4_rz7NSrE
 
 ###
 POST http://localhost:5000/api/pedidos HTTP/1.1
@@ -19,8 +19,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vb
 
 
 ###
-GET http://localhost:5000/api/pedidos/pedido/308d25e3-a877-425b-a9e7-0bb3c471552a HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDI3ODkyNywiZXhwIjoxNzAwMjgyNTI3fQ.FvRpoXoOXOEFV-PuHsalHAkKCnvXyMMVCK4d7DzdeEQ
+GET http://localhost:5000/api/pedidos/287fe44c-6841-41ee-b246-3c4dd74e8c1f HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MDY3MiwiZXhwIjoxNzAwMzQ0MjcyfQ.ZDSt1t5Y9k1g-hxRQzfZSqHPllEfs2OrVn4_rz7NSrE
 
 ###
 DELETE http://localhost:5000/api/pedidos/eliminarFisico/0f8ca9a3-427b-4472-ab4f-5e6222c0adc2 HTTP/1.1
@@ -56,5 +56,5 @@ GET http://localhost:5000/api/pedidos/pedidosUser/a0877488-3b4e-4e4d-aadb-1334a5
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNzEzOSwiZXhwIjoxNjk5OTEwNzM5fQ.t-cHFGBWjIZp3tH7OEmg0-9h_wgAgHwZoTMDbIStL7g
 
 ###
-GET http://localhost:5000/api/pedidos/pedidosPendientes HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNzEzOSwiZXhwIjoxNjk5OTEwNzM5fQ.t-cHFGBWjIZp3tH7OEmg0-9h_wgAgHwZoTMDbIStL7g
+GET http://localhost:5000/api/pedidos/pedidos/Pendientes HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MTUzMSwiZXhwIjoxNzAwMzQ1MTMxfQ.r_lmEoPlVF6w2bt6pjy2orVDfs0lBQ8i0ic0ff0rnfk

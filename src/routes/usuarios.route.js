@@ -12,6 +12,10 @@ usuarioRouter.post("/", verificarJWT, usuariosController.create);
 usuarioRouter.patch("/:id", verificarJWT, usuariosController.updateParcial);
 usuarioRouter.put("/:id", verificarJWT, usuariosController.updateCompleto);
 usuarioRouter.delete("/:id", verificarJWT, usuariosController.deleteLogico);
-usuarioRouter.delete("/fisico/:id", verificarJWT, usuariosController.deleteFisico)
+usuarioRouter.delete(
+  "/fisico/:id",
+  verificarJWT,
+  usuariosController.deleteFisico
+);
 
 export default usuarioRouter;

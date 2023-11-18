@@ -1,9 +1,9 @@
 import * as pedidosService from "../services/pedidos.service.js";
 import { validatePartialPedido, validatePedido } from "../models/pedido.js";
-import crypto from 'node:crypto';
+import crypto from "node:crypto";
 
 export const getPedidos = (req, res) => {
-  const { page = 1, limit = 10 , orden = 'nombre_pedido' } = req.query;
+  const { page = 1, limit = 10, orden = "nombre_pedido" } = req.query;
   const skip = (page - 1) * limit;
   pedidosService
     .getPedidos(skip, limit, orden)
@@ -25,21 +25,21 @@ export const createPedido = (req, res) => {
   }
 
   //Manipular "creadorNombre" de la forma que se quiera (recordar modificar db)
-  const {nombre : creadorNombre} = req.usuario
+  const { nombre: creadorNombre } = req.usuario;
   console.log(creadorNombre);
   const newPedido = {
     id: crypto.randomUUID(),
     id_usuario: creadorNombre,
     ...result.data,
     created_at: new Date(),
-    deleted: false
+    deleted: false,
   };
 
   pedidosService
     .createPedido(newPedido)
     .then(() => {
       res.status(201).json({
-        message: "Pedido creado"
+        message: "Pedido creado",
       });
     })
     .catch((error) => {
@@ -114,7 +114,7 @@ export const updatePartialPedido = (req, res) => {
         ...originalData,
         ...result.data,
         updated_at: new Date(),
-      }; 
+      };
       pedidosService
         .updatePedido(newPedido, id)
         .then(() => {
@@ -124,7 +124,7 @@ export const updatePartialPedido = (req, res) => {
         })
         .catch((error) => {
           res.status(500).send(error);
-        }); 
+        });
     })
     .catch((error) => {
       res.status(500).send("Pedido no encontrado", error);
@@ -158,11 +158,11 @@ export const getPedidosByUser = (req, res) => {
   const { id_usuario } = req.params;
   pedidosService
     .getPedidosbyUser(id_usuario)
-    .then((response)=> {
+    .then((response) => {
       res.status(200).json({
-        message: 'Los pedidos se obtuvieron correctamente',
-        data: response[0]
-      })
+        message: "Los pedidos se obtuvieron correctamente",
+        data: response[0],
+      });
     })
     .catch((error) => {
       res.status(500).json({
@@ -173,18 +173,17 @@ export const getPedidosByUser = (req, res) => {
 };
 
 export const getPedidosPending = (req, res) => {
+  const { page = 1, limit = 10, orden = "nombre_pedido" } = req.query;
+  const skip = (page - 1) * limit;
   pedidosService
-    .getPedidosPending()
-    .then((response)=>{
+    .getPedidosPending(skip, limit, orden)
+    .then((response) => {
       res.status(200).json({
-        message: 'Se consiguieron los pedidos pendientes',
-        data: response[0]
+        message: "Se consiguieron los pedidos",
+        data: response[0],
       });
     })
-    .catch((error)=>{
-      res.status(500).json({
-        message: 'Ocurrió un error al conseguir los pedidos pendientes',
-        error: error.message
-      });
+    .catch((error) => {
+      res.status(500).send(error);
     });
 };

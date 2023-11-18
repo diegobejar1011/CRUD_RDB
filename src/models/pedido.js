@@ -23,13 +23,16 @@ const pedidoSchema = z.object({
   dedicatoria: z.string({
     invalid_type_error: "Dedicatoria debe ser un string",
   }),
-  deleted: z.boolean({
-    invalid_type_error: 'Deletede debe ser un booleano'
-  })
-  .default(false),
-  status: z.boolean({
-    invalid_type_error: 'Status debe ser booleano'
-  }).default(false)
+  deleted: z
+    .boolean({
+      invalid_type_error: "Deletede debe ser un booleano",
+    })
+    .default(false),
+  status: z
+    .boolean({
+      invalid_type_error: "Status debe ser booleano",
+    })
+    .default(false),
 });
 
 export const validatePedido = (object) => {

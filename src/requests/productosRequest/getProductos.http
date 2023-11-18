@@ -1,3 +1,7 @@
 ###
-GET http://localhost:5000/api/productos/1b356832-5f79-4ce1-acb9-06001f06df70 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkyMTAwNSwiZXhwIjoxNjk5OTI0NjA1fQ.g3CVRbTmG1oPS1eS29XnlM-cWSmea_LimMvtXBSSR8w
+GET http://localhost:5000/api/productos HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDMzOTc2MSwiZXhwIjoxNzAwMzQzMzYxfQ.dyBOC74dAgWZT1htwpP-52dhUf4PDR-GWLQxJRVH_jI
+
+###
+GET http://localhost:5000/api/productos/productosPersonalizados HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDMzOTc2MSwiZXhwIjoxNzAwMzQzMzYxfQ.dyBOC74dAgWZT1htwpP-52dhUf4PDR-GWLQxJRVH_jI

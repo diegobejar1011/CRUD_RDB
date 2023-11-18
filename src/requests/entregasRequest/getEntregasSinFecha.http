@@ -1,3 +1,2 @@
-###
-GET http://localhost:5000/api/entregas?page=1&limit=10 HTTP/1.1
+GET http://localhost:5000/api/entregas/entregasAprobadas/sinFecha HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MjE5NywiZXhwIjoxNzAwMzQ1Nzk3fQ.fE3wcnNcdNpODYlmeOIv6L91FVOGKkDty5kEr9rEq8I

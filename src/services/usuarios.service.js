@@ -2,7 +2,8 @@ import db from "../config/db.js";
 
 export const getUsuarioByEmail = (email) => {
   return new Promise((resolve, reject) => {
-    const query = "select id_usuario, nombre, apellido, telefono, correo, tipo_usuario, password from usuario where correo = ? and deleted = false";
+    const query =
+      "select id_usuario, nombre, apellido, telefono, correo, tipo_usuario, password from usuario where correo = ? and deleted = false";
     db.execute(query, [email])
       .then((res) => {
         resolve(res);
@@ -15,7 +16,8 @@ export const getUsuarioByEmail = (email) => {
 
 export const getUsuarioById = (id) => {
   return new Promise((resolve, reject) => {
-    const query = "select id_usuario, nombre, apellido, telefono, correo, tipo_usuario, password from usuario where id_usuario=? and deleted = false";
+    const query =
+      "select id_usuario, nombre, apellido, telefono, correo, tipo_usuario, password from usuario where id_usuario=? and deleted = false";
     db.execute(query, [id])
       .then((res) => {
         resolve(res);
@@ -41,16 +43,16 @@ export const getUsuarios = (offset, limit, orden) => {
 
 export const createUsuario = (data) => {
   return new Promise((resolve, reject) => {
-    const { 
+    const {
       id,
-      nombre, 
+      nombre,
       apellido,
       telefono,
-      email, 
-      password, 
+      email,
+      password,
       tipo,
       deleted,
-      created_at
+      created_at,
     } = data;
     const query =
       "Insert into usuario (id_usuario,nombre, apellido, telefono, correo, password, tipo_usuario, created_at, deleted) values (?, ?, ?, ?, ?, ?, ?,?,?)";
@@ -63,7 +65,7 @@ export const createUsuario = (data) => {
       password,
       tipo,
       created_at,
-      deleted
+      deleted,
     ])
       .then((res) => {
         resolve(res);
@@ -76,19 +78,10 @@ export const createUsuario = (data) => {
 
 export const updateParcialUsuario = (data, id) => {
   return new Promise((resolve, reject) => {
-    const { nombre, 
-      apellido, 
-      telefono, 
-      correo,
-      updated_at } = data;
+    const { nombre, apellido, telefono, correo, updated_at } = data;
     const query =
       "update usuario set nombre= ?, apellido = ?, telefono= ?, correo= ? , updated_at = ? where id_usuario = ?";
-    db.execute(query, [nombre, 
-      apellido, 
-      telefono, 
-      correo, 
-      updated_at, 
-      id])
+    db.execute(query, [nombre, apellido, telefono, correo, updated_at, id])
       .then((res) => {
         resolve(res);
       })
@@ -101,19 +94,10 @@ export const updateParcialUsuario = (data, id) => {
 
 export const updateUsuario = (data, id) => {
   return new Promise((resolve, reject) => {
-    const {nombre, 
-      apellido, 
-      telefono, 
-      email,
-      updated_at} = data;
+    const { nombre, apellido, telefono, email, updated_at } = data;
     const query =
-    "update usuario set nombre= ?, apellido = ?, telefono= ?, correo= ?, updated_at = ? where id_usuario = ?";
-    db.execute(query, [nombre, 
-      apellido, 
-      telefono, 
-      email,
-      updated_at, 
-      id])
+      "update usuario set nombre= ?, apellido = ?, telefono= ?, correo= ?, updated_at = ? where id_usuario = ?";
+    db.execute(query, [nombre, apellido, telefono, email, updated_at, id])
       .then((res) => {
         resolve(res);
       })
@@ -151,26 +135,27 @@ export const deleteFisico = (id) => {
 };
 
 export const getTypes = () => {
-  return new Promise((resolve, reject) =>{
-    const query = 'SELECT id_tipo, nombre_tipo FROM tipo_usuario';
+  return new Promise((resolve, reject) => {
+    const query = "SELECT id_tipo, nombre_tipo FROM tipo_usuario";
     db.execute(query)
-      .then((res)=>{
+      .then((res) => {
         resolve(res);
       })
-      .catch((error)=>{
+      .catch((error) => {
         reject(error);
       });
   });
 };
 
 export const createType = (nombre_tipo) => {
-  return new Promise ((resolve, reject ) => {
-    const query = 'INSERT INTO tipo_usuario (nombre_tipo, created_at) VALUES (?,?)';
-    db.execute(query,[nombre_tipo, new Date()])
-      .then((res)=>{
+  return new Promise((resolve, reject) => {
+    const query =
+      "INSERT INTO tipo_usuario (nombre_tipo, created_at) VALUES (?,?)";
+    db.execute(query, [nombre_tipo, new Date()])
+      .then((res) => {
         resolve(res);
       })
-      .catch((error)=>{
+      .catch((error) => {
         reject(error);
       });
   });
@@ -178,18 +163,15 @@ export const createType = (nombre_tipo) => {
 
 export const updateType = (newObject) => {
   return new Promise((resolve, reject) => {
-    const {
-      id_tipo,
-      nombre_tipo
-    } = newObject
-    const query = 'UPDATE tipo_usuario SET nombre_tipo=? , update = ? where id_tipo=?';
-    db.execute(query,[nombre_tipo ,new Date(), id_tipo])
-      .then((res)=>{
+    const { id_tipo, nombre_tipo } = newObject;
+    const query =
+      "UPDATE tipo_usuario SET nombre_tipo=? , update = ? where id_tipo=?";
+    db.execute(query, [nombre_tipo, new Date(), id_tipo])
+      .then((res) => {
         resolve(res);
       })
-      .catch((error)=>{
+      .catch((error) => {
         reject(error);
       });
   });
 };
-

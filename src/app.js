@@ -2,7 +2,7 @@ import express from "express";
 import db from "./config/db.js";
 import cors from "cors";
 import dotenv from "dotenv";
-import indexRouter from './routes/index.route.js'
+import indexRouter from "./routes/index.route.js";
 
 dotenv.config();
 const app = express();
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 //rutas
-app.use("/", indexRouter)
+app.use("/", indexRouter);
 
 //En caso que ingrese una ruta inexistente
 app.use("*", (req, res) => {
