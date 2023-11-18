@@ -89,7 +89,7 @@ export const deleteLogico = (id) => {
 export const getEntregabyDate = (month) => {
   return new Promise((resolve, reject) => {
     const query =
-      "SELECT id_entrega, id_pedido, lugar, horario, fecha, total, created_at, updated_at, deleted_at, deleted FROM entrega WHERE MONTH(fecha) = ?";
+      "SELECT id_entrega, id_pedido, lugar, horario, fecha, total, created_at, updated_at, deleted_at, deleted FROM entrega WHERE MONTH(fecha) = ? and deleted = false";
     db.execute(query, [month])
       .then((res) => {
         resolve(res);
@@ -154,4 +154,18 @@ export const createEntregaWithTransaction = async (
     await db.rollback();
     return error;
   }
+};
+
+export const getEntregasPendingDate = () => {
+  console.log("Entro")
+  return new Promise((resolve, reject) =>{
+    const query = "SELECT id_entrega, id_pedido, lugar, horario, fecha, total, created_at, updated_at, deleted_at, deleted FROM entrega WHERE deleted = false AND fecha IS NULL";
+    db.execute(query)
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+  });
 };

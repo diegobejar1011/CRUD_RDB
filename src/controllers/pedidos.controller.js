@@ -170,4 +170,21 @@ export const getPedidosByUser = (req, res) => {
         error: error.message
       })
     })
-}
+};
+
+export const getPedidosPending = (req, res) => {
+  pedidosService
+    .getPedidosPending()
+    .then((response)=>{
+      res.status(200).json({
+        message: 'Se consiguieron los pedidos pendientes',
+        data: response[0]
+      });
+    })
+    .catch((error)=>{
+      res.status(500).json({
+        message: 'Ocurrió un error al conseguir los pedidos pendientes',
+        error: error.message
+      });
+    });
+};

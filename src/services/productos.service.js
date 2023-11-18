@@ -236,3 +236,15 @@ export const updateTypeProducto = (newObject) =>{
   });
 };
 
+export const getProductImage = (id_producto) =>{
+  return new Promise((resolve, reject) =>{
+    const query = " SELECT pm.id_producto, i.url_imagen FROM producto_imagen pm INNER JOIN imagen i ON pm.id_imagen = i.id_imagen WHERE pm.id_producto = 'c11dcba4-6067-4ad9-b742-6e31af1690d7'";
+    db.execute(query,[id_producto])
+    .then((res)=>{
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    });
+  });
+};

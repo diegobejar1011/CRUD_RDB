@@ -38,7 +38,7 @@ export const createPedido = (newPedido) => {
 
 export const getPedidos = (skip, limite, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, status, deleted, created_at, updated_at, deleted_at FROM pedido WHERE deleted = false ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
+    const query = `SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, status, deleted, created_at, updated_at, deleted_at FROM pedido WHERE deleted = false and status = true ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
     db.execute(query)
       .then((result) => {
         resolve(result);
@@ -51,7 +51,7 @@ export const getPedidos = (skip, limite, orden) => {
 
 export const getByIdPedido = (id) => {
   return new Promise((resolve, reject) => {
-    const query = `select id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria from pedido where id_pedido = ? and deleted = false `;
+    const query = `select id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, deleted, status, created_at, updated_at, deleted_at from pedido where id_pedido = ? and deleted = false `;
     db.execute(query, [id])
       .then((result) => {
         resolve(result[0]);
@@ -103,7 +103,6 @@ export const updatePedido = (newPedido, id) => {
   });
 };
 
-
 export const getPedidosbyUser = (id_usuario) => {
   return new Promise ((resolve, reject) => {
     const query = 'SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, deleted, created_at, updated_at, deleted_at, status FROM pedido where deleted = false and id_usuario = ?';
@@ -112,6 +111,19 @@ export const getPedidosbyUser = (id_usuario) => {
         resolve(res);
       })
       .catch((error)=>{
+        reject(error);
+      });
+  });
+};
+
+export const getPedidosPending = () => {
+  return new Promise((resolve, reject)=>{
+    const query = 'select id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, deleted, created_at, updated_at, deleted_at, status from pedido where status = false and deleted = false';
+    db.execute(query)
+      .then((res)=>{
+        resolve(res);
+      })
+      .catch((error) =>{
         reject(error);
       });
   });

@@ -10,7 +10,8 @@ import {
   updateImagen,
   deleteImagen,
   getTamaños,
-  getType
+  getType,
+  getProductImage
 } from "../controllers/productos.controller.js";
 
 import {
@@ -30,11 +31,14 @@ productosRouter.delete("/deleteFisico/:id", verificarJWT, deleteFisico);
 productosRouter.put("/updateImagen/:id_producto", verificarJWT, updateImagen);
 productosRouter.get("/mostrarArchivo/:nombreArchivo", verificarJWT, mostrarArchivo);
 productosRouter.delete("/eliminarImagen/:id_imagen", verificarJWT, deleteImagen);
+productosRouter.get("/imagesProducto/:id_producto", verificarJWT, getProductImage );
 
 //rutasTamaños
 productosRouter.get('/Tamaños', verificarJWT, getTamaños); 
 
 //rutasTipos
 productosRouter.get('/Tipos', verificarJWT, getType);
+
+
 
 export default productosRouter;

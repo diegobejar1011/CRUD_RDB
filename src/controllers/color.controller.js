@@ -39,7 +39,8 @@ export const updateColor = (req, res) => {
     const {codigo_color} = req.body;
     const newColor ={
         id_color,
-        codigo_color
+        codigo_color,
+        updated_at: new Date()
     };
     colorServices
         .updateColor(newColor)
@@ -60,9 +61,11 @@ export const postColorProducto = (req, res) =>{
     const {id_producto, id_color} = req.body;
     const newColorProducto = {
         id_producto,
-        id_color
+        id_color,
+        created_at: new Date()
     }
-    colorServices(newColorProducto)
+    colorServices
+        .postColorProducto(newColorProducto)
         .then(()=>{
             res.status(201).json({
                 message: 'El color se agrego correctamente'
@@ -98,7 +101,8 @@ export const postColorPedido = (req,res) =>{
     const {id_pedido,id_color} = req.body;
     const newColorPedido ={
         id_pedido,
-        id_color
+        id_color,
+        created_at: new Date()
     };
     colorServices
         .postColorPedido(newColorPedido)

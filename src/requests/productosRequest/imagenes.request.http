@@ -16,3 +16,7 @@ Authorization: Bearer
 ###
 DELETE http://localhost:5000/api/productos/eliminarImagen/3e426bc7-5e1c-42db-8533-551f8b95ff3c HTTP/1.1
 Authorization: Bearer 
+
+
+###
+GET http://localhost:5000/api/productos/imagesProducto/c11dcba4-6067-4ad9-b742-6e31af1690d7 HTTP/1.1

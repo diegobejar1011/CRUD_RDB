@@ -12,6 +12,7 @@ pedidosRouter.delete("/eliminarLogico/:id", verificarJWT, pedidosController.dele
 pedidosRouter.patch("/actualizarParcial/:id", verificarJWT, pedidosController.updatePartialPedido);
 pedidosRouter.put("/actualizarCompleto/:id", verificarJWT, pedidosController.updatePedido);
 
-pedidosRouter.get("/pedidosUser/:id_usuario", pedidosController.getPedidosByUser);
+pedidosRouter.get("/pedidosUser/:id_usuario", verificarJWT, pedidosController.getPedidosByUser);
+pedidosRouter.get("/pedidosPendientes", pedidosController.getPedidosPending);
 
 export default pedidosRouter;

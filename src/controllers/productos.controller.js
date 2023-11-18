@@ -306,6 +306,22 @@ export const getType = (req, res) => {
     });
 };
 
-//Método en conjunto 
+export const getProductImage = (req, res) =>{
+  const {id_producto} = req.params;
+  productosService
+    .getProductImage(id_producto)
+      .then((response)=>{
+        res.status(200).json({
+          message: 'Se consiguieron las imagenes correctamente',
+          data: response[0]
+        });
+      })
+      .catch((error) =>{
+        res.status(500).json({
+          message: 'Ocurrió un error al conseguir las imagenes',
+          error: error.message
+        });
+      });
+};
 
 

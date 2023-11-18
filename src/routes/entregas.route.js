@@ -15,5 +15,7 @@ entregasRouter.delete('/deleteFisico/:id', verificarJWT, entregasController.dele
 entregasRouter.get('/entregaDate/:month', verificarJWT, entregasController.getEntregasByDate);
 entregasRouter.post('/creacionTotal', verificarJWT, entregasController.createEntregaWithTransaction);
 
+entregasRouter.get("/SinFecha/Conseguir", verificarJWT, entregasController.getEntregasPendingDate);
+
 
 export default entregasRouter; 
