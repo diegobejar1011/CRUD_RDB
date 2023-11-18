@@ -136,31 +136,36 @@ export const deleteFisico = (req, res) => {
 export const updateImagen = async (req, res) => {
   try {
     const { b64, extension } = req.body;
-    const id_producto = req.params.id;
+    const {id_producto} = req.params;
     const imagen = Buffer.from(b64, "base64");
     const nombreImagen = `${id_producto}${Date.now()}.${extension}`;
     const __dirname = path.resolve();
     const productoEncontrado = await productosService.getProducto(id_producto);
-
     if (!productoEncontrado) {
       return res.status(404).json({
         message: "Producto no encontrado",
       });
     }
-    const uploadPath = path.join(__dirname, "uploads", nombreImagen);
-    fs.writeFileSync(uploadPath, imagen);
+    
 
     const id_imagen = crypto.randomUUID();
 
     const newImagen = {
       id_producto,
       id_imagen,
-      url_imagen: uploadPath,
+      url_imagen: nombreImagen,
       created_at: new Date(),
       deleted: false,
     };
 
-    productosService.updateImage(newImagen);
+    const result = await productosService.updateImage(newImagen);
+
+    if(result){
+    const uploadPath = path.join(__dirname, "uploads", nombreImagen);
+    fs.writeFileSync(uploadPath, imagen);
+    }
+
+    
 
     return res.status(200).json({
       message: "Se subio la imagen correctamente",
@@ -168,7 +173,7 @@ export const updateImagen = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: "Ocurrión un error al actualizar imagen del producto",
-      error: error.message,
+      error: error.message
     });
   }
 };
@@ -303,4 +308,37 @@ export const getType = (req, res) => {
     });
 };
 
-//Método en conjunto
+export const getProductImage = (req, res) =>{
+  const {id_producto} = req.params;
+  productosService
+    .getProductImage(id_producto)
+      .then((response)=>{
+        res.status(200).json({
+          message: 'Se consiguieron las imagenes correctamente',
+          data: response[0]
+        });
+      })
+      .catch((error) =>{
+        res.status(500).json({
+          message: 'Ocurrió un error al conseguir las imagenes',
+          error: error.message
+        });
+      });
+};
+
+
+export const getProductPersonal = (req, res) => {
+  const { page = 1, limit = 10, orden = "nombre_producto" } = req.query;
+  const skip = (page - 1) * limit;
+  productosService
+    .getProductPersonal(skip, limit, orden)
+    .then((response) => {
+      res.status(200).json({
+        message: 'Se consiguieron los productos personalizados',
+        data: response[0],
+      });
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+};

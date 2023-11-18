@@ -35,10 +35,4 @@ colorRouter.post(
   colorControllers.postColorPedido
 );
 
-colorRouter.post(
-  "/:id_producto/:id_imagen",
-  verificarJWT,
-  colorControllers.postColorProducto
-);
-
 export default colorRouter;

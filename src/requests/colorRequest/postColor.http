@@ -1,2 +1,29 @@
 ###
-GET http://localhost:5000/api/colores/18806413-aab9-4a91-93f3-3378b55b5e25/25 HTTP/1.1
+POST http://localhost:5000/api/colores/createColor HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
+
+{
+    "codigo_color": "#FF5733"
+}
+
+###
+POST http://localhost:5000/api/colores/agregarColorProducto HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
+
+
+{
+    "id_producto": "86c66a2c-00ef-4c03-b650-9e5d5a0a69bb",
+    "id_color": "2"
+}
+
+###
+POST http://localhost:5000/api/colores/agregarColorPedido HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
+
+{
+    "id_pedido": "66740d60-3aac-4c66-a4b0-22f591cea1db",
+    "id_color": "2"
+}

@@ -2,8 +2,19 @@ import db from "../config/db.js";
 
 export const getEntregas = (skip, limit, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `Select id_entrega, id_pedido, lugar, horario, fecha, total, created_at, updated_at, deleted_at, deleted from entrega where deleted = false order by ${orden} DESC LIMIT ${skip}, ${limit} `;
-
+    const query = `
+    Select e.id_entrega, e.id_pedido, e.lugar, e.horario, e.fecha, e.total, e.created_at, e.updated_at, e.deleted_at, e.deleted, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo
+    from entrega e
+    INNER JOIN pedido pe
+    ON e.id_pedido = pe.id_pedido
+    INNER JOIN producto p
+    ON pe.id_producto = p.id_producto
+    INNER JOIN tamaño t 
+    ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp 
+    ON p.tipo_producto = tp.id_tipo
+    WHERE e.deleted = false and pe.status = true
+    order by ${orden} DESC LIMIT ${skip}, ${limit} `;
     db.execute(query)
       .then((res) => resolve(res))
       .catch((error) => reject(error));
@@ -12,7 +23,18 @@ export const getEntregas = (skip, limit, orden) => {
 
 export const getEntregaById = (id) => {
   return new Promise((resolve, reject) => {
-    const query = `Select id_entrega, id_pedido, lugar, horario, fecha, total, created_at, updated_at, deleted_at, deleted from entrega where deleted = false and id_entrega = ?`;
+    const query = 
+    `Select e.id_entrega, e.id_pedido, e.lugar, e.horario, e.fecha, e.total, e.created_at, e.updated_at, e.deleted_at, e.deleted, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo
+    from entrega e
+    INNER JOIN pedido pe
+    ON e.id_pedido = pe.id_pedido
+    INNER JOIN producto p
+    ON pe.id_producto = p.id_producto
+    INNER JOIN tamaño t 
+    ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp 
+    ON p.tipo_producto = tp.id_tipo
+    where e.deleted = false and pe.status= true and id_entrega = ?`;
     db.execute(query, [id])
       .then((result) => {
         resolve(result[0]);
@@ -89,7 +111,7 @@ export const deleteLogico = (id) => {
 export const getEntregabyDate = (month) => {
   return new Promise((resolve, reject) => {
     const query =
-      "SELECT id_entrega, id_pedido, lugar, horario, fecha, total, created_at, updated_at, deleted_at, deleted FROM entrega WHERE MONTH(fecha) = ?";
+      "SELECT id_entrega, id_pedido, lugar, horario, fecha, total, created_at, updated_at, deleted_at, deleted FROM entrega WHERE MONTH(fecha) = ? and deleted = false";
     db.execute(query, [month])
       .then((res) => {
         resolve(res);
@@ -154,4 +176,26 @@ export const createEntregaWithTransaction = async (
     await db.rollback();
     return error;
   }
+};
+
+
+export const getEntregasSinFecha = (skip, limit, orden) => {
+  return new Promise((resolve, reject) => {
+    const query = `
+    Select e.id_entrega, e.id_pedido, e.lugar, e.horario, e.fecha, e.total, e.created_at, e.updated_at, e.deleted_at, e.deleted, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo
+    from entrega e
+    INNER JOIN pedido pe
+    ON e.id_pedido = pe.id_pedido
+    INNER JOIN producto p
+    ON pe.id_producto = p.id_producto
+    INNER JOIN tamaño t 
+    ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp 
+    ON p.tipo_producto = tp.id_tipo
+    WHERE e.deleted = false and pe.status = true and e.fecha is NULL
+    order by ${orden} DESC LIMIT ${skip}, ${limit} `;
+    db.execute(query)
+      .then((res) => resolve(res))
+      .catch((error) => reject(error));
+  });
 };

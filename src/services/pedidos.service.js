@@ -38,7 +38,16 @@ export const createPedido = (newPedido) => {
 
 export const getPedidos = (skip, limite, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, status, deleted, created_at, updated_at, deleted_at FROM pedido WHERE deleted = false ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
+    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at
+    FROM pedido pe
+    INNER JOIN producto p
+    ON pe.id_producto = p.id_producto
+    INNER JOIN tamaño t 
+    ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp 
+    ON p.tipo_producto = tp.id_tipo
+    WHERE pe.deleted = false and status = true
+    ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
     db.execute(query)
       .then((result) => {
         resolve(result);
@@ -51,7 +60,15 @@ export const getPedidos = (skip, limite, orden) => {
 
 export const getByIdPedido = (id) => {
   return new Promise((resolve, reject) => {
-    const query = `select id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria from pedido where id_pedido = ? and deleted = false `;
+    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at
+    FROM pedido pe
+    INNER JOIN producto p
+    ON pe.id_producto = p.id_producto
+    INNER JOIN tamaño t 
+    ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp 
+    ON p.tipo_producto = tp.id_tipo
+    WHERE pe.deleted = false and status = true and pe.id_pedido = ?;`;
     db.execute(query, [id])
       .then((result) => {
         resolve(result[0]);
@@ -105,6 +122,28 @@ export const getPedidosbyUser = (id_usuario) => {
     db.execute(query, [id_usuario])
       .then((res) => {
         resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getPedidosPending = (skip, limite, orden) => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at
+    FROM pedido pe
+    INNER JOIN producto p
+    ON pe.id_producto = p.id_producto
+    INNER JOIN tamaño t 
+    ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp 
+    ON p.tipo_producto = tp.id_tipo
+    WHERE pe.deleted = false and status = false
+    ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
+    db.execute(query)
+      .then((result) => {
+        resolve(result);
       })
       .catch((error) => {
         reject(error);

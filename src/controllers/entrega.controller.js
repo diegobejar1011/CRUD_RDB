@@ -238,3 +238,22 @@ export const createEntregaWithTransaction = async (req, res) => {
       });
     });
 };
+
+export const getEntregasSinFecha = (req, res) => {
+  const { page = 1, limit = 10, orden = "fecha" } = req.query;
+  const skip = (page - 1) * limit;
+  entregaServices
+    .getEntregasSinFecha(skip, limit, orden)
+    .then((response) => {
+      res.status(200).json({
+        message: "Entregas conseguidas",
+        data: response[0],
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Ocurrió un error al conseguir las entregas",
+        error: error.message,
+      });
+    });
+};

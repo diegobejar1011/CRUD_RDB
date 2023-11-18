@@ -166,8 +166,24 @@ export const getPedidosByUser = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: "Ocurrió un error al obtener los pedidos",
-        error: error.message,
+        message: 'Ocurrió un error al obtener los pedidos',
+        error: error.message
+      })
+    })
+};
+
+export const getPedidosPending = (req, res) => {
+  const { page = 1, limit = 10, orden = "nombre_pedido" } = req.query;
+  const skip = (page - 1) * limit;
+  pedidosService
+    .getPedidosPending(skip, limit, orden)
+    .then((response) => {
+      res.status(200).json({
+        message: "Se consiguieron los pedidos",
+        data: response[0],
       });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
     });
 };

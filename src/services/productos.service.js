@@ -4,7 +4,7 @@ import db from "../config/db.js";
 export const getProducto = (id) => {
   return new Promise((resolve, reject) => {
     const query =
-      "select id_producto, nombre_producto, precio, id_tamaño, tipo_producto, created_at, updated_at, deleted_at, deleted from producto where id_producto = ? and deleted = false";
+      "select p.id_producto, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, p.deleted, p.created_at, p.updated_at, p.deleted_at from producto p INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo where id_producto = ? and deleted = false";
     db.execute(query, [id])
       .then((res) => {
         resolve(res[0]);
@@ -15,7 +15,14 @@ export const getProducto = (id) => {
 
 export const getProductos = (offset, limit, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `select id_producto, nombre_producto, precio, id_tamaño, tipo_producto from producto where deleted = false order by ${orden}  desc limit ${offset},${limit}`;
+    const query = `SELECT p.id_producto, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, p.deleted, p.created_at, p.updated_at, p.deleted_at
+    FROM producto p
+    INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo
+    WHERE p.deleted = false
+    and p.tipo_producto = 1
+    ORDER BY ${orden} DESC
+    LIMIT ${offset}, ${limit};`;
     db.execute(query)
       .then((result) => {
         resolve(result);
@@ -112,13 +119,14 @@ export const updateImage = async (newObject) => {
     db.execute(query, [id_imagen, url_imagen, created_at, deleted]);
 
     const queryImagenProducto =
-      "INSERT INTO producto_imagen (id_producto, id_imagen) VALUES (?,?);";
-    db.execute(queryImagenProducto, [id_producto, id_imagen]);
+      "INSERT INTO producto_imagen (id_producto, id_imagen, created_at) VALUES (?,?,?);";
+    db.execute(queryImagenProducto, [id_producto, id_imagen, created_at]);
 
     await db.commit();
+    return true;
   } catch (error) {
     await db.rollback();
-    return error;
+    return false;
   }
 };
 
@@ -218,3 +226,36 @@ export const updateTypeProducto = (newObject) => {
       });
   });
 };
+
+export const getProductImage = (id_producto) =>{
+  return new Promise((resolve, reject) =>{
+    const query = " SELECT i.url_imagen FROM producto_imagen pm INNER JOIN imagen i ON pm.id_imagen = i.id_imagen WHERE pm.id_producto = ? ";
+    db.execute(query,[id_producto])
+    .then((res)=>{
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    });
+  });
+};
+
+export const getProductPersonal = (offset, limit, orden) =>{
+  return new Promise((resolve, reject) => {
+    const query = `SELECT p.id_producto, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, p.deleted, p.created_at, p.updated_at, p.deleted_at
+    FROM producto p
+    INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo
+    WHERE p.deleted = false
+    and p.tipo_producto = 2
+    ORDER BY ${orden} DESC
+    LIMIT ${offset}, ${limit};`;
+    db.execute(query)
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}

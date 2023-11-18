@@ -6,7 +6,7 @@ export const getColores = (req, res) => {
     .then((response) => {
       res.status(200).json({
         message: "Se consiguieron los colores",
-        data: response,
+        data: response[0],
       });
     })
     .catch((error) => {
@@ -62,7 +62,8 @@ export const postColorProducto = (req, res) => {
     id_producto,
     id_color,
   };
-  colorServices(newColorProducto)
+  colorServices
+  .postColorProducto(newColorProducto)
     .then(() => {
       res.status(201).json({
         message: "El color se agrego correctamente",
