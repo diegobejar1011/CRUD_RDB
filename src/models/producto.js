@@ -2,8 +2,8 @@ import z from "zod";
 
 const productoSchema = z.object({
   Prod_Name: z.string({
-    invalid_type_error: "Task name must be a string",
-    required_error: "Task name is required",
+    invalid_type_error: "Name name must be a string",
+    required_error: "Name is required",
   }),
   Price: z.number({
     invalid_type_error: "Price must be a Number",
