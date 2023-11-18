@@ -28,4 +28,9 @@ pedidosRouter.put(
   pedidosController.updatePedido
 );
 
+pedidosRouter.get(
+  "/pedidosUser/:id_usuario",
+  pedidosController.getPedidosByUser
+);
+
 export default pedidosRouter;

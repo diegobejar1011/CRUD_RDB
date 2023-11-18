@@ -1,11 +1,13 @@
 ###
-PUT http://localhost:5000/api/usuarios/25 HTTP/1.1
+PUT http://localhost:5000/api/usuarios/5a43da3a-4267-4e6e-a691-b9c026dd52ce HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTM3MTc3NiwiZXhwIjoxNjk5Mzc1Mzc2fQ.8_ULtXn8D93xTLntlA0wY1kVRbbHLVt04nBn-wSZyAo
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwMzEwNywiZXhwIjoxNjk5OTA2NzA3fQ.OD1lYt5DyVZ9a7WhOv5Mj_KvRe9THDRl6PvA_lv6N04
 {
-    "nombre": "Rodri",
-    "apellido" : "Flores",
-    "email": "Rodri@gmail.com",
-    "password": "1234"
+    "nombre": "Carlos",
+    "apellido" : "Farrera",
+    "telefono": "9611727213",
+    "email": "email1@gmail.com",
+    "password": "1234",
+    "tipo": 1
 }
+

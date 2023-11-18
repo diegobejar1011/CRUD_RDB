@@ -26,7 +26,7 @@ export const login = (req, res) => {
       const payload = await {
         usuario: {
           id: resolve[0][0].id,
-          nombre : resolve[0][0].nombre,
+          nombre: resolve[0][0].nombre,
         },
       };
       const token = jwt.sign(payload, jwtToken, { expiresIn: "1h" });

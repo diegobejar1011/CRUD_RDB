@@ -5,30 +5,34 @@ const pedidoSchema = z.object({
     invalid_type_error: "Id_product debe ser un string",
     required_error: "Id_product es requerido",
   }),
-  id_lugar: z.number({
-    invalid_type_error: "Id_lugar debe ser un número",
-    required_error: "Id_lugar es requerido",
+  id_usuario: z.string({
+    invalid_type_error: "Id_usuario debe ser un string",
+    required_error: "Id_usuario es requerido",
   }),
-  fecha: z.coerce.date({
-    invalid_type_error: "Fecha debe ser un date",
-    required_error: "Fecha es requerida",
+  nombre_pedido: z.string({
+    invalid_type_error: "Nombre debe ser un string",
+    required_error: "Nombre es requerido",
   }),
-  id_horario: z.number({
-    invalid_type_error: "Id_horario debe ser un numero",
-    required_error: "Id_horario es requerido",
+  cantidad: z.number({
+    invalid_type_error: "Cantidad debe ser un número",
+    required_error: "Cantidad es requerido",
   }),
-  total: z.number({
-    invalid_type_error: "Total debe ser un número",
-    required_error: "Total es requerido",
+  especificacion: z.string({
+    invalid_type_error: "Especificación debe ser un string",
+  }),
+  dedicatoria: z.string({
+    invalid_type_error: "Dedicatoria debe ser un string",
   }),
   deleted: z
-    .string({
-      invalid_type_error: "Deleted must be a Char",
+    .boolean({
+      invalid_type_error: "Deletede debe ser un booleano",
     })
-    .default("N"),
-  Deleted_at: z.coerce.date().nullable().default(null),
-  Created_at: z.coerce.date().nullable().default(null),
-  Update_at: z.coerce.date().nullable().default(null),
+    .default(false),
+  status: z
+    .boolean({
+      invalid_type_error: "Status debe ser booleano",
+    })
+    .default(false),
 });
 
 export const validatePedido = (object) => {

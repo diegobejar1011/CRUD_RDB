@@ -1,2 +1,2 @@
-DELETE http://localhost:5000/api/usuarios/32 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTM3MTc3NiwiZXhwIjoxNjk5Mzc1Mzc2fQ.8_ULtXn8D93xTLntlA0wY1kVRbbHLVt04nBn-wSZyAo
+DELETE http://localhost:5000/api/usuarios/d26b16e8-93af-470c-8ab1-fd3cc69907fe HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTc1NTUzOCwiZXhwIjoxNjk5NzU5MTM4fQ.WflD0WwGDI9jENP3W_bkqCJVCiIQPkan-CnIn-aRo50
