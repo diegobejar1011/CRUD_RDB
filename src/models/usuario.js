@@ -2,8 +2,8 @@ import zod from "zod";
 
 const usuarioSchema = zod.object({
   nombre: zod.string({
-    invalid_type_error: "name must be a string",
-    required_error: "name is required",
+    invalid_type_error: "nombre must be a string",
+    required_error: "nombre is required",
   }),
   apellido: zod.string({
     invalid_type_error: "apellido must be a string",
