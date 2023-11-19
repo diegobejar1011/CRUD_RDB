@@ -8,14 +8,20 @@ import indexRouter from "./routes/index.route.js";
 
 dotenv.config();
 const app = express();
-const server = createServer(app);
-const io = new Server(server);
-
-app.set("port", process.env.PORT || 4000);
 
 //middleware
 app.use(express.json());
 app.use(cors());
+
+app.set("port", process.env.PORT || 4000);
+
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+  },
+});
 
 //rutas
 app.use("/", indexRouter);
@@ -25,13 +31,16 @@ app.use("*", (req, res) => {
   res.send("Esta ruta no existe en la API");
 });
 
+io.on("connection", (socket) => {
+  console.log("usuario conectado");
+  socket.on("disconnect", () => {
+    console.log("usuario desconectado")
+  })
+});
+
 //Empieza servidor
 server.listen(app.get("port"), () => {
   console.log("Servidor corriendo en puerto", app.get("port"));
-});
-
-io.on("connection", () => {
-  console.log("usuario conectado");
 });
 
 //Conexion a db
