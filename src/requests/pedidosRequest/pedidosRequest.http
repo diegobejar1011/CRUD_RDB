@@ -1,26 +1,26 @@
 ###
 GET http://localhost:5000/api/pedidos?page=1&limit=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MDY3MiwiZXhwIjoxNzAwMzQ0MjcyfQ.ZDSt1t5Y9k1g-hxRQzfZSqHPllEfs2OrVn4_rz7NSrE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMmY5MjA3ZjktODZmYi00OWZlLWI5OGMtODNhODBlZTgyMmIwIiwibm9tYnJlIjoiRGllZ28ifSwiaWF0IjoxNzAwNDIzODExLCJleHAiOjE3MDA0Mjc0MTF9.jB9FTQqceI_tEk5OF1ZUNZ1Zrty1ueVf0m2N3GrR84M
 
 ###
 POST http://localhost:5000/api/pedidos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDI3ODkyNywiZXhwIjoxNzAwMjgyNTI3fQ.FvRpoXoOXOEFV-PuHsalHAkKCnvXyMMVCK4d7DzdeEQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMmY5MjA3ZjktODZmYi00OWZlLWI5OGMtODNhODBlZTgyMmIwIiwibm9tYnJlIjoiRGllZ28ifSwiaWF0IjoxNzAwNDIxNTkzLCJleHAiOjE3MDA0MjUxOTN9.IofSMIOfrLJSV9gWuawmwHi6uJU91y-zp-8lX_5vU0g
 
 {
-        "id_usuario": "2f9207f9-86fb-49fe-b98c-83a80ee822b0",
         "id_producto": "18806413-aab9-4a91-93f3-3378b55b5e25",
         "nombre_pedido": "Tulipanes rojos",
         "cantidad": 2,
         "especificacion": "Que se vea bonito",
         "dedicatoria": "I love you",
-        "status": true
+        "status": true,
+        "colores": ["1","2"]
 }
 
 
 ###
-GET http://localhost:5000/api/pedidos/287fe44c-6841-41ee-b246-3c4dd74e8c1f HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MDY3MiwiZXhwIjoxNzAwMzQ0MjcyfQ.ZDSt1t5Y9k1g-hxRQzfZSqHPllEfs2OrVn4_rz7NSrE
+GET http://localhost:5000/api/pedidos/20dd7b16-c341-4694-8abb-2fa4e9a17187 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMmY5MjA3ZjktODZmYi00OWZlLWI5OGMtODNhODBlZTgyMmIwIiwibm9tYnJlIjoiRGllZ28ifSwiaWF0IjoxNzAwNDIzODExLCJleHAiOjE3MDA0Mjc0MTF9.jB9FTQqceI_tEk5OF1ZUNZ1Zrty1ueVf0m2N3GrR84M
 
 ###
 DELETE http://localhost:5000/api/pedidos/eliminarFisico/0f8ca9a3-427b-4472-ab4f-5e6222c0adc2 HTTP/1.1
@@ -52,7 +52,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vb
 }
 
 ###
-GET http://localhost:5000/api/pedidos/pedidosUser/a0877488-3b4e-4e4d-aadb-1334a5be2829 HTTP/1.1
+GET http://localhost:5000/api/pedidos/pedidosUser/2f9207f9-86fb-49fe-b98c-83a80ee822b0 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNzEzOSwiZXhwIjoxNjk5OTEwNzM5fQ.t-cHFGBWjIZp3tH7OEmg0-9h_wgAgHwZoTMDbIStL7g
 
 ###

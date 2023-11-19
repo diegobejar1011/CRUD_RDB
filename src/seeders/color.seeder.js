@@ -17,7 +17,8 @@ const array = [];
 try {
   colores.forEach(async (color) => {
     array.push(createColor(color.codigo_color));
-  })(async () => {
+  });
+  (async () => {
     await Promise.all(array);
     console.log("Colores creados correctamente");
     process.exit(0);

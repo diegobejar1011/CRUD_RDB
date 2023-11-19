@@ -1,6 +1,7 @@
 import * as pedidosService from "../services/pedidos.service.js";
 import { validatePartialPedido, validatePedido } from "../models/pedido.js";
 import crypto from "node:crypto";
+import { postColorPedido } from "../services/color.service.js";
 
 export const getPedidos = (req, res) => {
   const { page = 1, limit = 10, orden = "nombre_pedido" } = req.query;
@@ -25,19 +26,32 @@ export const createPedido = (req, res) => {
   }
 
   //Manipular "creadorNombre" de la forma que se quiera (recordar modificar db)
-  const { nombre: creadorNombre } = req.usuario;
-  console.log(creadorNombre);
+  const { id : creadorNombre } = req.usuario;
   const newPedido = {
     id: crypto.randomUUID(),
     id_usuario: creadorNombre,
-    ...result.data,
+    id_producto: result.data.id_producto,
+    nombre_pedido: result.data.nombre_pedido,
+    cantidad: result.data.cantidad,
+    especificacion: result.data.especificacion,
+    dedicatoria: result.data.dedicatoria,
+    status: result.data.status,
     created_at: new Date(),
     deleted: false,
   };
 
+  const colores = [...req.body.colores];
+
   pedidosService
     .createPedido(newPedido)
     .then(() => {
+      colores.forEach((color)=>{
+        const newColor = {
+          id_pedido: newPedido.id,
+          id_color: color
+        };
+        postColorPedido(newColor);
+      });
       res.status(201).json({
         message: "Pedido creado",
       });

@@ -1,6 +1,7 @@
 import db from "../config/db.js";
 
 export const createPedido = (newPedido) => {
+  console.log(newPedido);
   return new Promise((resolve, reject) => {
     const {
       id,
@@ -38,7 +39,7 @@ export const createPedido = (newPedido) => {
 
 export const getPedidos = (skip, limite, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at
+    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido
     FROM pedido pe
     INNER JOIN producto p
     ON pe.id_producto = p.id_producto
@@ -46,6 +47,8 @@ export const getPedidos = (skip, limite, orden) => {
     ON p.id_tamaño = t.id_tamaño
     INNER JOIN tipo_producto tp 
     ON p.tipo_producto = tp.id_tipo
+    INNER JOIN usuario u 
+    ON pe.id_usuario = u.id_usuario
     WHERE pe.deleted = false and status = true
     ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
     db.execute(query)
@@ -60,7 +63,7 @@ export const getPedidos = (skip, limite, orden) => {
 
 export const getByIdPedido = (id) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at
+    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido
     FROM pedido pe
     INNER JOIN producto p
     ON pe.id_producto = p.id_producto
@@ -68,6 +71,8 @@ export const getByIdPedido = (id) => {
     ON p.id_tamaño = t.id_tamaño
     INNER JOIN tipo_producto tp 
     ON p.tipo_producto = tp.id_tipo
+    INNER JOIN usuario u 
+    ON pe.id_usuario = u.id_usuario
     WHERE pe.deleted = false and status = true and pe.id_pedido = ?;`;
     db.execute(query, [id])
       .then((result) => {
@@ -118,7 +123,7 @@ export const updatePedido = (newPedido, id) => {
 export const getPedidosbyUser = (id_usuario) => {
   return new Promise((resolve, reject) => {
     const query =
-      "SELECT id_pedido, id_producto, id_usuario, nombre_pedido, cantidad, especificacion, dedicatoria, deleted, created_at, updated_at, deleted_at, status FROM pedido where deleted = false and id_usuario = ?";
+      "SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido FROM pedido pe INNER JOIN producto p ON pe.id_producto = p.id_producto INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo INNER JOIN usuario u ON pe.id_usuario = u.id_usuario where pe.deleted = false and pe.id_usuario = ?";
     db.execute(query, [id_usuario])
       .then((res) => {
         resolve(res);
@@ -131,7 +136,7 @@ export const getPedidosbyUser = (id_usuario) => {
 
 export const getPedidosPending = (skip, limite, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at
+    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido
     FROM pedido pe
     INNER JOIN producto p
     ON pe.id_producto = p.id_producto
@@ -139,6 +144,8 @@ export const getPedidosPending = (skip, limite, orden) => {
     ON p.id_tamaño = t.id_tamaño
     INNER JOIN tipo_producto tp 
     ON p.tipo_producto = tp.id_tipo
+    INNER JOIN usuario u 
+    ON pe.id_usuario = u.id_usuario
     WHERE pe.deleted = false and status = false
     ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
     db.execute(query)

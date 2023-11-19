@@ -5,10 +5,6 @@ const pedidoSchema = z.object({
     invalid_type_error: "Id_product debe ser un string",
     required_error: "Id_product es requerido",
   }),
-  id_usuario: z.string({
-    invalid_type_error: "Id_usuario debe ser un string",
-    required_error: "Id_usuario es requerido",
-  }),
   nombre_pedido: z.string({
     invalid_type_error: "Nombre debe ser un string",
     required_error: "Nombre es requerido",
