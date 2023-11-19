@@ -20,8 +20,9 @@ try {
   (async () => {
     await Promise.all(array);
     console.log("LOs tamañosfueron creados correctamente");
-    process.exit(1);
+    process.exit(0);
   })();
 } catch (error) {
   console.log("Ocurrió un error al crear los tamaños", error);
+  process.exit(1);
 }

@@ -1,8 +1,8 @@
-import path from "node:path";
 import { validatePartialProduct, validateProduct } from "../models/producto.js";
 import * as productosService from "../services/productos.service.js";
 import crypto from "node:crypto";
-import fs from "node:fs";
+import {postColorProducto} from '../services/color.service.js';
+import {crearImagen} from '../helpers/crearImagen.js'
 
 export const getProductos = (req, res) => {
   const { page = 1, limit = 10, orden = "nombre_producto" } = req.query;
@@ -17,7 +17,7 @@ export const getProductos = (req, res) => {
     .catch((err) => {
       res.status(500).send(err);
     });
-};
+}; 
 
 export const createProducts = (req, res) => {
   const result = validateProduct(req.body);
@@ -26,15 +26,52 @@ export const createProducts = (req, res) => {
   }
   const newProduct = {
     id: crypto.randomUUID(),
-    ...result.data,
+    id_producto,
+    nombre_producto: result.data.nombre_producto,
+    precio: result.data.precio,
+    id_tamaño: result.data.id_tamaño,
+    tipo_producto: result.data.tipo_producto,
     created_at: new Date(),
+    deleted: false
   };
+
+  const imagenes = [...req.body.imagenes];
+  const colores = [...req.body.colores];
+
+
   productosService
     .createProduct(newProduct)
     .then(() => {
-      res.status(201).json({
-        data: `Product created sucessfully!`,
+      imagenes.forEach( async (imagen)=>{
+        const { b64, extension } = imagen;
+        const id_producto  = newProduct.id;
+        const nombreImagen = `${id_producto}${Date.now()}.${extension}`;
+        const newImagen = {
+          id_producto,
+          id_imagen: crypto.randomUUID(),
+          url_imagen: nombreImagen,
+          created_at: new Date(),
+          deleted: false,
+        }
+        const result = await productosService.updateImage(newImagen);
+        if(result){
+          const apiImagen = {
+            b64,
+            nombreImagen
+          };
+          crearImagen(apiImagen);
+        };
       });
+      colores.forEach((color)=>{
+        const newColor = {
+          id_producto: newProduct.id,
+          id_color: color
+        };
+        postColorProducto(newColor);
+      });
+      res.status(201).json({
+        message: 'Se completo el guardado del producto'
+      })
     })
     .catch((err) => {
       res.status(500).send(err.message);
@@ -136,20 +173,15 @@ export const deleteFisico = (req, res) => {
 export const updateImagen = async (req, res) => {
   try {
     const { b64, extension } = req.body;
-    const {id_producto} = req.params;
-    const imagen = Buffer.from(b64, "base64");
+    const { id_producto } = req.params;
     const nombreImagen = `${id_producto}${Date.now()}.${extension}`;
-    const __dirname = path.resolve();
     const productoEncontrado = await productosService.getProducto(id_producto);
     if (!productoEncontrado) {
       return res.status(404).json({
         message: "Producto no encontrado",
       });
     }
-    
-
     const id_imagen = crypto.randomUUID();
-
     const newImagen = {
       id_producto,
       id_imagen,
@@ -157,23 +189,21 @@ export const updateImagen = async (req, res) => {
       created_at: new Date(),
       deleted: false,
     };
-
     const result = await productosService.updateImage(newImagen);
-
-    if(result){
-    const uploadPath = path.join(__dirname, "uploads", nombreImagen);
-    fs.writeFileSync(uploadPath, imagen);
-    }
-
-    
-
+    if (result) {
+      const apiImagen = {
+        b64,
+        nombreImagen
+      };
+      crearImagen(apiImagen);
+    };
     return res.status(200).json({
       message: "Se subio la imagen correctamente",
     });
   } catch (error) {
     return res.status(500).json({
       message: "Ocurrión un error al actualizar imagen del producto",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -308,24 +338,23 @@ export const getType = (req, res) => {
     });
 };
 
-export const getProductImage = (req, res) =>{
-  const {id_producto} = req.params;
+export const getProductImage = (req, res) => {
+  const { id_producto } = req.params;
   productosService
     .getProductImage(id_producto)
-      .then((response)=>{
-        res.status(200).json({
-          message: 'Se consiguieron las imagenes correctamente',
-          data: response[0]
-        });
-      })
-      .catch((error) =>{
-        res.status(500).json({
-          message: 'Ocurrió un error al conseguir las imagenes',
-          error: error.message
-        });
+    .then((response) => {
+      res.status(200).json({
+        message: "Se consiguieron las imagenes correctamente",
+        data: response[0],
       });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Ocurrió un error al conseguir las imagenes",
+        error: error.message,
+      });
+    });
 };
-
 
 export const getProductPersonal = (req, res) => {
   const { page = 1, limit = 10, orden = "nombre_producto" } = req.query;
@@ -334,7 +363,7 @@ export const getProductPersonal = (req, res) => {
     .getProductPersonal(skip, limit, orden)
     .then((response) => {
       res.status(200).json({
-        message: 'Se consiguieron los productos personalizados',
+        message: "Se consiguieron los productos personalizados",
         data: response[0],
       });
     })
@@ -342,3 +371,4 @@ export const getProductPersonal = (req, res) => {
       res.status(500).send(err);
     });
 };
+

@@ -1,10 +1,6 @@
 import z from "zod";
 
 const productoSchema = z.object({
-  Prod_Name: z.string({
-    invalid_type_error: "Name must be a string",
-    required_error: "Name is required",
-  }),
   nombre_producto: z.string({
     invalid_type_error: "name must be a string",
     required_error: "name is required",

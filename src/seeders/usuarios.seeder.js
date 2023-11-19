@@ -55,8 +55,9 @@ try {
   (async () =>{
     await Promise.all(array);
     console.log("Los usuarios fueron creados correctamente");
-    process.exit(1);
+    process.exit(0);
   })();
 } catch (error) {
   console.log("Ocurrió un error al crear los usuarios", error);
+  process.exit(1);
 };

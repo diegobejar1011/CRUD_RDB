@@ -2,6 +2,10 @@ import * as entregaServices from "../services/entrega.service.js";
 import { getProducto } from "../services/productos.service.js";
 import { validatePartialEntrega, validateEntrega } from "../models/entrega.js";
 import crypto from "node:crypto";
+import { updateImage } from "../services/productos.service.js";
+import { postColorProducto } from "../services/color.service.js";
+import { crearImagen } from '../helpers/crearImagen.js'
+import { postColorPedido } from "../services/color.service.js";
 
 export const getEntrega = (req, res) => {
   const { page = 1, limit = 10, orden = "fecha" } = req.query;
@@ -38,7 +42,7 @@ export const getEntregaById = (req, res) => {
         error: error.message,
       });
     });
-};
+}; 
 
 export const createEntrega = (req, res) => {
   const result = validateEntrega(req.body);
@@ -193,10 +197,45 @@ export const createEntregaWithTransaction = async (req, res) => {
     id_producto,
       (producto = {
         id_producto,
-        ...req.body.producto,
+        nombre_producto: req.body.producto.nombre_producto,
+        precio: req.body.producto.precio,
+        id_tamaño: req.body.producto.id_tamaño,
+        tipo_producto: req.body.producto.tipo_producto,
         deleted: false,
         created_at: new Date(),
       });
+      const imagenes = [...req.body.producto.imagenes];
+      const colores = [...req.body.producto.colores]; 
+      
+      imagenes.forEach( async (imagen)=>{
+        const { b64, extension } = imagen;
+        const id_producto  = producto.id_producto;
+        const nombreImagen = `${id_producto}${Date.now()}.${extension}`;
+        const newImagen = {
+          id_producto,
+          id_imagen: crypto.randomUUID(),
+          url_imagen: nombreImagen,
+          created_at: new Date(),
+          deleted: false,
+        }
+        const result = await updateImage(newImagen);
+        if(result){
+          const apiImagen = {
+            b64,
+            nombreImagen
+          };
+          crearImagen(apiImagen);
+        };
+      });
+
+      colores.forEach((color)=>{
+        const newColor = {
+          id_producto: producto.id_producto,
+          id_color: color
+        };
+        postColorProducto(newColor);
+      }); 
+      
   } else {
     const result = await getProducto(id_productoNew);
     producto = {
@@ -206,14 +245,32 @@ export const createEntregaWithTransaction = async (req, res) => {
       created: true,
     };
   }
+
   const id_pedido = crypto.randomUUID();
+  const id_usuario = req.usuario.id;
   const pedido = {
     id_producto: producto.id_producto,
     id_pedido,
+    id_usuario,
     ...req.body.pedido,
     created_at: new Date(),
     deleted: false,
   };
+
+  let coloresPedido = []; 
+  if(req.body.producto){
+    coloresPedido = [...req.body.producto.colores];
+  }else{
+    coloresPedido = [...req.body.pedido.colores];
+  }
+
+  coloresPedido.forEach((color)=>{
+    const newColor = {
+      id_pedido: id_pedido,
+      id_color: color
+    };
+    postColorPedido(newColor);
+  });
 
   const id_entrega = crypto.randomUUID();
   const entrega = {

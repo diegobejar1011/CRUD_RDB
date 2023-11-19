@@ -25,7 +25,7 @@ export const login = (req, res) => {
       }
       const payload = await {
         usuario: {
-          id: resolve[0][0].id,
+          id: resolve[0][0].id_usuario,
           nombre: resolve[0][0].nombre,
         },
       };
@@ -33,6 +33,10 @@ export const login = (req, res) => {
       res.status(200).json({
         message: "acceso correcto",
         token,
+        usuario : {
+          id : resolve[0][0].id_usuario,
+          nombre: resolve[0][0].nombre,
+        }
       });
     })
     .catch((err) => {

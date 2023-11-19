@@ -18,8 +18,9 @@ try {
   async () => {
     await Promise.all(array);
     console.log("Tipos de usuarios creados exitosamente");
-    process.exit(1);
+    process.exit(0);
   };
 } catch (error) {
   console.log("Ocurrió un error al crear los tipos de usuarios", error);
+  process.exit(1);
 }
