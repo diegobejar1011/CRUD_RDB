@@ -19,8 +19,9 @@ try {
   (async () => {
     await Promise.all(array);
     console.log("Tipos de productos creados correctamente");
-    process.exit(1);
+    process.exit(0);
   })();
 } catch (error) {
   console.log("Ocurrió un error al crear los tipos de productos", error);
+  process.exit(1);
 }

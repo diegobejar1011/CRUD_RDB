@@ -8,7 +8,7 @@ const usuarios = [
     apellido: "flores",
     telefono: "96117272713",
     email: "rodrigFlores@gmail.com",
-    tipo: 1,
+    tipo: 2,
     password: bcrypt.hashSync("rodrigo", 10),
     deleted: false,
   },
@@ -17,7 +17,7 @@ const usuarios = [
     apellido: "flores",
     telefono: "96117272713",
     email: "fercho@gmail.com",
-    tipo: 1,
+    tipo: 2,
     password: bcrypt.hashSync("fernando", 10),
     deleted: false,
   },
@@ -26,7 +26,7 @@ const usuarios = [
     apellido: "Bejar",
     telefono: "96117272713",
     email: "debz@gmail.com",
-    tipo: 1,
+    tipo: 2,
     password: bcrypt.hashSync("Diego", 10),
     deleted: false,
   },
@@ -35,7 +35,7 @@ const usuarios = [
     apellido: "Flores",
     telefono: "96117272713",
     email: "rox@gmail.com",
-    tipo: 1,
+    tipo: 2,
     password: bcrypt.hashSync("Roxana", 10),
     deleted: false,
   },
@@ -49,9 +49,10 @@ try {
       created_at: new Date(),
     };
     createUsuario(newUsuario);
-    process.exit(1);
   });
   console.log("Usuarios creados correctamente");
+  process.exit(0);
 } catch (error) {
   console.log("Ocurrió un error al crear los usuarios", error);
+  process.exit(1);
 }

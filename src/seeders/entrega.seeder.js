@@ -33,6 +33,7 @@ const entregas = [
 ];
 
 try {
+  //tercero entrega
   entregas.forEach(async (entrega) => {
     const newEntrega = {
       id: crypto.randomUUID(),
@@ -43,9 +44,11 @@ try {
       deleted_at: null,
     };
     await createEntrega(newEntrega);
-    process.exit(1);
+    
   });
   console.log("Entregas creadas correctamente");
+  process.exit(0);
 } catch (error) {
   console.log("Ocurrió un error al crear las entregas", error);
+  process.exit(1);
 }

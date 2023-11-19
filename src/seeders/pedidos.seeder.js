@@ -41,6 +41,7 @@ const pedidos = [
 ];
 
 try {
+  //segundo pedido
   pedidos.forEach(async (pedido) => {
     const newPedido = {
       id: crypto.randomUUID(),
@@ -51,9 +52,11 @@ try {
       deleted_at: null,
     };
     await createPedido(newPedido);
-    process.exit(1);
+
   });
   console.log("Pedidos creados correctamente");
+  process.exit(0);
 } catch (error) {
   console.log("Ocurrió un error al crear los pedidos", error);
+  process.exit(1);
 }

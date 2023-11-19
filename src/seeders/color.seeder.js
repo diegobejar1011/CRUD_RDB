@@ -20,8 +20,9 @@ try {
   })(async () => {
     await Promise.all(array);
     console.log("Colores creados correctamente");
-    process.exit(1);
+    process.exit(0);
   });
 } catch (error) {
   console.log("Error al crear los colores", error);
+  process.exit(1);
 }

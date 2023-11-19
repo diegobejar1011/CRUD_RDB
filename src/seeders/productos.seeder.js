@@ -35,6 +35,7 @@ const arregloDeProductos = [
 ];
 
 try {
+  //primero se ejecuta producto
   arregloDeProductos.forEach((producto) => {
     const newObject = {
       id: crypto.randomUUID(),
@@ -45,9 +46,11 @@ try {
       deleted: false,
     };
     createProduct(newObject);
-    process.exit(1);
+    
   });
   console.log("Productos creados correctamente");
+  process.exit(0);
 } catch (error) {
   console.log("Ocurrió un error al crear los productos", error);
+  process.exit(1);
 }
