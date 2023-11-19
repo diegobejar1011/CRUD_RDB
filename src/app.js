@@ -2,10 +2,14 @@ import express from "express";
 import db from "./config/db.js";
 import cors from "cors";
 import dotenv from "dotenv";
+import { Server } from "socket.io";
+import { createServer } from "node:http";
 import indexRouter from "./routes/index.route.js";
 
 dotenv.config();
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
 app.set("port", process.env.PORT || 4000);
 
@@ -22,8 +26,12 @@ app.use("*", (req, res) => {
 });
 
 //Empieza servidor
-app.listen(app.get("port"), () => {
+server.listen(app.get("port"), () => {
   console.log("Servidor corriendo en puerto", app.get("port"));
+});
+
+io.on("connection", () => {
+  console.log("usuario conectado");
 });
 
 //Conexion a db

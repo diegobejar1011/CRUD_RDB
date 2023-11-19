@@ -50,13 +50,15 @@ export const create = async (req, res) => {
       error: JSON.parse(validacion.error.message),
     });
   }
-  const existingUser = await usuarioServices.getUsuarioByEmail(validacion.data.email);
-    if (existingUser[0].length) {
-      return res.status(406).json({
-        data: null,
-        message: "El usuario a crear ya existe, intente con otro",
-      });
-    }
+  const existingUser = await usuarioServices.getUsuarioByEmail(
+    validacion.data.email
+  );
+  if (existingUser[0].length) {
+    return res.status(406).json({
+      data: null,
+      message: "El usuario a crear ya existe, intente con otro",
+    });
+  }
   const password = bcrypt.hashSync(req.body.password, saltosBcrypt);
 
   const newObject = {
@@ -70,7 +72,7 @@ export const create = async (req, res) => {
     .createUsuario(newObject)
     .then(() => {
       res.status(201).json({
-        data : validacion.data.email,
+        data: validacion.data.email,
         message: `usuario creado exitosamente`,
       });
     })
