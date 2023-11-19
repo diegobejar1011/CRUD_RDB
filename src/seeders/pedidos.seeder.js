@@ -3,8 +3,8 @@ import crypto from "node:crypto";
 
 const pedidos = [
   {
-    id_producto: "18806413-aab9-4a91-93f3-3378b55b5e25",
-    id_usuario: "2f9207f9-86fb-49fe-b98c-83a80ee822b0",
+    id_producto: "0b5bed7d-9adb-4475-b3cd-b5301f5aee8f",
+    id_usuario: "8b806fe3-cc5d-486c-816a-8f28749462e8",
     nombre_pedido: "Tulipanes Rojos",
     cantidad: 5,
     especificacion: "Quiero que sea muy bonito, con detalles",
@@ -12,8 +12,8 @@ const pedidos = [
     status: true,
   },
   {
-    id_producto: "23a4c7e7-2c05-4a7f-8c28-9f8f94cd453d",
-    id_usuario: "c8739e06-8e7a-41e1-a4c7-2e71a59c8b24",
+    id_producto: "7240b73a-c1ec-4db0-a51d-2d00364b3c28",
+    id_usuario: "ac12062a-4dda-43a2-a212-a5df16e958c8",
     nombre_pedido: "Rosas Blancas",
     cantidad: 10,
     especificacion: "Me gustaría un ramo grande",
@@ -21,8 +21,8 @@ const pedidos = [
     status: false,
   },
   {
-    id_producto: "8d45f56b-cc56-4f6b-9fc3-56a1e98b83fb",
-    id_usuario: "7a1a6e90-3c1a-45d2-bb93-4b6aae2d7982",
+    id_producto: "bdb8ca01-b074-474d-8258-01536a75568a",
+    id_usuario: "52050963-5f07-4494-9772-ecd04c6c0475",
     nombre_pedido: "Girasoles Amarillos",
     cantidad: 3,
     especificacion: "Que sean frescos",
@@ -30,8 +30,8 @@ const pedidos = [
     status: true,
   },
   {
-    id_producto: "4fd9a9c1-8249-4c50-8a88-7a48ba0e09a7",
-    id_usuario: "be1a52c0-2487-402c-87f1-348480e56bc2",
+    id_producto: "5e7bfdfd-dc16-4270-b704-60ece00d68d7",
+    id_usuario: "1cf0c950-90c7-4a72-a9be-b0404307de64",
     nombre_pedido: "Lirios Morados",
     cantidad: 7,
     especificacion: "Con envoltura morada",
@@ -40,8 +40,9 @@ const pedidos = [
   },
 ];
 
+const array = [];
+
 try {
-  //segundo pedido
   pedidos.forEach(async (pedido) => {
     const newPedido = {
       id: crypto.randomUUID(),
@@ -51,12 +52,14 @@ try {
       deleted: false,
       deleted_at: null,
     };
-    await createPedido(newPedido);
-
+    array.push(createPedido(newPedido));
   });
-  console.log("Pedidos creados correctamente");
-  process.exit(0);
+  (async () =>{
+    await Promise.all(array);
+    console.log("Los pedidos fueron creados correctamente");
+    process.exit(0);
+  })();
 } catch (error) {
   console.log("Ocurrió un error al crear los pedidos", error);
   process.exit(1);
-}
+};

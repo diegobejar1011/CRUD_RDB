@@ -5,37 +5,38 @@ const arregloDeProductos = [
   {
     nombre_producto: "Tulipanes Rojos",
     precio: 15,
-    id_tamaño: 1,
-    tipo_producto: 1,
+    id_tamaño: 4,
+    tipo_producto: 3,
   },
   {
     nombre_producto: "Rosas Blancas",
     precio: 25,
-    id_tamaño: 2,
-    tipo_producto: 1,
+    id_tamaño: 5,
+    tipo_producto: 3,
   },
   {
     nombre_producto: "Girasoles Amarillos",
     precio: 18,
-    id_tamaño: 1,
-    tipo_producto: 1,
+    id_tamaño: 4,
+    tipo_producto: 3,
   },
   {
     nombre_producto: "Lirios Morados",
     precio: 30,
-    id_tamaño: 3,
-    tipo_producto: 1,
+    id_tamaño: 6,
+    tipo_producto: 3,
   },
   {
     nombre_producto: "Orquídeas Rosadas",
     precio: 40,
-    id_tamaño: 2,
-    tipo_producto: 1,
+    id_tamaño: 5,
+    tipo_producto: 3,
   },
 ];
 
+const array = [];
+
 try {
-  //primero se ejecuta producto
   arregloDeProductos.forEach((producto) => {
     const newObject = {
       id: crypto.randomUUID(),
@@ -45,11 +46,13 @@ try {
       deleted_at: null,
       deleted: false,
     };
-    createProduct(newObject);
-    
+    array.push(createProduct(newObject));
   });
-  console.log("Productos creados correctamente");
-  process.exit(0);
+  (async () => {
+    await Promise.all(array);
+    console.log('Los productos fueron creados correctamente');
+    process.exit(0);
+  })();
 } catch (error) {
   console.log("Ocurrió un error al crear los productos", error);
   process.exit(1);
