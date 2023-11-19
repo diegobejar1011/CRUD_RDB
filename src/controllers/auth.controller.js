@@ -30,13 +30,14 @@ export const login = (req, res) => {
         },
       };
       const token = jwt.sign(payload, jwtToken, { expiresIn: "1h" });
+
       res.status(200).json({
         message: "acceso correcto",
         token,
-        usuario : {
-          id : resolve[0][0].id_usuario,
+        usuario: {
+          id: resolve[0][0].id_usuario,
           nombre: resolve[0][0].nombre,
-        }
+        },
       });
     })
     .catch((err) => {

@@ -42,7 +42,7 @@ export const getById = (req, res) => {
     });
 };
 
-export const create = (req, res) => {
+export const create = async (req, res) => {
   const validacion = usuarioModel.validarUsuario(req.body);
   if (!validacion.success) {
     return res.status(422).json({
@@ -50,7 +50,13 @@ export const create = (req, res) => {
       error: JSON.parse(validacion.error.message),
     });
   }
-
+  const existingUser = await usuarioServices.getUsuarioByEmail(validacion.data.email);
+    if (existingUser[0].length) {
+      return res.status(406).json({
+        data: null,
+        message: "El usuario a crear ya existe, intente con otro",
+      });
+    }
   const password = bcrypt.hashSync(req.body.password, saltosBcrypt);
 
   const newObject = {
@@ -64,6 +70,7 @@ export const create = (req, res) => {
     .createUsuario(newObject)
     .then(() => {
       res.status(201).json({
+        data : validacion.data.email,
         message: `usuario creado exitosamente`,
       });
     })
@@ -80,9 +87,9 @@ export const updateParcial = (req, res) => {
   const validacion = usuarioModel.validarUsuarioParcial(req.body);
 
   if (!validacion.success) {
-    return res.status(422).json({
-      message: "datos invalidos",
-      error: JSON.parse(validacion.error.message),
+    return res.status(400).json({
+      message: JSON.parse("Este usuario ya es existente"),
+      error: JSON.parse("Este usuario ya es existente"),
     });
   }
 
