@@ -17,11 +17,12 @@ const array = [];
 try {
   colores.forEach(async (color) => {
     array.push(createColor(color.codigo_color));
-  })(async () => {
+  });
+  (async () => {
     await Promise.all(array);
     console.log("Colores creados correctamente");
     process.exit(1);
-  });
+  })();
 } catch (error) {
   console.log("Error al crear los colores", error);
 }

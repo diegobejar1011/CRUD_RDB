@@ -32,6 +32,8 @@ const entregas = [
   },
 ];
 
+const array = [];
+
 try {
   entregas.forEach(async (entrega) => {
     const newEntrega = {
@@ -42,10 +44,13 @@ try {
       deleted: false,
       deleted_at: null,
     };
-    await createEntrega(newEntrega);
-    process.exit(1);
+    array.push(createEntrega(newEntrega));
   });
-  console.log("Entregas creadas correctamente");
+  ( async () =>{
+    await Promise.all(array);
+    console.log("Las entregas fueron creadas correctamente");
+    process.exit(1);
+  })();
 } catch (error) {
   console.log("Ocurrió un error al crear las entregas", error);
 }

@@ -40,6 +40,8 @@ const pedidos = [
   },
 ];
 
+const array = [];
+
 try {
   pedidos.forEach(async (pedido) => {
     const newPedido = {
@@ -50,10 +52,13 @@ try {
       deleted: false,
       deleted_at: null,
     };
-    await createPedido(newPedido);
-    process.exit(1);
+    array.push(createPedido(newPedido));
   });
-  console.log("Pedidos creados correctamente");
+  (async () =>{
+    await Promise.all(array);
+    console.log("Los pedidos fueron creados correctamente");
+    process.exit(1);
+  })();
 } catch (error) {
   console.log("Ocurrió un error al crear los pedidos", error);
-}
+};
