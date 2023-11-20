@@ -26,7 +26,7 @@ export const createPedido = (req, res) => {
   }
 
   //Manipular "creadorNombre" de la forma que se quiera (recordar modificar db)
-  const { id : creadorNombre } = req.usuario;
+  const { id: creadorNombre } = req.usuario;
   const newPedido = {
     id: crypto.randomUUID(),
     id_usuario: creadorNombre,
@@ -45,10 +45,10 @@ export const createPedido = (req, res) => {
   pedidosService
     .createPedido(newPedido)
     .then(() => {
-      colores.forEach((color)=>{
+      colores.forEach((color) => {
         const newColor = {
           id_pedido: newPedido.id,
-          id_color: color
+          id_color: color,
         };
         postColorPedido(newColor);
       });
@@ -180,10 +180,10 @@ export const getPedidosByUser = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'Ocurrió un error al obtener los pedidos',
-        error: error.message
-      })
-    })
+        message: "Ocurrió un error al obtener los pedidos",
+        error: error.message,
+      });
+    });
 };
 
 export const getPedidosPending = (req, res) => {

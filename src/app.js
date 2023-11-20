@@ -34,8 +34,8 @@ app.use("*", (req, res) => {
 io.on("connection", (socket) => {
   console.log("usuario conectado");
   socket.on("disconnect", () => {
-    console.log("usuario desconectado")
-  })
+    console.log("usuario desconectado");
+  });
   //emitir orden de compra
   // socket.on("orden")
 });
