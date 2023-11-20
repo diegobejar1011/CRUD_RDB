@@ -3,7 +3,7 @@ import { getProducto } from "../services/productos.service.js";
 import { validatePartialEntrega, validateEntrega } from "../models/entrega.js";
 import crypto from "node:crypto";
 import { updateImage } from "../services/productos.service.js";
-import { postColorProducto } from "../services/color.service.js";
+import { createColor, postColorProducto } from "../services/color.service.js";
 import { crearImagen } from "../helpers/crearImagen.js";
 import { postColorPedido } from "../services/color.service.js";
 
@@ -193,6 +193,7 @@ export const createEntregaWithTransaction = async (req, res) => {
   const id_producto = crypto.randomUUID();
 
   if (!id_productoNew) {
+    console.log(req.body);
     id_producto,
       (producto = {
         id_producto,
@@ -232,6 +233,8 @@ export const createEntregaWithTransaction = async (req, res) => {
         id_producto: producto.id_producto,
         id_color: color,
       };
+      //crear color con el color (#FFF, etc...) que mando
+      // createColor()
       postColorProducto(newColor);
     });
   } else {
