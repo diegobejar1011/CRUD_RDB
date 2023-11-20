@@ -10,8 +10,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkI
  
 
 ### 
-GET http://localhost:5000/api/productos/mostrarArchivo/18806413-aab9-4a91-93f3-3378b55b5e251700344006603.png HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MzU5NSwiZXhwIjoxNzAwMzQ3MTk1fQ.vktdW0fyhlPqdz5413N3rHTbFzFZ8NMiYS3N-qw4tlY
+GET http://localhost:5000/api/productos/mostrarArchivo/10fb13a8-a9a0-4a14-9711-d295fc7acc0f1700460525749.jpg HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNDk4Nzg4LCJleHAiOjE3MDA1MDIzODh9.foaTq8OYLo2UwdDGJ2MFgVsye4FjEakcZ1bZ_LIiBOw
 
 ###
 DELETE http://localhost:5000/api/productos/eliminarImagen/3e426bc7-5e1c-42db-8533-551f8b95ff3c HTTP/1.1

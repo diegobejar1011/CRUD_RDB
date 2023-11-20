@@ -3,8 +3,9 @@ GET http://localhost:5000/api/colores HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
 
 ###
-GET http://localhost:5000/api/colores/coloresProducto/18806413-aab9-4a91-93f3-3378b55b5e25 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0NDY3NiwiZXhwIjoxNzAwMzQ4Mjc2fQ.0LHMgPgva_RVkvLb5_msxDXm-WtdmmhhthjbUCKSGno
+GET http://localhost:5000/api/colores/coloresProducto/2d97f7e7-be75-4eb2-840b-07e565f9122b HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNTE2MjYzLCJleHAiOjE3MDA1MTk4NjN9.ab5xphqh9HpLEjy-818YR1kEPzf5rOdu_CTG6syK6CY
+
 
 ###
 GET http://localhost:5000/api/colores/coloresPedido/66740d60-3aac-4c66-a4b0-22f591cea1db HTTP/1.1

@@ -12,7 +12,8 @@ import {
   getTamaños,
   getType,
   getProductImage,
-  getProductPersonal
+  getProductPersonal,
+  getProducto
 } from "../controllers/productos.controller.js";
 
 import { mostrarArchivo } from "../controllers/uploads.controller.js";
@@ -21,6 +22,9 @@ const productosRouter = Router();
 
 //Se consiguen todos los productos no eliminados y que son unicamente del catalogo (es decir no personalizados)
 productosRouter.get("/", getProductos);
+
+//se consigue un producto
+productosRouter.get("/:id", getProducto)
 
 //Se crea un producto 
 productosRouter.post("/", verificarJWT, createProducts);

@@ -4,6 +4,20 @@ import crypto from "node:crypto";
 import { postColorProducto } from "../services/color.service.js";
 import { crearImagen } from "../helpers/crearImagen.js";
 
+export const getProducto = (req, res) => {
+  const { id } = req.params;
+  productosService
+    .getProducto(id)
+    .then((response) => {
+      res.status(200).json({
+        data: response[0],
+      });
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+};
+
 export const getProductos = (req, res) => {
   const { page = 1, limit = 10, orden = "nombre_producto" } = req.query;
   const skip = (page - 1) * limit;
