@@ -86,6 +86,29 @@ export const getByIdPedido = (id) => {
   });
 };
 
+export const getByIdPedidoForDelete = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido
+    FROM pedido pe
+    INNER JOIN producto p
+    ON pe.id_producto = p.id_producto
+    INNER JOIN tamaño t 
+    ON p.id_tamaño = t.id_tamaño
+    INNER JOIN tipo_producto tp 
+    ON p.tipo_producto = tp.id_tipo
+    INNER JOIN usuario u 
+    ON pe.id_usuario = u.id_usuario
+    WHERE pe.deleted = false and pe.id_pedido = ? and status = false`;
+    db.execute(query, [id])
+      .then((result) => {
+        resolve(result[0]);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const deletePedido = (id) => {
   return new Promise((resolve, reject) => {
     const query = `delete from pedido where id_pedido = ?`;
@@ -138,19 +161,34 @@ export const getPedidosbyUser = (id_usuario) => {
 
 export const getPedidosPending = (skip, limite, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido
-    FROM pedido pe
-    INNER JOIN producto p
-    ON pe.id_producto = p.id_producto
-    INNER JOIN tamaño t 
-    ON p.id_tamaño = t.id_tamaño
-    INNER JOIN tipo_producto tp 
-    ON p.tipo_producto = tp.id_tipo
-    INNER JOIN usuario u 
-    ON pe.id_usuario = u.id_usuario
-    WHERE pe.deleted = false and status = false
-    ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
+    const query = `SELECT pe.id_pedido, en.lugar, en.fecha, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido FROM pedido pe INNER JOIN producto p ON pe.id_producto = p.id_producto INNER JOIN tamaño t  ON p.id_tamaño = t.id_tamaño INNER JOIN tipo_producto tp  ON p.tipo_producto = tp.id_tipo INNER JOIN usuario u  ON pe.id_usuario = u.id_usuario INNER JOIN entrega en on en.id_pedido = pe.id_pedido WHERE pe.deleted = false and status = false ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
     db.execute(query)
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const deleteLogicoPedido = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "update pedido set deleted = true where id_pedido = ?";
+    db.execute(query, [id])
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const aceptarPedido = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "update pedido set status = true where id_pedido = ?";
+    db.execute(query, [id])
       .then((result) => {
         resolve(result);
       })
