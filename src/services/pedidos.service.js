@@ -39,7 +39,7 @@ export const createPedido = (newPedido) => {
 
 export const getPedidos = (skip, limite, orden) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido
+    const query = `SELECT e.fecha, e.lugar ,pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido
     FROM pedido pe
     INNER JOIN producto p
     ON pe.id_producto = p.id_producto
@@ -49,6 +49,8 @@ export const getPedidos = (skip, limite, orden) => {
     ON p.tipo_producto = tp.id_tipo
     INNER JOIN usuario u 
     ON pe.id_usuario = u.id_usuario
+    inner join entrega as e
+    on  e.id_pedido = pe.id_pedido
     WHERE pe.deleted = false and status = true
     ORDER BY ${orden} DESC LIMIT ${skip}, ${limite}`;
     db.execute(query)
@@ -123,7 +125,7 @@ export const updatePedido = (newPedido, id) => {
 export const getPedidosbyUser = (id_usuario) => {
   return new Promise((resolve, reject) => {
     const query =
-      "SELECT pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido FROM pedido pe INNER JOIN producto p ON pe.id_producto = p.id_producto INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo INNER JOIN usuario u ON pe.id_usuario = u.id_usuario where pe.deleted = false and pe.id_usuario = ?";
+      "SELECT e.fecha, e.lugar, pe.id_pedido, pe.id_producto, pe.id_usuario, pe.nombre_pedido, pe.cantidad, pe.especificacion, pe.dedicatoria, pe.status, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, pe.created_at, pe.updated_at, pe.deleted, pe.deleted_at, u.nombre, u.apellido FROM pedido pe INNER JOIN producto p ON pe.id_producto = p.id_producto INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo INNER JOIN usuario u ON pe.id_usuario = u.id_usuario inner join entrega as e where pe.deleted = false and pe.id_usuario = ?";
     db.execute(query, [id_usuario])
       .then((res) => {
         resolve(res);

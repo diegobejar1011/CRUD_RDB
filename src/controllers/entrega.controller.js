@@ -193,7 +193,6 @@ export const createEntregaWithTransaction = async (req, res) => {
   const id_producto = crypto.randomUUID();
 
   if (!id_productoNew) {
-    console.log(req.body);
     id_producto,
       (producto = {
         id_producto,

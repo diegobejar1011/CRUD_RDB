@@ -36,8 +36,9 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("usuario desconectado");
   });
-  //emitir orden de compra
-  // socket.on("orden")
+  socket.on("nueva entrega", (data) => {
+    socket.broadcast.emit("entrega recibida", data);
+  });
 });
 
 //Empieza servidor

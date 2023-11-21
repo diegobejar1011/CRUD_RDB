@@ -63,7 +63,7 @@ export const postColorProducto = (req, res) => {
     id_color,
   };
   colorServices
-  .postColorProducto(newColorProducto)
+    .postColorProducto(newColorProducto)
     .then(() => {
       res.status(201).json({
         message: "El color se agrego correctamente",

@@ -7,7 +7,7 @@ export const mostrarArchivo = async (req, res) => {
 
     const { nombreArchivo } = req.params;
     const pathArchivo = path.join(__dirname, "uploads", nombreArchivo);
-    console.log(pathArchivo);
+    
     if (!fs.existsSync(pathArchivo)) {
       return res.status(404).json({
         message: "El archivo no existe",
