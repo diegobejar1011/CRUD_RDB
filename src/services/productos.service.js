@@ -36,7 +36,7 @@ export const getProductos = (offset, limit, orden) => {
 export const createProduct = (newProduct) => {
   return new Promise((resolve, reject) => {
     const {
-      id,
+      id_producto,
       nombre_producto,
       precio,
       id_tamaño,
@@ -47,7 +47,7 @@ export const createProduct = (newProduct) => {
     const query =
       "insert into producto (id_producto, nombre_producto, precio, id_tamaño, tipo_producto, deleted, created_at ) values (?, ?, ?, ?, ?, ?, ?)";
     db.execute(query, [
-      id,
+      id_producto,
       nombre_producto,
       precio,
       id_tamaño,

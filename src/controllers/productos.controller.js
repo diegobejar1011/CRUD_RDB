@@ -38,9 +38,9 @@ export const createProducts = (req, res) => {
   if (!result.success) {
     return res.status(422).json({ error: JSON.parse(result.error.message) });
   }
+  const id = crypto.randomUUID()
   const newProduct = {
-    id: crypto.randomUUID(),
-    id_producto,
+    id_producto : id,
     nombre_producto: result.data.nombre_producto,
     precio: result.data.precio,
     id_tamaño: result.data.id_tamaño,
@@ -57,7 +57,7 @@ export const createProducts = (req, res) => {
     .then(() => {
       imagenes.forEach(async (imagen) => {
         const { b64, extension } = imagen;
-        const id_producto = newProduct.id;
+        const id_producto = id;
         const nombreImagen = `${id_producto}${Date.now()}.${extension}`;
         const newImagen = {
           id_producto,
@@ -75,10 +75,10 @@ export const createProducts = (req, res) => {
           crearImagen(apiImagen);
         }
       });
-      colores.forEach((color) => {
+      colores.forEach(({id_color}) => {
         const newColor = {
-          id_producto: newProduct.id,
-          id_color: color,
+          id_producto: id,
+          id_color,
         };
         postColorProducto(newColor);
       });
