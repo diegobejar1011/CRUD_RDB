@@ -26,7 +26,7 @@ export const createPedido = (req, res) => {
   }
 
   //Manipular "creadorNombre" de la forma que se quiera (recordar modificar db)
-  const { id : creadorNombre } = req.usuario;
+  const { id: creadorNombre } = req.usuario;
   const newPedido = {
     id: crypto.randomUUID(),
     id_usuario: creadorNombre,
@@ -45,10 +45,10 @@ export const createPedido = (req, res) => {
   pedidosService
     .createPedido(newPedido)
     .then(() => {
-      colores.forEach((color)=>{
+      colores.forEach((color) => {
         const newColor = {
           id_pedido: newPedido.id,
-          id_color: color
+          id_color: color,
         };
         postColorPedido(newColor);
       });
@@ -78,24 +78,16 @@ export const getByIdPedido = (req, res) => {
 
 export const deleteLogico = (req, res) => {
   const { id } = req.params;
-  pedidosService.getByIdPedido(id).then((response) => {
-    const originalData = response[0];
-    const newPedido = {
-      ...originalData,
-      deleted: true,
-      deleted_at: new Date(),
-    };
-    pedidosService
-      .updatePedido(newPedido, id)
-      .then(() => {
-        res.status(200).json({
-          message: `Pedido ha sido eliminado`,
-        });
-      })
-      .catch((error) => {
-        res.status(500).send(error);
+  pedidosService
+    .deleteLogicoPedido(id)
+    .then(() => {
+      res.status(200).json({
+        message: `Pedido ha sido eliminado`,
       });
-  });
+    })
+    .catch((error) => {
+      res.status(500).send(error.message);
+    });
 };
 
 export const deleteFisico = (req, res) => {
@@ -180,10 +172,10 @@ export const getPedidosByUser = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'Ocurrió un error al obtener los pedidos',
-        error: error.message
-      })
-    })
+        message: "Ocurrió un error al obtener los pedidos",
+        error: error.message,
+      });
+    });
 };
 
 export const getPedidosPending = (req, res) => {
@@ -195,6 +187,20 @@ export const getPedidosPending = (req, res) => {
       res.status(200).json({
         message: "Se consiguieron los pedidos",
         data: response[0],
+      });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+};
+
+export const aceptarPedido = (req, res) => {
+  const { id } = req.params;
+  pedidosService
+    .aceptarPedido(id)
+    .then(() => {
+      res.status(200).json({
+        message: `Pedido con id ${id} ha sido aceptado`,
       });
     })
     .catch((error) => {

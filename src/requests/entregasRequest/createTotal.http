@@ -1,23 +1,58 @@
-###
-POST http://localhost:5000/api/entregas/creacionTotal HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMmY5MjA3ZjktODZmYi00OWZlLWI5OGMtODNhODBlZTgyMmIwIiwibm9tYnJlIjoiRGllZ28ifSwiaWF0IjoxNzAwNDIyNDQ3LCJleHAiOjE3MDA0MjYwNDd9.EVoqWS3o4M-YKhqcQPQSc8bYCLMX00NAZgS-J3GxDLw
+ ###
+ POST http://localhost:5000/api/entregas/creacionTotal HTTP/1.1
+ Content-Type: application/json
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMmY5MjA3ZjktODZmYi00OWZlLWI5OGMtODNhODBlZTgyMmIwIiwibm9tYnJlIjoiRGllZ28ifSwiaWF0IjoxNzAwNDIyNDQ3LCJleHAiOjE3MDA0MjYwNDd9.EVoqWS3o4M-YKhqcQPQSc8bYCLMX00NAZgS-J3GxDLw
 
-{
-    "id_productoNew": "1b356832-5f79-4ce1-acb9-06001f06df70",
-    "pedido": {
-        "nombre_pedido": "osito",
-        "cantidad": 2,
+ {
+     "id_productoNew": "1b356832-5f79-4ce1-acb9-06001f06df70",
+     "pedido": {
+         "nombre_pedido": "osito",
+         "cantidad": 2,
         "especificacion": "Que se vea bonito",
-        "dedicatoria": "I love you",
-        "status": true,
-        "colores": ["1","2"]
-    },
-    "entrega": {
-         "lugar": "calle tepeaca",
-        "horario": "13:45:00",
-        "fecha": "2023-11-09",
-        "total": 250
-    }
-}
+         "dedicatoria": "I love you",
+         "status": true,
+         "colores": ["1","2"]
+     },
+     "entrega": {
+          "lugar": "calle tepeaca",
+         "horario": "13:45:00",
+         "fecha": "2023-11-09",
+         "total": 250
+     }
+ }
+###
+ POST http://localhost:5000/api/entregas/creacionTotal HTTP/1.1
+ Content-Type: application/json
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNDUwNTkwLCJleHAiOjE3MDA0NTQxOTB9.v9DgCRajWVRcDKwT2BPYjdkkjOVsnxBJlXO3tmVz-2w
+
+ {
+    
+     "producto" : { 
+     "nombre_producto": "tulipan",
+     "precio": 20,
+     "id_tamaño": 1,
+     "tipo_producto": 2,
+     "imagenes": [
+         {
+             "b64": "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",
+            "extension": "png"
+        }
+    ],
+     "colores" : ["1","2"]
+ },
+     "pedido": {
+         "nombre_pedido": "osito",
+         "cantidad": 2,
+         "especificacion": "Que se vea bonito",
+         "dedicatoria": "I love you",
+         "status": true,
+         "colores": ["1","2"]
+     },
+     "entrega": {
+          "lugar": "calle tepeaca",
+         "horario": "13:45:00",
+         "fecha": "2023-11-09",
+         "total": 250
+     }
+ }
 

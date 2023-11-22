@@ -24,10 +24,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkI
 
 ###
 DELETE http://localhost:5000/api/pedidos/eliminarFisico/0f8ca9a3-427b-4472-ab4f-5e6222c0adc2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNjY0OCwiZXhwIjoxNjk5OTEwMjQ4fQ.YZYdihyosCn_nZBmjL5_Qt1XtX1tlrgf9U0HbfOb9q8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNTQyMTk2LCJleHAiOjE3MDA1NDU3OTZ9.Obwnik__ka4mTUbxs0arxtd9-cYkt9A_9av8CSEN-1Y
 ###
-DELETE http://localhost:5000/api/pedidos/eliminarLogico/0f8ca9a3-427b-4472-ab4f-5e6222c0adc2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNX0sImlhdCI6MTY5OTEyMjg0NiwiZXhwIjoxNjk5MTI2NDQ2fQ.a-TpxC4pUe52441wB675rJpa1aZl7viwrHxs-P7LlIc
+DELETE http://localhost:5000/api/pedidos/eliminarLogico/83e9ea9c-d464-48c0-8fa9-d70825e73815 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNTQyMTk2LCJleHAiOjE3MDA1NDU3OTZ9.Obwnik__ka4mTUbxs0arxtd9-cYkt9A_9av8CSEN-1Y
 
 ###
 PUT http://localhost:5000/api/pedidos/actualizarCompleto/3f78dd14-ceda-4a3e-963c-02f3f8351c77 HTTP/1.1

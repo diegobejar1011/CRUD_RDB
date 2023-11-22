@@ -4,7 +4,7 @@ import db from "../config/db.js";
 export const getProducto = (id) => {
   return new Promise((resolve, reject) => {
     const query =
-      "select p.id_producto, p.nombre_producto, p.precio, t.nombre_tamaño, tp.nombre_tipo, p.deleted, p.created_at, p.updated_at, p.deleted_at from producto p INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo where id_producto = ? and deleted = false";
+      "select p.id_producto, p.nombre_producto, p.precio, t.nombre_tamaño from producto p INNER JOIN tamaño t ON p.id_tamaño = t.id_tamaño INNER JOIN tipo_producto tp ON p.tipo_producto = tp.id_tipo where id_producto = ? and deleted = false";
     db.execute(query, [id])
       .then((res) => {
         resolve(res[0]);
@@ -36,7 +36,7 @@ export const getProductos = (offset, limit, orden) => {
 export const createProduct = (newProduct) => {
   return new Promise((resolve, reject) => {
     const {
-      id,
+      id_producto,
       nombre_producto,
       precio,
       id_tamaño,
@@ -47,7 +47,7 @@ export const createProduct = (newProduct) => {
     const query =
       "insert into producto (id_producto, nombre_producto, precio, id_tamaño, tipo_producto, deleted, created_at ) values (?, ?, ?, ?, ?, ?, ?)";
     db.execute(query, [
-      id,
+      id_producto,
       nombre_producto,
       precio,
       id_tamaño,

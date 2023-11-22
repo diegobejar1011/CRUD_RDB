@@ -59,7 +59,7 @@ export const postColorProducto = (newObject) => {
 export const getColorProducto = (id_producto) => {
   return new Promise((resolve, reject) => {
     const query =
-      'SELECT c.codigo_color FROM producto_color pc INNER JOIN color c ON pc.id_color= c.id_color where pc.id_producto = ?';
+      "SELECT c.codigo_color, c.id_color FROM producto_color pc INNER JOIN color c ON pc.id_color= c.id_color where pc.id_producto = ?";
     db.execute(query, [id_producto])
       .then((res) => {
         resolve(res);
@@ -101,7 +101,7 @@ export const postColorPedido = (newObject) => {
 export const getColorPedido = (id_pedido) => {
   return new Promise((resolve, reject) => {
     const query =
-      'SELECT c.codigo_color FROM pedido_color pe INNER JOIN color c ON pe.id_color= c.id_color where pe.id_pedido = ? ;';
+      "SELECT c.codigo_color FROM pedido_color pe INNER JOIN color c ON pe.id_color= c.id_color where pe.id_pedido = ? ;";
     db.execute(query, [id_pedido])
       .then((res) => {
         resolve(res);

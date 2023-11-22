@@ -1,10 +1,10 @@
 ###
 POST http://localhost:5000/api/productos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMmY5MjA3ZjktODZmYi00OWZlLWI5OGMtODNhODBlZTgyMmIwIiwibm9tYnJlIjoiRGllZ28ifSwiaWF0IjoxNzAwNDE0NzA3LCJleHAiOjE3MDA0MTgzMDd9.EApw3TkjQJcr4Vv6ldl1o3AtO5Se23qiJcNlPAl7vWA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNTk2MDgwLCJleHAiOjE3MDA1OTk2ODB9.CgEsfNOqrgfWUOaZO8LzXMMJpRNz5X2-BKqr8V6QVx0
 
 {
-    "nombre_producto": "tulipan",
+    "nombre_producto": "prueba_bacck",
     "precio": 20,
     "id_tamaño": 1,
     "tipo_producto": 1,
@@ -14,5 +14,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkI
             "extension": "png"
         }
     ],
-    "colores" : ["1","2"]
+    "colores" : [{"id_color" : 1},{"id_color" : 2}]
 }
