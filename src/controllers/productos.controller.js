@@ -238,6 +238,23 @@ export const deleteImagen = (req, res) => {
     });
 };
 
+export const deleteImageProduct = (req, res) =>{
+  const { id_producto } = req.params;
+  productosService
+  .deleteImageProduct(id_producto)
+  .then(()=>{
+    res.status(200).json({
+      message: 'La imagen del producto ha sido eliminada'
+    });
+  })
+  .catch((error) =>{
+    res.status(500).json({
+      message: 'Ocurrio un error al eliminar la imagen del producto',
+      error: error.message
+    });
+  });
+};
+
 //tamaño
 export const createTamaño = (req, res) => {
   const { nombre_tamaño } = req.body;

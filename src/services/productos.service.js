@@ -144,6 +144,19 @@ export const deleteImage = (id_imagen) => {
   });
 };
 
+export const deleteImageProduct = (id_producto) =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'DELETE FROM producto_imagen WHERE id_producto = ?';
+    db.execute(query,[id_producto])
+    .then((res) =>{
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    });
+  });
+};
+
 export const getTamaños = () => {
   return new Promise((resolve, reject) => {
     const query = "SELECT id_tamaño, nombre_tamaño FROM tamaño";

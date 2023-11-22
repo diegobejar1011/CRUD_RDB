@@ -35,4 +35,12 @@ colorRouter.post(
   colorControllers.postColorPedido
 );
 
+
+//se elimina los colores deseados del producto 
+colorRouter.delete(
+  '/eliminarColoresProducto/:id_producto',
+  verificarJWT,
+  colorControllers.deleteColorProducto
+)
+
 export default colorRouter;

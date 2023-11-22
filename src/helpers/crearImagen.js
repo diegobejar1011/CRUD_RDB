@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+
 export const crearImagen = (newImagen) => {
   const { b64, nombreImagen } = newImagen;
   const imagen = Buffer.from(b64, "base64");

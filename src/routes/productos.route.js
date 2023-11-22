@@ -13,7 +13,7 @@ import {
   getType,
   getProductImage,
   getProductPersonal,
-  getProducto
+  deleteImageProduct
 } from "../controllers/productos.controller.js";
 
 import { mostrarArchivo } from "../controllers/uploads.controller.js";
@@ -49,11 +49,14 @@ productosRouter.put("/updateImagen/:id_producto", verificarJWT, updateImagen);
 //Para mandar a traer la imagen desde la carpeta uploads de la API
 productosRouter.get("/mostrarArchivo/:nombreArchivo", verificarJWT, mostrarArchivo);
 
-//Para eliminar la imagen de un producto (es un eliminado logico)
+//Para eliminar una imagen 
 productosRouter.delete("/eliminarImagen/:id_imagen", verificarJWT, deleteImagen);
 
 //Para traer todas las imagenes de un producto
-productosRouter.get('/ImagenesProducto/:id_producto', getProductImage);
+productosRouter.get('/ImagenesProducto/:id_producto', verificarJWT, getProductImage);
+
+//Para eliminar la imagen de un producto en especifico 
+productosRouter.delete('/eliminarImagen/producto/:id_producto', verificarJWT, deleteImageProduct);
 
 //rutasTamaños
 //Traer todos los tamaños
