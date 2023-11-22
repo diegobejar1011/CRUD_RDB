@@ -70,6 +70,19 @@ export const getColorProducto = (id_producto) => {
   });
 };
 
+export const deleteColorProducto = (id_color, id_producto) =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'DELETE FROM producto_color WHERE id_color = ? and id_producto = ?';
+    db.execute(query,[id_color,id_producto])
+    .then((res) =>{
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    })
+  })
+}
+
 export const postColorPedido = (newObject) => {
   return new Promise((resolve, reject) => {
     const { id_pedido, id_color } = newObject;

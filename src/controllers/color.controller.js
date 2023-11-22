@@ -63,7 +63,7 @@ export const postColorProducto = (req, res) => {
     id_color,
   };
   colorServices
-  .postColorProducto(newColorProducto)
+    .postColorProducto(newColorProducto)
     .then(() => {
       res.status(201).json({
         message: "El color se agrego correctamente",
@@ -93,6 +93,25 @@ export const getColorProducto = (req, res) => {
         error: error.message,
       });
     });
+};
+
+export const deleteColorProducto = (req, res) => {
+  try {
+    const { id_producto } = req.params;
+    const coloresEliminados = [...req.body.colores];
+    coloresEliminados.forEach(async (id_color) => {
+      await colorServices.deleteColorProducto(id_color, id_producto);
+    });
+
+    res.status(200).json({
+      message: 'Los colores se han eliminado correctamente'
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Ocurrió un error al eliminar los colores',
+      error: error.message
+    });
+  }
 };
 
 export const postColorPedido = (req, res) => {
