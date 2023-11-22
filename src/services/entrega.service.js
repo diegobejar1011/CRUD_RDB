@@ -16,7 +16,7 @@ export const getEntregas = (skip, limit, orden) => {
     INNER JOIN usuario u
     ON pe.id_usuario = u.id_usuario
     WHERE e.deleted = false and pe.status = true
-    order by ${orden} DESC LIMIT ${skip}, ${limit} `;
+    order by ${orden} `;
     db.execute(query)
       .then((res) => resolve(res))
       .catch((error) => reject(error));

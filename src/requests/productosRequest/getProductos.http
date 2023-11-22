@@ -1,6 +1,6 @@
 ###
 GET http://localhost:5000/api/productos?page=1&limit=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM1NzQxMCwiZXhwIjoxNzAwMzYxMDEwfQ.JeAsXeVlLtGJThIgfwuEUeVGGio69vDxPzr0fh4LjaM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNjY1NTUwLCJleHAiOjE3MDA2NjkxNTB9.xwb54PLJEexJhcFXwStOXAFVqyVtbX55ZxPuGURpEFg
 
 ###
 GET http://localhost:5000/api/productos/2d97f7e7-be75-4eb2-840b-07e565f9122b HTTP/1.1

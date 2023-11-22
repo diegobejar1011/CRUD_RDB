@@ -10,8 +10,8 @@ dotenv.config();
 const app = express();
 
 //middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 // var corsOptions = {
 //   origin: "http://localhost:5173",
