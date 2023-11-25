@@ -51,5 +51,6 @@ La estructura del proyecto sigue las convenciones estándar de Express, con ruta
 
 El archivo .env contiene las configuraciones esenciales para la base de datos, el puerto del servidor, y la clave secreta para Jsonwebtoken.
 
-
-
+## Colaboradores:
+Fernando Emiliano Flores De La Riva
+Diego Eduardo Bejar Zea
