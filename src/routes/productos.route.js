@@ -13,7 +13,8 @@ import {
   getType,
   getProductImage,
   getProductPersonal,
-  deleteImageProduct
+  deleteImageProduct,
+  getProducto
 } from "../controllers/productos.controller.js";
 
 import { mostrarArchivo } from "../controllers/uploads.controller.js";

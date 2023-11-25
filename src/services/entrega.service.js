@@ -15,7 +15,7 @@ export const getEntregas = (skip, limit, orden) => {
     ON p.tipo_producto = tp.id_tipo
     INNER JOIN usuario u
     ON pe.id_usuario = u.id_usuario
-    WHERE e.deleted = false and pe.status = true
+    WHERE e.deleted = false and pe.status = true and e.fecha IS NOT NUll
     order by ${orden} DESC LIMIT ${skip}, ${limit} `;
     db.execute(query)
       .then((res) => resolve(res))

@@ -1,4 +1,3 @@
-import { resolveEnvPrefix } from "vite";
 import db from "../config/db.js";
 
 export const getProducto = (id) => {
