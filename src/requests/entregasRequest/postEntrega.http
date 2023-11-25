@@ -1,12 +1,12 @@
 ###
 POST http://localhost:5000/api/entregas HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTkwNTU0MywiZXhwIjoxNjk5OTA5MTQzfQ.uME_vh4j8noZhK4Na-R2LC4Hye_Ui3usV8EZ0uryJ2w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNjY1NTUwLCJleHAiOjE3MDA2NjkxNTB9.xwb54PLJEexJhcFXwStOXAFVqyVtbX55ZxPuGURpEFg
 
 {
-    "id_pedido": "1",
+    "id_pedido": "ebe0f318-f17a-4532-95a9-00959d7988d0",
     "lugar": "calle tepeaca",
     "horario": "13:45:00",
-    "fecha": "2023-11-09",
+    "fecha": null,
     "total": 250
 }

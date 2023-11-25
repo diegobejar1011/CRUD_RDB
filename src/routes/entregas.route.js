@@ -5,7 +5,7 @@ import { verificarJWT } from "../middlewares/auth.middleware.js";
 const entregasRouter = Router();
 
 //Se consiguen todas las entregas
-entregasRouter.get("/", verificarJWT, entregasController.getEntrega);
+entregasRouter.get("/", entregasController.getEntrega);
 
 //Se consigue entrega por id
 entregasRouter.get("/:id", verificarJWT, entregasController.getEntregaById);
@@ -23,7 +23,7 @@ entregasRouter.patch(
   entregasController.updateParcialEntrega
 );
 
-//Se elimina de forma logica una entrega por id 
+//Se elimina de forma logica una entrega por id
 entregasRouter.delete(
   "/deleteLogico/:id",
   verificarJWT,
@@ -60,5 +60,5 @@ entregasRouter.post(
 entregasRouter.get(
   "/entregasAprobadas/sinFecha",
   entregasController.getEntregasSinFecha
-)
+);
 export default entregasRouter;

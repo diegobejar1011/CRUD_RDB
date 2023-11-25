@@ -10,8 +10,42 @@ dotenv.config();
 const app = express();
 
 //middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+
+// var corsOptions = {
+//   origin: "http://localhost:5173",
+//   optionsSuccessStatus: 200, // For legacy browser support
+// };
+// app.use(cors(corsOptions));
+
+// app.options("*", (req, res) => {
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PATCH, PUT, DELETE"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   res.setHeader("Access-Control-Allow-Credentials", "true"); // Si estás utilizando credenciales (por ejemplo, cookies)
+//   res.status(200).end();
+// });
+
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PATCH, PUT, DELETE"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   res.setHeader("Access-Control-Allow-Credentials", "true"); // Si estás utilizando credenciales (por ejemplo, cookies)
+//   next();
+// });
 
 app.set("port", process.env.PORT || 4000);
 

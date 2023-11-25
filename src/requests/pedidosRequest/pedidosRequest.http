@@ -1,6 +1,6 @@
 ###
 GET http://localhost:5000/api/pedidos?page=1&limit=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMmY5MjA3ZjktODZmYi00OWZlLWI5OGMtODNhODBlZTgyMmIwIiwibm9tYnJlIjoiRGllZ28ifSwiaWF0IjoxNzAwNDIzODExLCJleHAiOjE3MDA0Mjc0MTF9.jB9FTQqceI_tEk5OF1ZUNZ1Zrty1ueVf0m2N3GrR84M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNjY2ODQzLCJleHAiOjE3MDA2NzA0NDN9.iIXw4bLFiX5csSn33WGgWDulNcv11wh6BKb3TeX_Vnk
 
 ###
 POST http://localhost:5000/api/pedidos HTTP/1.1

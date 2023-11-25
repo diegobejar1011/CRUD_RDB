@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { verificarJWT } from "../middlewares/auth.middleware.js";
 import {
+  getProducto,
   getProductos,
   createProducts,
   updatePartialProduct,
@@ -25,9 +26,9 @@ const productosRouter = Router();
 productosRouter.get("/", getProductos);
 
 //se consigue un producto
-productosRouter.get("/:id", getProducto)
+productosRouter.get("/:id", getProducto);
 
-//Se crea un producto 
+//Se crea un producto
 productosRouter.post("/", verificarJWT, createProducts);
 
 //Se actualiza de manera parcial un producto
@@ -48,16 +49,28 @@ productosRouter.delete("/deleteFisico/:id", verificarJWT, deleteFisico);
 productosRouter.put("/updateImagen/:id_producto", verificarJWT, updateImagen);
 
 //Para mandar a traer la imagen desde la carpeta uploads de la API
-productosRouter.get("/mostrarArchivo/:nombreArchivo", verificarJWT, mostrarArchivo);
+productosRouter.get(
+  "/mostrarArchivo/:nombreArchivo",
+  verificarJWT,
+  mostrarArchivo
+);
 
-//Para eliminar una imagen 
-productosRouter.delete("/eliminarImagen/:id_imagen", verificarJWT, deleteImagen);
+//Para eliminar una imagen
+productosRouter.delete(
+  "/eliminarImagen/:id_imagen",
+  verificarJWT,
+  deleteImagen
+);
 
 //Para traer todas las imagenes de un producto
-productosRouter.get('/ImagenesProducto/:id_producto', verificarJWT, getProductImage);
+productosRouter.get("/ImagenesProducto/:id_producto", getProductImage);
 
-//Para eliminar la imagen de un producto en especifico 
-productosRouter.delete('/eliminarImagen/producto/:id_producto', verificarJWT, deleteImageProduct);
+//Para eliminar la imagen de un producto en especifico
+productosRouter.delete(
+  "/eliminarImagen/producto/:id_producto",
+  verificarJWT,
+  deleteImageProduct
+);
 
 //rutasTamaños
 //Traer todos los tamaños
@@ -65,12 +78,9 @@ productosRouter.get("/Tamaños", verificarJWT, getTamaños);
 
 //rutasTipos
 //Traer todos los tipos de productos
-productosRouter.get('/Tipos', verificarJWT, getType);
+productosRouter.get("/Tipos", verificarJWT, getType);
 
-//Consigue los productos personalizados 
-productosRouter.get('/productosPersonalizados', getProductPersonal);
-
-
-
+//Consigue los productos personalizados
+productosRouter.get("/productosPersonalizados", getProductPersonal);
 
 export default productosRouter;
