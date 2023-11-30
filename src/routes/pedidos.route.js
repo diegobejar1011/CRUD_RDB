@@ -57,4 +57,9 @@ pedidosRouter.patch(
 //Se consiguen los pedidos pendientes por aceptar
 pedidosRouter.get("/pedidos/Pendientes", pedidosController.getPedidosPending);
 
+
+
+//Se consigue la cuenta de pedido aceptados o rechazados 
+pedidosRouter.get('/conConteo/segunSu/Status', pedidosController.getPedidosCantidad);
+
 export default pedidosRouter;

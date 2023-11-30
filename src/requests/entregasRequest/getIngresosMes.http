@@ -1,0 +1,3 @@
+###
+POST http://localhost:5000/api/entregas/ingresosTotales/porMes HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNjE1ODYzLCJleHAiOjE3MDA2MTk0NjN9.u3ofRIlyd_krBnuSBAgKzTNRDp2_9skKZnyWa2pfUTw

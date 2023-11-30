@@ -243,3 +243,23 @@ export const getType = (req, res) => {
       });
     });
 };
+
+
+export const getTotalUsuario = (req, res) =>{
+  const {id_usuario} = req.params;
+  console.log(req.params);
+  usuarioServices
+    .getTotalUsuario(id_usuario)
+    .then((response) =>{
+      res.status(200).json({
+        message: `Se consiguio el total del usuario ${id_usuario}`,
+        data: response[0]
+      })
+    })
+    .catch((error) =>{
+      res.status(500).json({
+        message: 'Ocurrio un error al conseguir el total del usuario',
+        error: error.message
+      })
+    })
+}

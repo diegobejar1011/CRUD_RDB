@@ -58,3 +58,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vb
 ###
 GET http://localhost:5000/api/pedidos/pedidos/Pendientes HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDM0MTUzMSwiZXhwIjoxNzAwMzQ1MTMxfQ.r_lmEoPlVF6w2bt6pjy2orVDfs0lBQ8i0ic0ff0rnfk
+
+
+###
+GET http://localhost:5000/api/pedidos/conConteo/segunSu/Status HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNGQ4Yjk5NjAtNzkxMS00OGNlLWE1NGMtZjBiNjNmZWQ4NDZjIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAxMzE1MDA4LCJleHAiOjE3MDEzMTg2MDh9.l_wRpChAEHCIaeqwD1DlnqUhTTft8oVJvZV7WqQ0uc4
+Content-Type: application/json
+
+{
+    "status": false
+}

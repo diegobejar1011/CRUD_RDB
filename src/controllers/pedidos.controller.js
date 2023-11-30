@@ -207,3 +207,21 @@ export const aceptarPedido = (req, res) => {
       res.status(500).send(error);
     });
 };
+
+export const getPedidosCantidad = (req, res) =>{
+  const {status} = req.body;
+  pedidosService
+  .getCantidadPedidos(status)
+  .then((response)=>{
+    res.status(200).json({
+      message: `Calculo de pedidos segun su status de ${status} `,
+      data: response[0]
+    });
+  })
+  .catch((error)=>{
+    res.status(500).json({
+      message: 'Ocurrio un error al realizar el calculo de pedidos',
+      error: error.message
+    });
+  });
+}

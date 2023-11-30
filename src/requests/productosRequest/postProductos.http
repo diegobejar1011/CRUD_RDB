@@ -1,7 +1,7 @@
 ###
 POST http://localhost:5000/api/productos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiZGU0MmM3NDAtNDQ3YS00MTczLThjZWItN2MzNTE0YzU3ODIyIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAwNTk2MDgwLCJleHAiOjE3MDA1OTk2ODB9.CgEsfNOqrgfWUOaZO8LzXMMJpRNz5X2-BKqr8V6QVx0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiMDI2YWE0ODktMmQ4ZS00MmIzLWJjM2UtNjA3NzEyOGVjMDZiIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAxMzI1MzY3LCJleHAiOjE3MDEzMjg5Njd9.CMWUkABWDdzDvMTadu6YyN7DSMxCkidokKrcCqHKMIA
 
 {
     "nombre_producto": "prueba_bacck",

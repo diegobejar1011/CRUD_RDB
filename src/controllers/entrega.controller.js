@@ -54,6 +54,7 @@ export const createEntrega = (req, res) => {
     ...result.data,
     created_at: new Date(),
     deleted: false,
+    created_by: req.usuario.id  
   };
   entregaServices
     .createEntrega(newEntrega)
@@ -313,4 +314,39 @@ export const getEntregasSinFecha = (req, res) => {
         error: error.message,
       });
     });
+};
+
+
+export const getIngresosMes = (req, res) =>{
+  entregaServices
+    .getIngresosMes()
+    .then((response) =>{
+      res.status(200).json({
+        message: 'Se han conseguido los ingresos del mes',
+        // data: response[0]
+      })
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'Ocurrió un error al conseguir los ingresos del mes',
+        error: error.message
+      })
+    });
+};
+
+export const setFechaEntrega = (req, res) =>{
+  const {id_pedido} = req.params;
+  entregaServices
+  .setFechaEntrega(id_pedido)
+  .then(()=>{
+    res.status(200).json({
+      message: `Se ha dado una fecha a la entrega con id_pedido ${id_pedido}`
+    });
+  })
+  .catch((error) =>{
+    res.status(500).json({
+      message: 'Ocurrió un eror al asignar una fecha aproximada a la entrega',
+      error: error.message
+    });
+  });
 };

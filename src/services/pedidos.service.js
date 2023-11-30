@@ -197,3 +197,17 @@ export const aceptarPedido = (id) => {
       });
   });
 };
+
+
+export const getCantidadPedidos = (status) =>{
+  return new Promise((resolve, reject) =>{
+    const query ='SELECT contar_pedido(?) AS total_pedidos';
+    db.execute(query,[status])
+    .then((res)=>{
+       resolve(res);
+    })
+    .catch((error)=>{
+      reject(error);
+    })
+  }) 
+};

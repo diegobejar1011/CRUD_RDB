@@ -17,5 +17,5 @@ usuarioRouter.delete(
   verificarJWT,
   usuariosController.deleteFisico
 );
-
+usuarioRouter.get('/totalUsuario/:id_usuario', usuariosController.getTotalUsuario);
 export default usuarioRouter;

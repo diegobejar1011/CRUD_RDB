@@ -14,7 +14,8 @@ import {
   getType,
   getProductImage,
   getProductPersonal,
-  deleteImageProduct
+  deleteImageProduct,
+  getProductosCantidad
 } from "../controllers/productos.controller.js";
 
 import { mostrarArchivo } from "../controllers/uploads.controller.js";
@@ -81,5 +82,9 @@ productosRouter.get("/Tipos", verificarJWT, getType);
 
 //Consigue los productos personalizados
 productosRouter.get("/productosPersonalizados", getProductPersonal);
+
+
+//Se hace el conteo de los productos por tipo 
+productosRouter.get("/conteoProducto/segunSuTipo/:tipo", getProductosCantidad);
 
 export default productosRouter;

@@ -61,4 +61,13 @@ entregasRouter.get(
   "/entregasAprobadas/sinFecha",
   entregasController.getEntregasSinFecha
 );
+
+
+//Se consiguen los ingresos de los totales de las entregas
+entregasRouter.post("/ingresosTotales/porMes", entregasController.getIngresosMes);
+
+//Se asigna una fecha proxima a la entrega por id_pedido
+entregasRouter.patch("/asignarFecha/porPedido/:id_pedido", entregasController.setFechaEntrega);
+
+
 export default entregasRouter;

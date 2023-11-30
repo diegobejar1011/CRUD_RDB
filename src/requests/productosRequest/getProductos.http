@@ -8,3 +8,7 @@ GET http://localhost:5000/api/productos/2d97f7e7-be75-4eb2-840b-07e565f9122b HTT
 ###
 GET http://localhost:5000/api/productos/productosPersonalizados HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTcwMDMzOTc2MSwiZXhwIjoxNzAwMzQzMzYxfQ.dyBOC74dAgWZT1htwpP-52dhUf4PDR-GWLQxJRVH_jI
+
+###
+GET http://localhost:5000/api/productos/conteoProducto/segunSuTipo/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNGQ4Yjk5NjAtNzkxMS00OGNlLWE1NGMtZjBiNjNmZWQ4NDZjIiwibm9tYnJlIjoiZmVybmFuZG8ifSwiaWF0IjoxNzAxMzE2Mzg4LCJleHAiOjE3MDEzMTk5ODh9.I3OZjLahPcEEUPLAhvH0eyt_5KqEui_jwwWMffM47zs

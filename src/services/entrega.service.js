@@ -50,10 +50,10 @@ export const getEntregaById = (id) => {
 
 export const createEntrega = (newObject) => {
   return new Promise((resolve, reject) => {
-    const { id, id_pedido, lugar, horario, fecha, total, created_at, deleted } =
+    const { id, id_pedido, lugar, horario, fecha, total, created_at, deleted, created_by} =
       newObject;
     const query =
-      "INSERT INTO entrega (id_entrega, id_pedido, lugar, horario, fecha, total, created_at, deleted) values (?,?,?,?,?,?,?,?)";
+      "INSERT INTO entrega (id_entrega, id_pedido, lugar, horario, fecha, total, created_at, deleted, created_by) values (?,?,?,?,?,?,?,?,?)";
     db.execute(query, [
       id,
       id_pedido,
@@ -63,6 +63,7 @@ export const createEntrega = (newObject) => {
       total,
       created_at,
       deleted,
+      created_by
     ])
       .then((res) => resolve(res))
       .catch((error) => reject(error));
@@ -188,5 +189,31 @@ export const getEntregasSinFecha = (skip, limit, orden) => {
     db.execute(query)
       .then((res) => resolve(res))
       .catch((error) => reject(error));
+  });
+};
+
+export const getIngresosMes = () =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'CALL calcular_ingreso_mensual();';
+    db.execute(query)
+    .then((res) =>{
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    });
+  });
+};
+
+export const setFechaEntrega = (id_pedido) => {
+  return new Promise((resolve, reject) =>{
+    const query = 'CALL asignar_fecha_entrega(?);';
+    db.execute(query,[id_pedido])
+    .then((res)=>{
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    });
   });
 };

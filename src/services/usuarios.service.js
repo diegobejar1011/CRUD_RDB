@@ -175,3 +175,17 @@ export const updateType = (newObject) => {
       });
   });
 };
+
+
+export const getTotalUsuario = (id_usuario) =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'SELECT contar_total(?) AS total_montos_usuario;';
+    db.execute(query,[id_usuario])
+    .then((res) =>{
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    })
+  });
+};

@@ -38,6 +38,7 @@ export const createProducts = (req, res) => {
   if (!result.success) {
     return res.status(422).json({ error: JSON.parse(result.error.message) });
   }
+  console.log(req.usuario);
   const id = crypto.randomUUID()
   const newProduct = {
     id_producto : id,
@@ -47,6 +48,7 @@ export const createProducts = (req, res) => {
     tipo_producto: result.data.tipo_producto,
     created_at: new Date(),
     deleted: false,
+    created_by: req.usuario.id
   };
 
   const imagenes = [...req.body.imagenes];
@@ -401,3 +403,25 @@ export const getProductPersonal = (req, res) => {
       res.status(500).send(err);
     });
 };
+
+
+
+
+
+export const getProductosCantidad = (req, res) =>{
+  const {tipo} = req.params;
+  productosService
+    .getProductosCantidad(tipo)
+    .then((response)=>{
+      res.status(200).json({
+        message: `Se ha hecho el conteo de los productos tipo ${tipo}`,
+        data: response[0]
+      })
+    })
+    .catch((error) =>{
+      res.status(500).json({
+        message:'Ha ocurrio un error al realizar el conteo',
+        error: error.message
+      })
+    })
+}

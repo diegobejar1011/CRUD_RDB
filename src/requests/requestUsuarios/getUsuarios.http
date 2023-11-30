@@ -1,3 +1,7 @@
 ###
 GET http://localhost:5000/api/usuarios/d26b16e8-93af-470c-8ab1-fd3cc69907fe HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTc1NDI4OCwiZXhwIjoxNjk5NzU3ODg4fQ.yPEwz-O0iH9Hws9BoKoUDdlHrK-bZAlFdsO-soTEWlA
+
+###
+GET http://localhost:5000/api/usuarios/totalUsuario/2f9207f9-86fb-49fe-b98c-83a80ee822b0 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6IkRpZWdvIn0sImlhdCI6MTY5OTc1NDI4OCwiZXhwIjoxNjk5NzU3ODg4fQ.yPEwz-O0iH9Hws9BoKoUDdlHrK-bZAlFdsO-soTEWlA

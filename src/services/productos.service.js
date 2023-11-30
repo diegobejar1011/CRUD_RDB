@@ -33,6 +33,7 @@ export const getProductos = (offset, limit, orden) => {
 };
 
 export const createProduct = (newProduct) => {
+
   return new Promise((resolve, reject) => {
     const {
       id_producto,
@@ -42,9 +43,11 @@ export const createProduct = (newProduct) => {
       tipo_producto,
       deleted,
       created_at,
+      created_by
     } = newProduct;
+    console.log(newProduct);
     const query =
-      "insert into producto (id_producto, nombre_producto, precio, id_tamaño, tipo_producto, deleted, created_at ) values (?, ?, ?, ?, ?, ?, ?)";
+      "insert into producto (id_producto, nombre_producto, precio, id_tamaño, tipo_producto, deleted, created_at, created_by ) values (?, ?, ?, ?, ?, ?, ?, ?)";
     db.execute(query, [
       id_producto,
       nombre_producto,
@@ -53,6 +56,7 @@ export const createProduct = (newProduct) => {
       tipo_producto,
       deleted,
       created_at,
+      created_by
     ])
       .then((result) => {
         resolve(result);
@@ -269,5 +273,19 @@ export const getProductPersonal = (offset, limit, orden) =>{
       .catch((err) => {
         reject(err);
       });
+  });
+}
+
+
+export const getProductosCantidad = (tipo) =>{
+  return new Promise((resolve, reject) =>{
+    const query = 'SELECT contar_producto(?) AS total_productos_tipo;'
+    db.execute(query,[tipo])
+    .then((res) => {
+      resolve(res);
+    })
+    .catch((error) =>{
+      reject(error);
+    })
   });
 }
