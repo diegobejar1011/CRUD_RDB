@@ -14,8 +14,7 @@ import {
   getType,
   getProductImage,
   getProductPersonal,
-  deleteImageProduct,
-  getProducto
+  deleteImageProduct
 } from "../controllers/productos.controller.js";
 
 import { mostrarArchivo } from "../controllers/uploads.controller.js";
