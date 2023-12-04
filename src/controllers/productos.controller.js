@@ -38,7 +38,6 @@ export const createProducts = (req, res) => {
   if (!result.success) {
     return res.status(422).json({ error: JSON.parse(result.error.message) });
   }
-  console.log(req.usuario);
   const id = crypto.randomUUID()
   const newProduct = {
     id_producto : id,

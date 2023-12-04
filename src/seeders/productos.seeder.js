@@ -80,6 +80,7 @@ try {
       updated_at: null,
       deleted_at: null,
       deleted: false,
+      created_by: '026aa489-2d8e-42b3-bc3e-6077128ec06b'
     };
     array.push(createProduct(newObject));
   });

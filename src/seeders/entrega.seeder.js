@@ -3,28 +3,28 @@ import crypto from "node:crypto";
 
 const entregas = [
   {
-    id_pedido: "2081583a-78d3-433e-b808-5f052c6cb289",
+    id_pedido: "3d9faffc-3624-48d4-9cb1-862f4445f511",
     lugar: "Fraccionamiento Villa Linda Calle Tres Estrellas",
     horario: "13:45:00",
     fecha: "2023-11-09",
     total: 250,
   },
   {
-    id_pedido: "50417e30-6a5a-4e3d-a66f-0f72ef8734a7",
+    id_pedido: "4a85baf0-c119-4ed5-b285-d29a53b4aafc",
     lugar: "Colonia Flores Hermosas Avenida Primavera",
     horario: "11:30:00",
     fecha: "2023-11-10",
     total: 180,
   },
   {
-    id_pedido: "7693cacf-4f08-4758-83d6-ae8e71316539",
+    id_pedido: "73c53546-f4b6-42f8-ab16-ec934348c439",
     lugar: "Barrio Jardín Calle Jazmín",
     horario: "15:20:00",
     fecha: "2023-11-11",
     total: 120,
   },
   {
-    id_pedido: "da0110b0-b761-4f2c-bb43-13f1c7313c19",
+    id_pedido: "f47d6334-383b-4b69-9153-fcf6610b9b4f",
     lugar: "Urbanización El Paraíso Avenida del Sol",
     horario: "09:00:00",
     fecha: "2023-11-12",
@@ -43,6 +43,7 @@ try {
       updated_at: null,
       deleted: false,
       deleted_at: null,
+      created_by: null
     };
     array.push(createEntrega(newEntrega));
   });

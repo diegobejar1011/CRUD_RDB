@@ -3,8 +3,8 @@ import crypto from "node:crypto";
 
 const pedidos = [
   {
-    id_producto: "2218a179-9a10-4816-a878-291999c8b154",
-    id_usuario: "a2db4dd0-95c1-480c-9914-c30b5a523d82",
+    id_producto: "22177806-dd5d-4904-9fb3-819998fc30dd",
+    id_usuario: "494f5f4e-1e83-4762-83cc-bb05ec580d79",
     nombre_pedido: "Tulipanes Rojos",
     cantidad: 5,
     especificacion: "Quiero que sea muy bonito, con detalles",
@@ -12,8 +12,8 @@ const pedidos = [
     status: true,
   },
   {
-    id_producto: "c194879f-d58f-4f5f-b4d0-69df13917edd",
-    id_usuario: "fe4477c4-2f01-4cf8-b52c-fe1859525151",
+    id_producto: "3288e2a7-e9b0-4aff-a200-feb850b5d374",
+    id_usuario: "2f9207f9-86fb-49fe-b98c-83a80ee822b0",
     nombre_pedido: "Rosas Blancas",
     cantidad: 10,
     especificacion: "Me gustaría un ramo grande",
@@ -21,8 +21,8 @@ const pedidos = [
     status: false,
   },
   {
-    id_producto: "8733fa79-627c-43a7-a4c6-97ec20f44c05",
-    id_usuario: "de42c740-447a-4173-8ceb-7c3514c57822",
+    id_producto: "7dc10092-7276-4a9b-9fec-5880f1020397",
+    id_usuario: "0e186bf7-ffef-43fe-8866-df59fbd8ef80",
     nombre_pedido: "Girasoles Amarillos",
     cantidad: 3,
     especificacion: "Que sean frescos",
@@ -30,8 +30,8 @@ const pedidos = [
     status: true,
   },
   {
-    id_producto: "3d334b04-7a69-4166-b8a0-cb52a0408154",
-    id_usuario: "ec26e54e-4a5b-49e9-9c02-cac3860ad44e",
+    id_producto: "8c62d8e0-cd0b-4d06-bc72-2742aa98e6ff",
+    id_usuario: "026aa489-2d8e-42b3-bc3e-6077128ec06b",
     nombre_pedido: "Lirios Morados",
     cantidad: 7,
     especificacion: "Con envoltura morada",

@@ -1,7 +1,6 @@
 import db from "../config/db.js";
 
 export const createPedido = (newPedido) => {
-  console.log(newPedido);
   return new Promise((resolve, reject) => {
     const {
       id,

@@ -45,7 +45,6 @@ export const createProduct = (newProduct) => {
       created_at,
       created_by
     } = newProduct;
-    console.log(newProduct);
     const query =
       "insert into producto (id_producto, nombre_producto, precio, id_tamaño, tipo_producto, deleted, created_at, created_by ) values (?, ?, ?, ?, ?, ?, ?, ?)";
     db.execute(query, [
